@@ -35,6 +35,8 @@ namespace TesteRec.Db.Models
                         return DbDespesa._listaDespesa.Find(x => x.Id == TipoDespesa).Descricao;
                     case EMenuSelecionado.Abastecimento:
                         return new Layouts.listas.TiposCombustivel()._tipoCombustivel.Find(x => x.Id == Combustivel).Descricao;
+                    case EMenuSelecionado.Serviço:
+                        return DbTipoServico._tipoServicos.Find(x => x.Id == TipoServico).Descricao;
                     default:
                         return null;
                 }
@@ -46,6 +48,14 @@ namespace TesteRec.Db.Models
             get
             {
                 return DbTipoReceita._tipoReceitas.Find(x => x.Id == Receita);
+            }
+        }
+        [NotMapped]
+        public TiposCombustivel CombustivelModelo
+        {
+            get
+            {
+                return new Layouts.listas.TiposCombustivel()._tipoCombustivel.Find(x => x.Id == Combustivel);
             }
         }
         [NotMapped]
@@ -62,6 +72,14 @@ namespace TesteRec.Db.Models
             get
             {
                 return new Layouts.listas.FormasPagamento()._tiposPagamentos.Find(x => x.Id == FormaPagamento);
+            }
+        }
+        [NotMapped]
+        public TipoServico TipoServicoModelo
+        {
+            get
+            {
+                return DbTipoServico._tipoServicos.Find(x => x.Id == TipoServico);
             }
         }
         public int Receita { get; set; }

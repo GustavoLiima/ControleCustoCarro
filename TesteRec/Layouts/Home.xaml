@@ -144,11 +144,56 @@
                 </Frame>
             </DataTemplate>
 
+
+            <DataTemplate x:Key="ServicoTemplate">
+                <Frame Padding="10" Margin="5">
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="oleo" WidthRequest="40"/>
+                                <StackLayout Grid.Column="1" >
+                                    <Label Text="{Binding DescricaoReceita}" FontSize="Medium"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" TextColor="Gray"/>
+                                        <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label Grid.Column="2" Text="{Binding ValorDespesa}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </toolkit:Expander.Header>
+                        <VerticalStackLayout Padding="10" Spacing="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Odometro: " TextColor="Gray"/>
+                                <Label Text="{Binding Odometro}"/>
+                            </StackLayout>
+                            <Label Text="Descrição:" TextColor="Gray"/>
+                            <Label Text="{Binding Descricao}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Motorista: " TextColor="Gray"/>
+                                <Label Text="{Binding Motorista}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="5">
+                                <Button Text="Remover" WidthRequest="100" HeightRequest="40" BackgroundColor="White" TextColor="#c0392b" FontAttributes="Bold" Clicked="RemoverClicked"/>
+                                <Button Text="Editar" WidthRequest="100" HeightRequest="40" BackgroundColor="White" TextColor="Black" Clicked="EditarClicked"/>
+                            </StackLayout>
+                        </VerticalStackLayout>
+                    </toolkit:Expander>
+                </Frame>
+            </DataTemplate>
+
+
+
             <!-- Define o TemplateSelector -->
             <local:HistoricoServicoTemplate x:Key="MeuTemplateSelector"
                                         GanhosTemplate="{StaticResource GanhosTemplate}"
                                         CustosTemplate="{StaticResource CustosTemplate}" 
-                                        AbastecimentoTemplate="{StaticResource AbastecimentoTemplate}"/>
+                                        AbastecimentoTemplate="{StaticResource AbastecimentoTemplate}"
+                                        ServicoTemplate="{StaticResource ServicoTemplate}"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>

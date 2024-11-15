@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TesteRec.Db.Models;
+﻿using TesteRec.Db.Models;
 using TesteRec.Enum;
 
 namespace TesteRec.Layouts.Templates
@@ -13,6 +8,7 @@ namespace TesteRec.Layouts.Templates
         public DataTemplate GanhosTemplate { get; set; }
         public DataTemplate CustosTemplate { get; set; }
         public DataTemplate AbastecimentoTemplate { get; set; }
+        public DataTemplate ServicoTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -26,6 +22,8 @@ namespace TesteRec.Layouts.Templates
                         return CustosTemplate;
                     case (int)EMenuSelecionado.Abastecimento:
                         return AbastecimentoTemplate;
+                    case (int)EMenuSelecionado.Serviço:
+                        return ServicoTemplate;
                     default:
                         return GanhosTemplate;
                 }

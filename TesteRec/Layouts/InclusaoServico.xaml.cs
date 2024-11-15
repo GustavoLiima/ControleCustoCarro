@@ -61,6 +61,13 @@ public partial class InclusaoServico : ContentPage
             case (int)EMenuSelecionado.Percurso:
                 break;
             case (int)EMenuSelecionado.Serviço:
+                _pagamentoSelecionado = _servico.FormaPagamentoModelo;
+                Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                _servicoSelecionado = _servico.TipoServicoModelo;
+                Label_TipoServico.Text = _servicoSelecionado.Descricao;
+                Entry_ValorDespesa.Text = _servico.ValorDespesa.ToString();
+                //Image_TipoServico.Source = _servicoSelecionado.Imagem;
                 break;
             case (int)EMenuSelecionado.Despesa:
                 Entry_ValorDespesa.Text = _servico.ValorDespesa.ToString();
@@ -72,6 +79,15 @@ public partial class InclusaoServico : ContentPage
                 Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
                 break;
             case (int)EMenuSelecionado.Abastecimento:
+                entryPreco.Text = _servico.Preco.ToString();
+                entryValorTotal.Text = _servico.ValorTotal.ToString();
+                entryLitros.Text = _servico.Litros.ToString();
+                _pagamentoSelecionado = _servico.FormaPagamentoModelo;
+                Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                _combustivelSelecionado = _servico.CombustivelModelo;
+                Label_Combustivel.Text = _combustivelSelecionado.Descricao.ToString();
+                Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem.ToString();
                 break;
             default:
                 break;
@@ -123,6 +139,7 @@ public partial class InclusaoServico : ContentPage
                 Grid_DataHorario.IsVisible = true;
                 Grid_Odometro.IsVisible = true;
                 Grid_Motorista.IsVisible = true;
+                Grid_ValorDespesa.IsVisible = true;
                 break;
             case EMenuSelecionado.Despesa:
                 Shell.SetBackgroundColor(this, Color.FromHex("#c0392b"));
@@ -248,6 +265,12 @@ public partial class InclusaoServico : ContentPage
             case EMenuSelecionado.Percurso:
                 break;
             case EMenuSelecionado.Serviço:
+                if (string.IsNullOrEmpty(Entry_ValorDespesa.Text))
+                {
+                    await DisplayAlert("Atenção", "Preencha o valor da despesa", "continuar");
+                    Entry_ValorDespesa.Focus();
+                    return;
+                }
                 await servicoService.AddServicoAsync(new Servico
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
@@ -257,7 +280,8 @@ public partial class InclusaoServico : ContentPage
                     TipoServico = _servicoSelecionado.Id,
                     Motorista = entryMotorista.Text,
                     FormaPagamento = _pagamentoSelecionado.Id,
-                    Descricao = Editor_Observacao.Text
+                    Descricao = Editor_Observacao.Text,
+                    ValorDespesa = double.Parse(Entry_ValorDespesa.Text)
                 });
                 break;
             case EMenuSelecionado.Despesa:
