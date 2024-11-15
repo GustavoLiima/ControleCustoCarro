@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.MainPage"
+             Title="Cadastro de Veiculo">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0">
+            <ScrollView>
+                <StackLayout>
+
+
+
+                    <Frame WidthRequest="150" HeightRequest="150" CornerRadius="75" Padding="0" HasShadow="True">
+                        <Image x:Name="Image_FotoCarro" Source="dotnet_bot.png" HeightRequest="210" Aspect="AspectFit" SemanticProperties.Description="dot net bot in a race car number eight" />
+                    </Frame>
+                    <Label Text="Atualizar Foto" HorizontalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AtualizaFoto_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+
+                    <!-- Apelido -->
+                    <Label Text="Apelido do Carro"/>
+                    <Entry Placeholder="Digite a marca do veículo" Text="{Binding Marca}" />
+
+
+                    <!-- Marca -->
+                    <Label Text="Marca"/>
+                    <Entry Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}"/>
+
+                    <!-- CollectionView para exibir as sugestões -->
+                    <CollectionView x:Name="CollectionView_Marcas" ItemsSource="{Binding MarcasFiltradas}"
+                                    IsVisible="{Binding DemonstraFiltro}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10" CornerRadius="0">
+                                    <Label Text="{Binding nome}" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Nome do Veículo -->
+                    <Label Text="Nome do Veículo"/>
+                    <Entry Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" />
+
+                    <!-- Quilometragem -->
+                    <Label Text="Quilometragem"/>
+                    <Entry Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" Keyboard="Numeric"/>
+
+                    <!-- Ano de Fabricação -->
+                    <Label Text="Ano de Fabricação"/>
+                    <Entry Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" Keyboard="Numeric"/>
+
+                    <!-- Ano do Modelo -->
+                    <Label Text="Ano do Modelo"/>
+                    <Entry Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" Keyboard="Numeric"/>
+
+                    <!-- Tipo de Combustível -->
+                    <Label Text="Tipo de Combustível"/>
+                    <StackLayout Orientation="Vertical" Margin="0,0,0,10">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <CheckBox IsChecked="{Binding IsGasolina}" />
+                            <Label Text="Gasolina" VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <CheckBox IsChecked="{Binding IsAlcool}" />
+                            <Label Text="Álcool" VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <CheckBox IsChecked="{Binding IsFlex}" />
+                            <Label Text="Flex" VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <CheckBox IsChecked="{Binding IsDiesel}" />
+                            <Label Text="Diesel" VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <CheckBox IsChecked="{Binding IsGNV}" />
+                            <Label Text="GNV" VerticalOptions="Center" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Button Text="Cadastrar Veículo" Command="{Binding CadastrarVeiculoCommand}" />
+
+                    <Button
+                        x:Name="CounterBtn"
+                        Text="Click me" 
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="OnCounterClicked"
+                        HorizontalOptions="Fill" />
+                </StackLayout>
+
+            </ScrollView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
