@@ -34,10 +34,21 @@ namespace TesteRec.Db.Services
 
         }
 
-        // Obtém todos os serviços
+        // Obtém todos os serviços, exceto lembretes
         public async Task<List<Servico>> GetServicosAsync()
         {
-            List<Servico> objRetorno = await _database.Table<Servico>().ToListAsync();
+            List<Servico> objRetorno = await _database.Table<Servico>().Where(x => x.AcaoSelecionada != 0).ToListAsync();
+            if (objRetorno != null)
+            {
+                return objRetorno;
+            }
+            return null;
+        }
+
+        // Obtém todos os lembretes
+        public async Task<List<Servico>> GetLembretesAsync()
+        {
+            List<Servico> objRetorno = await _database.Table<Servico>().Where(x => x.AcaoSelecionada == 0).ToListAsync();
             if (objRetorno != null)
             {
                 return objRetorno;

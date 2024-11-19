@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\bell.png" />
 	  <None Remove="Resources\Images\bolsadedinheiro.png" />
 	  <None Remove="Resources\Images\calendario.png" />
 	  <None Remove="Resources\Images\caminhao.png" />
@@ -72,6 +73,7 @@
 	  <None Remove="Resources\Images\escrevendo.png" />
 	  <None Remove="Resources\Images\etanol.png" />
 	  <None Remove="Resources\Images\gnv.png" />
+	  <None Remove="Resources\Images\history.png" />
 	  <None Remove="Resources\Images\moto.png" />
 	  <None Remove="Resources\Images\odometer.png" />
 	  <None Remove="Resources\Images\oil.png" />
@@ -80,6 +82,7 @@
 	  <None Remove="Resources\Images\pix.png" />
 	  <None Remove="Resources\Images\posto.png" />
 	  <None Remove="Resources\Images\postomenu.png" />
+	  <None Remove="Resources\Images\setting.png" />
 	  <None Remove="Resources\Images\sino.png" />
 	  <None Remove="Resources\Images\ticket.png" />
 	  <None Remove="Resources\Images\tomada.png" />
@@ -107,6 +110,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\InclusaoServico.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Lembretes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\listas\FormasPagamento.xaml">

@@ -9,20 +9,15 @@
     Title="TesteRec">
 
     <TabBar>
-        <!-- Primeira aba -->
-        <ShellContent Title="Home" 
-                      Icon="home_icon.png"
+        <ShellContent Title="Histórico" 
+                      Icon="history.png"
                       ContentTemplate="{DataTemplate layouts:Home}" />
-
-        <!-- Segunda aba -->
-        <ShellContent Title="Settings" 
-                      Icon="settings_icon.png"
+        <ShellContent Title="Lembretes" 
+                      Icon="bell.png"
+                      ContentTemplate="{DataTemplate layouts:Lembretes}" /> 
+        <ShellContent Title="Configurações" 
+                      Icon="setting.png"
                       ContentTemplate="{DataTemplate layouts:Configuracoes}" />
-
-        <!-- Terceira aba -->
-        <ShellContent Title="About" 
-                      Icon="about_icon.png"
-                      ContentTemplate="{DataTemplate layouts:InclusaoServico}" />
     </TabBar>
 
 </Shell>

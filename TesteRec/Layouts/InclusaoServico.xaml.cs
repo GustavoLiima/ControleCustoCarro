@@ -221,12 +221,20 @@ public partial class InclusaoServico : ContentPage
         switch (_menuSelecionado)
         {
             case EMenuSelecionado.Lembrete:
+                if(CheckBox_Kilometragem.IsChecked)
+                {
+                    if (string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
+                    {
+                        await DisplayAlert("Atenção", "É necessário colocar com quantos kilometros deseja receber o alerta", "continuar");
+                        Entry_OdometroLembrete.Focus();
+                        return;
+                    }
+                }
                 await servicoService.AddServicoAsync(new Servico
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     TipoDespesa = _despesaSelecionada.Id,
                     TipoServico = _servicoSelecionado.Id,
-                    ValorReceita = double.Parse(entryValor.Text),
                     LembreteFoiServico = Grid_Servico.IsVisible,
                     ApenasUmaVez = _ApenasUmaVez,
                     LembrarEmKm = CheckBox_Kilometragem.IsChecked,
