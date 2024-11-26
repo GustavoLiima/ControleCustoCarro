@@ -59,6 +59,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\bell.png" />
 	  <None Remove="Resources\Images\bolsadedinheiro.png" />
+	  <None Remove="Resources\Images\calculator.png" />
 	  <None Remove="Resources\Images\calendario.png" />
 	  <None Remove="Resources\Images\caminhao.png" />
 	  <None Remove="Resources\Images\caminho.png" />
@@ -90,6 +91,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.91" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.91" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -118,6 +120,9 @@
 	  <MauiXaml Update="Layouts\listas\FormasPagamento.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Layouts\listas\listaVeiculos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Layouts\listas\TipoReceita.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -128,6 +133,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\listas\TiposServico.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Templates\CalculadoraFlex.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\Templates\TemplateHistoricoServicos.xaml">

@@ -1,5 +1,6 @@
 using TesteRec.Layouts.crud;
 using TesteRec.Layouts.listas;
+using TesteRec.Layouts.Templates;
 
 namespace TesteRec.Layouts;
 
@@ -37,6 +38,11 @@ public partial class Configuracoes : ContentPage
             Imagem = "dinheiro.png",
             Descricao = "Tipos de receitas"
         },
+        new Menu()
+        {
+            Imagem = "calculator.png",
+            Descricao = "Calculadora flex"
+        },
     };
 	public Configuracoes()
 	{
@@ -63,7 +69,7 @@ public partial class Configuracoes : ContentPage
         switch (pTela)
         {
             case "Veículos":
-                Navigation.PushAsync(new CadastroVeiculo());
+                Navigation.PushAsync(new listaVeiculos());
                 break;
             case "Combustíveis":
                 Navigation.PushAsync(new TiposCombustivel());
@@ -79,6 +85,9 @@ public partial class Configuracoes : ContentPage
                 break;
             case "Tipos de receitas":
                 Navigation.PushAsync(new TipoReceita());
+                break;
+            case "Calculadora flex":
+                Navigation.PushAsync(new CalculadoraFlex());
                 break;
         }
     }

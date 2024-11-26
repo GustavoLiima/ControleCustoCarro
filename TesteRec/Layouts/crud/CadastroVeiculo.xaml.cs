@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using TesteRec.Db.Models;
+using TesteRec.Db.Services;
 using TesteRec.Model;
 
 namespace TesteRec.Layouts.crud;
@@ -6,10 +8,27 @@ namespace TesteRec.Layouts.crud;
 public partial class CadastroVeiculo : ContentPage
 {
     Marca _marcaSelecionada;
+    Veiculo _veiculo;
 
     public CadastroVeiculo()
     {
         InitializeComponent();
+    }
+
+    public CadastroVeiculo(Veiculo pVeiculoSelecionado)
+    {
+        InitializeComponent();
+        _veiculo = pVeiculoSelecionado;
+        Entry_ApelidoVeiculo.Text = _veiculo.Nome;
+        Entry_MarcaVeiculo.Text = _veiculo.Marca;
+        Entry_TipoVeiculo.Text = _veiculo.TipoVeiculo;
+        Entry_NomeVeiculo.Text = _veiculo.Modelo;
+        Entry_Quilometragem.Text = _veiculo.Quilometros.ToString();
+        Entry_AnoFabricacao.Text = _veiculo.Ano.ToString();
+        Entry_AnoModelo.Text = _veiculo.Ano.ToString();
+        Entry_Placa.Text = _veiculo.Placa;
+        Entry_Renavam.Text = _veiculo.Renavam.ToString();
+        Entry_Chassi.Text = _veiculo.Chassi;
     }
 
     protected override void OnAppearing()
@@ -128,6 +147,33 @@ public partial class CadastroVeiculo : ContentPage
     private void OnCancelPopupClicked(object sender, EventArgs e)
     {
         Popup_TipoVeiculo.IsVisible = false;
+    }
+
+    private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
+    {
+        VeiculoDB instancia = new VeiculoDB();
+        Veiculo objAdd = new Veiculo()
+        {
+            Ano = int.Parse(Entry_AnoFabricacao.Text),
+            Quilometros = double.Parse(Entry_Quilometragem.Text),
+            Nome = Entry_ApelidoVeiculo.Text,
+            Marca = Entry_MarcaVeiculo.Text,
+            Chassi = Entry_Chassi.Text,
+            Renavam = Entry_Renavam.Text,
+            Modelo = Entry_NomeVeiculo.Text,
+            TipoVeiculo = Entry_TipoVeiculo.Text,
+            Placa = Entry_Placa.Text,
+        };
+        if(_veiculo != null)
+        {
+            objAdd.Id = _veiculo.Id;
+            await instancia.UpdateVeiculoAsync(objAdd);
+        }
+        else
+        {
+            await instancia.AddVeiculoAsync(objAdd);
+        }
+        await Navigation.PopAsync();
     }
 }
 

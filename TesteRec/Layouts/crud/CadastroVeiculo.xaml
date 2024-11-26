@@ -6,12 +6,8 @@
     <Grid>
 
             <ScrollView>
-        <VerticalStackLayout
-        Padding="30,0">
+        <VerticalStackLayout Padding="30,0">
                 <StackLayout>
-
-
-
                     <Frame WidthRequest="150" HeightRequest="150" CornerRadius="75" Padding="0" HasShadow="True">
                         <Image x:Name="Image_FotoCarro" Source="dotnet_bot.png" HeightRequest="210" Aspect="AspectFit" SemanticProperties.Description="dot net bot in a race car number eight" />
                     </Frame>
@@ -24,12 +20,12 @@
 
                     <!-- Apelido -->
                     <Label Text="Apelido do Carro"/>
-                    <Entry Placeholder="Digite a marca do veículo" Text="{Binding Marca}" />
+                    <Entry x:Name="Entry_ApelidoVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding Marca}" />
 
 
                     <!-- Marca -->
                     <Label Text="Marca"/>
-                    <Entry Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}"/>
+                    <Entry x:Name="Entry_MarcaVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}"/>
 
                     <!-- CollectionView para exibir as sugestões -->
                     <CollectionView x:Name="CollectionView_Marcas" ItemsSource="{Binding MarcasFiltradas}"
@@ -51,19 +47,28 @@
 
                     <!-- Nome do Veículo -->
                     <Label Text="Nome do Veículo"/>
-                    <Entry Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" />
+                    <Entry x:Name="Entry_NomeVeiculo" Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" />
 
                     <!-- Quilometragem -->
                     <Label Text="Quilometragem"/>
-                    <Entry Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" Keyboard="Numeric"/>
+                    <Entry x:Name="Entry_Quilometragem" Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" Keyboard="Numeric"/>
 
                     <!-- Ano de Fabricação -->
                     <Label Text="Ano de Fabricação"/>
-                    <Entry Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" Keyboard="Numeric"/>
+                    <Entry x:Name="Entry_AnoFabricacao" Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" Keyboard="Numeric"/>
 
                     <!-- Ano do Modelo -->
                     <Label Text="Ano do Modelo"/>
-                    <Entry Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" Keyboard="Numeric"/>
+                    <Entry x:Name="Entry_AnoModelo" Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" Keyboard="Numeric"/>
+
+                    <Label Text="Placa do veículo *opcional"/>
+                    <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}"/>
+
+                    <Label Text="Renavam *opcional"/>
+                    <Entry x:Name="Entry_Renavam" Placeholder="Digite o renavam" Text="{Binding Renavam}"/>
+
+                    <Label Text="Chassi * opcional"/>
+                    <Entry x:Name="Entry_Chassi" Placeholder="Digite o chassi" Text="{Binding Chassi}"/>
 
                     <!-- Tipo de Combustível -->
                     <Label Text="Tipo de Combustível"/>
@@ -94,7 +99,7 @@
                         </StackLayout>
                     </StackLayout>
 
-                    <Button Text="Cadastrar Veículo" Command="{Binding CadastrarVeiculoCommand}" />
+                    <Button Text="Cadastrar Veículo" Clicked="CadastrarVeiculo_Clicked"/>
                 </StackLayout>
 
 

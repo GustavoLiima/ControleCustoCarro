@@ -198,82 +198,19 @@
     </ContentPage.Resources>
     <Grid>
         <VerticalStackLayout>
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <StackLayout Padding="10" Orientation="Horizontal">
+                        <Image x:Name="Image_TipoVeiculo" WidthRequest="40" HeightRequest="40" VerticalOptions="Center"/>
+                        <Label x:Name="Label_VeiculoSelecionado"  Text="Onix LT 1.4" FontSize="Medium" TextColor="Black" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="Ver detalhes" TextColor="Gray" HorizontalOptions="End" VerticalOptions="Center"/>
+                    </StackLayout>
+                </toolkit:Expander.Header>
+                <StackLayout Padding="10">
+                    <Label x:Name="Label_QuilometragemAtual" Text="Teste"/>
+                </StackLayout>
+            </toolkit:Expander>
             <StackLayout Padding="10">
-                <!-- Frame que envolve a imagem e o nome do carro -->
-                <Frame Padding="10" CornerRadius="10" HasShadow="True">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <!-- Imagem -->
-                            <ColumnDefinition Width="*" />
-                            <!-- Nome do carro -->
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Imagem do Carro Circular -->
-                        <Image Source="dotnet_bot.png"
-                           WidthRequest="80" HeightRequest="80"
-                           Aspect="AspectFill"
-                           Grid.Column="0"
-                           VerticalOptions="Center">
-                            <Image.Clip>
-                                <EllipseGeometry Center="40,40" RadiusX="40" RadiusY="40" />
-                            </Image.Clip>
-                        </Image>
-
-                        <!-- Nome do Carro, centralizado no topo -->
-                        <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Carro selecionado: "/>
-                                <Label Text="Onix"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="CenterAndExpand" />
-                            </StackLayout>
-                            <!-- Grid com 2 colunas e 2 linhas -->
-                            <Grid RowSpacing="20" ColumnSpacing="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <!-- Primeira linha -->
-                                    <RowDefinition Height="Auto" />
-                                    <!-- Segunda linha -->
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <!-- Primeira coluna -->
-                                    <ColumnDefinition Width="*" />
-                                    <!-- Segunda coluna -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Último abastecimento -->
-                                <StackLayout Grid.Row="0" Grid.Column="0">
-                                    <Label Text="Último abastecimento: "/>
-                                    <Label Text="10/10/2024" HorizontalOptions="Start" VerticalOptions="Center" />
-                                </StackLayout>
-
-                                <!-- Última troca de óleo -->
-                                <StackLayout Grid.Row="0" Grid.Column="1">
-                                    <Label Text="Última troca de óleo: "/>
-                                    <Label Text="10/10/2024" HorizontalOptions="Start" VerticalOptions="Center" />
-                                </StackLayout>
-
-                                <!-- Última troca de pneu -->
-                                <StackLayout Grid.Row="1" Grid.Column="0">
-                                    <Label Text="Última troca de pneu: "/>
-                                    <Label Text="10/10/2024"
-                                       HorizontalOptions="Start"
-                                       VerticalOptions="Center" />
-                                </StackLayout>
-
-                                <StackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="Alertas:"/>
-                                    <Label Text="0" HorizontalOptions="Start" VerticalOptions="Center" />
-                                </StackLayout>
-
-                                <!-- Alertas -->
-                            </Grid>
-                        </StackLayout>
-                    </Grid>
-                </Frame>
                 <CollectionView x:Name="CollectionView_Servicos" EmptyView="Sem histórico de serviços" ItemTemplate="{StaticResource MeuTemplateSelector}" />
             </StackLayout>
         </VerticalStackLayout>

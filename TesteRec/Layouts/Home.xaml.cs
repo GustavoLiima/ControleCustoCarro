@@ -1,3 +1,4 @@
+using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
 
@@ -22,6 +23,28 @@ public partial class Home : ContentPage
 
     private async void carregarTela()
     {
+        if(Global.carroSelecionado != null)
+        {
+            Label_VeiculoSelecionado.Text = Global.carroSelecionado.Nome;
+            switch (Global.carroSelecionado.TipoVeiculo)
+            {
+                case "Carro":
+                    Image_TipoVeiculo.Source = "carro.png";
+                    break;
+                case "Moto":
+                    Image_TipoVeiculo.Source = "moto.png";
+                    break;
+                case "Onibus":
+                    Image_TipoVeiculo.Source = "onibus.png";
+                    break;
+                case "Caminhao":
+                    Image_TipoVeiculo.Source = "caminhao.png";
+                    break;
+                default:
+                    break;
+            }
+            Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Quilometros}";
+        }
         CollectionView_Servicos.ItemsSource = null;
         CollectionView_Servicos.ItemsSource = await servicoService.GetServicosAsync();
     }
@@ -55,7 +78,7 @@ public partial class Home : ContentPage
                 case "Checklist":
                     Navigation.PushAsync(new InclusaoServico(Enum.EMenuSelecionado.Checklist));
                     break;
-                case "Receita":
+                case "Ganhos":
                     Navigation.PushAsync(new InclusaoServico(Enum.EMenuSelecionado.Receita));
                     break;
                 case "Percurso":
@@ -64,7 +87,7 @@ public partial class Home : ContentPage
                 case "Serviço":
                     Navigation.PushAsync(new InclusaoServico(Enum.EMenuSelecionado.Serviço));
                     break;
-                case "Despesa":
+                case "Gastos":
                     Navigation.PushAsync(new InclusaoServico(Enum.EMenuSelecionado.Despesa));
                     break;
                 case "Abastecimento":

@@ -18,6 +18,11 @@ namespace TesteRec.Db.Services
             return await _database.InsertAsync(pVeiculo);
         }
 
+        public async Task<int> UpdateVeiculoAsync(Veiculo pVeiculo)
+        {
+            return await _database.UpdateAsync(pVeiculo);
+        }
+
         // Obtém todos os veiculos
         public async Task<List<Veiculo>> GetVeiculosAsync()
         {
