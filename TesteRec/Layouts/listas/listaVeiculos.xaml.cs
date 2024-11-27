@@ -54,6 +54,6 @@ public partial class listaVeiculos : ContentPage
 
     private void OnAddVeiculoClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CadastroVeiculo());
+        Navigation.PushAsync(new CadastroVeiculo(false));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using TesteRec.Db.Services;
+using TesteRec.Layouts.Iniciais;
 
 namespace TesteRec
 {
@@ -7,7 +8,7 @@ namespace TesteRec
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+            MainPage = new Apresentacao();
         }
 
         protected override async void OnStart()

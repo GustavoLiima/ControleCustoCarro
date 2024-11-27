@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.Layouts.Iniciais.Apresentacao"
+             Title="Apresentacao">
+    <ContentPage.Content>
+            <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+                
+            <!-- Imagem -->
+            <Image Source="carrodinheiro.png" 
+                   Aspect="AspectFit" 
+                   HeightRequest="150" />
+
+            <!-- Texto de introdução -->
+            <Label Text="Bem-vindo ao Controle Financeiro do Veículo!" 
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="Aqui você poderá gerenciar todos os custos e ganhos relacionados ao seu veículo de forma prática e organizada."
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <Label Text="- Registre seus custos: Controle gastos com combustível, manutenção, peças e outros."
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <Label Text="- Adicione seus ganhos: Informe receitas relacionadas ao veículo, como trabalhos realizados."
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <Label Text="- Use a calculadora de combustível: Descubra qual combustível é mais vantajoso para o seu bolso, com base nos preços informados."
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <Label Text="- Acompanhe o saldo: Compare o que entra e o que sai para manter suas finanças sempre equilibradas."
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <Label Text="Simplifique sua gestão e tenha o controle total do seu veículo na palma da mão!"
+                   FontSize="Body"
+                   TextColor="Gray" />
+
+            <!-- Botão para continuar -->
+            <Button Text="Continuar"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="Button_Clicked" />
+        </VerticalStackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

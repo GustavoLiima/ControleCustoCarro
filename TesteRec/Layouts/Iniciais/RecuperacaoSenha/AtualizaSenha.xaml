@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.Layouts.Iniciais.RecuperacaoSenha.AtualizaSenha">
+    <Grid BackgroundColor="#F5F5F5" Padding="30">
+        <!-- Frame central flutuante -->
+        <Frame BackgroundColor="White"
+           CornerRadius="20"
+           Padding="20"
+           VerticalOptions="Center"
+           HorizontalOptions="Center"
+           HasShadow="True">
+            <VerticalStackLayout Spacing="15">
+                <!-- Insira o código enviado -->
+                <Label Text="Insira o código enviado no e-mail"
+                   FontSize="Body"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Start" />
+                <Entry x:Name="Entry_Code"
+                   Placeholder="Código do e-mail"
+                   FontSize="Medium" />
+
+                <!-- Nova senha -->
+                <Label Text="Crie uma nova senha"
+                   FontSize="Body"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Start" />
+                <Grid>
+                    <Entry x:Name="Entry_NewPassword"
+                       Placeholder="Nova senha"
+                       IsPassword="True"
+                       FontSize="Medium" />
+                    <ImageButton Source="invisible"
+                             WidthRequest="30"
+                             HeightRequest="30"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"
+                             Clicked="TogglePasswordVisibility_NewPassword" />
+                </Grid>
+
+                <!-- Repetir senha -->
+                <Label Text="Repita a nova senha"
+                   FontSize="Body"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Start" />
+                <Grid>
+                    <Entry x:Name="Entry_ConfirmPassword"
+                       Placeholder="Repita a nova senha"
+                       IsPassword="True"
+                       FontSize="Medium" />
+                    <ImageButton Source="invisible"
+                             WidthRequest="30"
+                             HeightRequest="30"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"
+                             Clicked="TogglePasswordVisibility_ConfirmPassword" />
+                </Grid>
+
+                <!-- Botão para avançar -->
+                <Button Text="Avançar"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="Button_Avancar_Clicked" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

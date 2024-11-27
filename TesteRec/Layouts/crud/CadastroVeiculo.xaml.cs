@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
 using TesteRec.Model;
@@ -9,10 +10,12 @@ public partial class CadastroVeiculo : ContentPage
 {
     Marca _marcaSelecionada;
     Veiculo _veiculo;
+    bool _novoCadastro = false;
 
-    public CadastroVeiculo()
+    public CadastroVeiculo(bool pNovoCadastro)
     {
         InitializeComponent();
+        _novoCadastro = pNovoCadastro;
     }
 
     public CadastroVeiculo(Veiculo pVeiculoSelecionado)
@@ -173,7 +176,16 @@ public partial class CadastroVeiculo : ContentPage
         {
             await instancia.AddVeiculoAsync(objAdd);
         }
-        await Navigation.PopAsync();
+
+        if(_novoCadastro)
+        {
+            Global.carroSelecionado = objAdd;
+            Application.Current.MainPage = new AppShell();
+        }
+        else
+        {
+            await Navigation.PopAsync();
+        }
     }
 }
 

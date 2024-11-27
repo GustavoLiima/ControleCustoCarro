@@ -38,6 +38,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -64,6 +68,7 @@
 	  <None Remove="Resources\Images\caminhao.png" />
 	  <None Remove="Resources\Images\caminho.png" />
 	  <None Remove="Resources\Images\carro.png" />
+	  <None Remove="Resources\Images\carrodinheiro.png" />
 	  <None Remove="Resources\Images\cartao.png" />
 	  <None Remove="Resources\Images\checklist.png" />
 	  <None Remove="Resources\Images\cilindrogas.png" />
@@ -75,6 +80,7 @@
 	  <None Remove="Resources\Images\etanol.png" />
 	  <None Remove="Resources\Images\gnv.png" />
 	  <None Remove="Resources\Images\history.png" />
+	  <None Remove="Resources\Images\invisible.png" />
 	  <None Remove="Resources\Images\moto.png" />
 	  <None Remove="Resources\Images\odometer.png" />
 	  <None Remove="Resources\Images\oil.png" />
@@ -87,6 +93,7 @@
 	  <None Remove="Resources\Images\sino.png" />
 	  <None Remove="Resources\Images\ticket.png" />
 	  <None Remove="Resources\Images\tomada.png" />
+	  <None Remove="Resources\Images\visible.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -112,6 +119,21 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\InclusaoServico.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Iniciais\Apresentacao.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Iniciais\CadastroUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Iniciais\PaginaLogin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\AtualizaSenha.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\InsiraEmail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\Lembretes.xaml">

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.Layouts.Iniciais.PaginaLogin">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#F5F5F5" Padding="30">
+            <!-- Frame central flutuante -->
+            <Frame BackgroundColor="White"
+                   CornerRadius="20"
+                   Padding="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <!-- Mensagem de boas-vindas -->
+                    <Label Text="Bem-vindo!"
+                           FontSize="Title"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="Faça o login abaixo para começar o controle financeiro do seu veículo"
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Center" />
+
+                    <!-- Campo de e-mail -->
+                    <Entry Placeholder="E-mail"
+                           Keyboard="Email"
+                           FontSize="Medium" />
+
+                    <!-- Campo de senha -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry x:Name="Entry_Senha"
+                               Grid.Column="0"
+                               HeightRequest="50"
+                               VerticalOptions="Start"
+                               Placeholder="Senha"
+                               IsPassword="True"
+                               FontSize="Medium" />
+                        <!-- Botão de olho -->
+                        <ImageButton 
+                             x:Name="Button_OlharSenha"
+                             Grid.Column="1"
+                             Source="invisible.png"
+                             BackgroundColor="Transparent"
+                            VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                            HeightRequest="30"
+                             WidthRequest="30"
+                             Clicked="Button_OlharSenha_Clicked" />
+                    </Grid>
+
+                    <!-- Esqueci minha senha -->
+                    <Label Text="Esqueci minha senha"
+                           TextColor="#007AFF"
+                           FontSize="Small"
+                           HorizontalTextAlignment="End">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="EsqueciMinhaSenha_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Botão de login -->
+                    <Button x:Name="Button_Login" Text="Entrar"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Button_Login_Clicked" />
+
+                    <!-- Botão de cadastro -->
+                    <Button x:Name="Button_Cadastro" Text="Cadastrar-se"
+                            BackgroundColor="Transparent"
+                            TextColor="#007AFF"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BorderColor="#007AFF"
+                            BorderWidth="1"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Button_Cadastro_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

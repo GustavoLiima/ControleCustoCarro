@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.Layouts.Iniciais.RecuperacaoSenha.InsiraEmail">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#F5F5F5" Padding="30">
+            <!-- Frame central flutuante -->
+            <Frame BackgroundColor="White"
+               CornerRadius="20"
+               Padding="20"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               HasShadow="True">
+                <VerticalStackLayout Spacing="15" MinimumWidthRequest="300">
+                    <Label Text="Insira o seu email abaixo"
+                       FontSize="Body"
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Start" />
+
+                    <Entry Placeholder="E-mail"
+                           Keyboard="Email"
+                           FontSize="Medium" />
+
+                    <Button x:Name="Button_Email" 
+                            Text="Enviar"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Button_Email_Clicked" />
+                    
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
