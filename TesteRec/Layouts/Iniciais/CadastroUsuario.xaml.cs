@@ -1,3 +1,5 @@
+using TesteRec.API.Communic;
+using TesteRec.API.Models;
 using TesteRec.Layouts.crud;
 
 namespace TesteRec.Layouts.Iniciais;
@@ -79,10 +81,24 @@ public partial class CadastroUsuario : ContentPage
             return;
         }
 
-        // Caso passe pelas validações
-        await DisplayAlert("Sucesso", "Usuário cadastrado com sucesso!", "OK");
-        Application.Current.MainPage = new NavigationPage(new CadastroVeiculo(true));
-        // Navegar para a próxima página, se necessário.
+        UsuarioCommunic chamada = new UsuarioCommunic();
+        UsuarioVM obj = new UsuarioVM()
+        {
+            nome = Entry_Nome.Text,
+            sobrenome = Entry_Sobrenome.Text,
+            email = Entry_Email.Text,
+            senha = Entry_Senha.Text
+        };
+
+        if (await chamada.CadastrarUsuario(obj))
+        {
+            await DisplayAlert("Atenção", "Deu certo!", "Continuar");
+            Application.Current.MainPage = new NavigationPage(new CadastroVeiculo(true));
+        }
+        else
+        {
+            await DisplayAlert("Atenção", "Deu errado!", "Continuar");
+        }
     }
 
     private void Button_Voltar_Clicked(object sender, EventArgs e)
