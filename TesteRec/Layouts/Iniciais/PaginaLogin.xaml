@@ -23,7 +23,8 @@
                            HorizontalTextAlignment="Center" />
 
                     <!-- Campo de e-mail -->
-                    <Entry Placeholder="E-mail"
+                    <Entry x:Name="Entry_Email"
+                           Placeholder="E-mail"
                            Keyboard="Email"
                            FontSize="Medium" />
 

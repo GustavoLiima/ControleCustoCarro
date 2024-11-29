@@ -17,7 +17,7 @@ namespace TesteRec.API
             };
         }
 
-        public async Task<string> GetTokenAsync(TokenVM tokenRequest)
+        public async Task<ApiResponse<string>> GetTokenAsync(TokenVM tokenRequest)
         {
             try
             {
@@ -39,19 +39,30 @@ namespace TesteRec.API
                 {
                     // Lendo o conteúdo da resposta como string
                     Global._DataToken = DateTime.Now;
-                    return Global._Token = await response.Content.ReadAsStringAsync();
+                    Global._Token = await response.Content.ReadAsStringAsync();
+                    return new ApiResponse<string>()
+                    {
+                        Sucesso = true,
+                        Valor = Global._Token
+                    };
                 }
                 else
                 {
-                    // Lançar uma exceção caso a resposta seja uma falha
-                    throw new HttpRequestException($"Erro ao obter o token: {response.StatusCode}");
+                    return new ApiResponse<string>()
+                    {
+                        Sucesso = false,
+                        Mensagem = $"Erro ao obter o token: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}"
+                    };
                 }
             }
             catch (Exception ex)
             {
                 // Tratar exceções
-                Console.WriteLine($"Erro: {ex.Message}");
-                throw;
+                return new ApiResponse<string>()
+                {
+                    Sucesso = false,
+                    Mensagem = $"Erro ao obter o token: {ex.Message}"
+                };
             }
         }
     }

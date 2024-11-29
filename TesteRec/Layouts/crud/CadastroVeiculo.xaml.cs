@@ -8,7 +8,6 @@ namespace TesteRec.Layouts.crud;
 
 public partial class CadastroVeiculo : ContentPage
 {
-    Marca _marcaSelecionada;
     Veiculo _veiculo;
     bool _novoCadastro = false;
 
@@ -111,7 +110,6 @@ public partial class CadastroVeiculo : ContentPage
                 var viewModel = BindingContext as MainViewModel;
                 if (viewModel != null)
                 {
-                    _marcaSelecionada = marcaSelecionada;
                     // Define o texto do Entry para o nome da marca selecionada
                     viewModel.TextoFiltro = marcaSelecionada.nome;
 
@@ -128,7 +126,7 @@ public partial class CadastroVeiculo : ContentPage
     private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // Recupera o item selecionado
-        TipoVeiculo selectedItem = e.CurrentSelection.FirstOrDefault() as TipoVeiculo;
+        TipoVeiculo? selectedItem = e.CurrentSelection.FirstOrDefault() as TipoVeiculo;
 
         if (selectedItem != null)
         {
@@ -180,7 +178,11 @@ public partial class CadastroVeiculo : ContentPage
         if(_novoCadastro)
         {
             Global.carroSelecionado = objAdd;
-            Application.Current.MainPage = new AppShell();
+            Application? current = Application.Current;
+            if (current != null)
+            {
+                current.MainPage = new AppShell();
+            }
         }
         else
         {

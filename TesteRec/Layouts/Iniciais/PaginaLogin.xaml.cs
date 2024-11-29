@@ -1,3 +1,5 @@
+using TesteRec.API;
+using TesteRec.API.Models;
 using TesteRec.Layouts.Iniciais.RecuperacaoSenha;
 
 namespace TesteRec.Layouts.Iniciais;
@@ -11,9 +13,22 @@ public partial class PaginaLogin : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
-    private void Button_Login_Clicked(object sender, EventArgs e)
+    private async void Button_Login_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new AppShell();
+        TokenService tokenService = new TokenService();
+        ApiResponse<string> vRet = await tokenService.GetTokenAsync(new API.Models.TokenVM()
+        {
+            user = Entry_Email.Text,
+            password = Entry_Senha.Text
+        });
+        if (vRet.Sucesso)
+        {
+            Application.Current.MainPage = new AppShell();
+        }
+        else
+        {
+            await DisplayAlert("Atenção", vRet.Mensagem, "continuar");
+        }
     }
 
     private void EsqueciMinhaSenha_Tapped(object sender, TappedEventArgs e)

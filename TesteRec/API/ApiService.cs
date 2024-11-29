@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using TesteRec.API.Models;
 using TesteRec.Db;
+using static SQLite.SQLite3;
 
 namespace TesteRec.API
 {
@@ -20,11 +21,11 @@ namespace TesteRec.API
         /// Para Android Emulator: Use 10.0.2.2 em vez de localhost
         /// Para Windows ou iOS Simulator: Use 127.0.0.1 em vez de localhost
         /// </summary>
-        private static string _UrlAtual;
+        private static string? _UrlAtual;
 
-        public static async Task<TResult> SendRequestAsync<TData, TResult>(string url, HttpMethod method, TData data, bool pNecessarioToken)
+        public static async Task<ApiResponse<TResult>> SendRequestAsync<TData, TResult>(string url, HttpMethod method, TData data, bool pNecessarioToken)
         {
-            _httpClient.Timeout = TimeSpan.FromSeconds(20);
+            //_httpClient.Timeout = TimeSpan.FromSeconds(20);
             MontarURL(url);
             try
             {
@@ -59,7 +60,19 @@ namespace TesteRec.API
                     // Lê o conteúdo de retorno e desserializa para o tipo esperado
                     var jsonResult = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<TResult>(jsonResult);
-                    return result;
+                    return new ApiResponse<TResult>()
+                    {
+                        Sucesso = true,
+                        Valor = result
+                    };
+                }
+                else
+                {
+                    return new ApiResponse<TResult>()
+                    {
+                        Sucesso = false,
+                        Mensagem = await response.Content.ReadAsStringAsync()
+                    };
                 }
 
                 // Lida com erros de status da resposta
@@ -67,8 +80,11 @@ namespace TesteRec.API
             }
             catch (Exception ex)
             {
-                // Trate exceções
-                throw new Exception($"Erro na requisição: {ex.Message}");
+                return new ApiResponse<TResult>()
+                {
+                    Sucesso = false,
+                    Mensagem = "Verifique a conexão e tente novamente mais tarde"
+                };
             }
         }
 

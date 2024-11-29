@@ -87,17 +87,22 @@ public partial class CadastroUsuario : ContentPage
             nome = Entry_Nome.Text,
             sobrenome = Entry_Sobrenome.Text,
             email = Entry_Email.Text,
-            senha = Entry_Senha.Text
+            senha = Entry_Senha.Text,
+            categoriaCnh = "B",
+            numeroCnh = "1234",
+            vencimentoCnh = DateTime.MinValue
         };
 
-        if (await chamada.CadastrarUsuario(obj))
+        ApiResponse<bool> vRet = await chamada.CadastrarUsuario(obj);
+
+        if (vRet.Sucesso)
         {
             await DisplayAlert("Atenção", "Deu certo!", "Continuar");
             Application.Current.MainPage = new NavigationPage(new CadastroVeiculo(true));
         }
         else
         {
-            await DisplayAlert("Atenção", "Deu errado!", "Continuar");
+            await DisplayAlert("Atenção", vRet.Mensagem, "Continuar");
         }
     }
 
