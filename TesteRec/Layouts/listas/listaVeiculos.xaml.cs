@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Alerts;
+using Newtonsoft.Json;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -39,6 +40,7 @@ public partial class listaVeiculos : ContentPage
                 case "Selecionar veículo":
                     Global.carroSelecionado = veiculoSelecionado;
                     await Toast.Make($"Você selecionou {Global.carroSelecionado.Nome}").Show();
+                    await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
                     await Navigation.PopAsync();
                     break;
                 case "Editar veículo":

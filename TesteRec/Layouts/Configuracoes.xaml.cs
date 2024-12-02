@@ -1,4 +1,5 @@
 using TesteRec.Layouts.crud;
+using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
 using TesteRec.Layouts.Templates;
 
@@ -43,6 +44,11 @@ public partial class Configuracoes : ContentPage
             Imagem = "calculator.png",
             Descricao = "Calculadora flex"
         },
+        new Menu()
+        {
+            Imagem = "sairusuario.png",
+            Descricao = "Sair"
+        },
     };
 	public Configuracoes()
 	{
@@ -64,30 +70,36 @@ public partial class Configuracoes : ContentPage
         }
     }
 
-    private void NavegarParaTela(string pTela)
+    private async void NavegarParaTela(string pTela)
     {
         switch (pTela)
         {
             case "Veículos":
-                Navigation.PushAsync(new listaVeiculos());
+                await Navigation.PushAsync(new listaVeiculos());
                 break;
             case "Combustíveis":
-                Navigation.PushAsync(new TiposCombustivel());
+                await Navigation.PushAsync(new TiposCombustivel());
                 break;
             case "Tipos de serviço":
-                Navigation.PushAsync(new TiposServico());
+                await Navigation.PushAsync(new TiposServico());
                 break;
             case "Formas de pagamento":
-                Navigation.PushAsync(new FormasPagamento());
+                await Navigation.PushAsync(new FormasPagamento());
                 break;
             case "Tipos de custos":
-                Navigation.PushAsync(new TiposDespesas());
+                await Navigation.PushAsync(new TiposDespesas());
                 break;
             case "Tipos de receitas":
-                Navigation.PushAsync(new TipoReceita());
+                await Navigation.PushAsync(new TipoReceita());
                 break;
             case "Calculadora flex":
-                Navigation.PushAsync(new CalculadoraFlex());
+                await Navigation.PushAsync(new CalculadoraFlex());
+                break;
+            case "Sair":
+                if(await DisplayAlert("Atenção", "Você tem certeza que deseja deslogar?", "confirmar", "cancelar"))
+                {
+                    await Navigation.PushAsync(new PaginaLogin());
+                }
                 break;
         }
     }

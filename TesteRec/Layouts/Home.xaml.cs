@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -12,12 +13,18 @@ public partial class Home : ContentPage
     {
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);
+        
         CollectionView_Inclusoes.ItemsSource = DbMenu._menus;
     }
 
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
+        string veiculoSelecionado = await SecureStorage.Default.GetAsync("veiculoSelecionado");
+        if (!string.IsNullOrEmpty(veiculoSelecionado))
+        {
+            Global.carroSelecionado = JsonConvert.DeserializeObject<Veiculo>(veiculoSelecionado);
+        }
         carregarTela();
     }
 

@@ -89,6 +89,7 @@
 	  <None Remove="Resources\Images\pix.png" />
 	  <None Remove="Resources\Images\posto.png" />
 	  <None Remove="Resources\Images\postomenu.png" />
+	  <None Remove="Resources\Images\sairusuario.png" />
 	  <None Remove="Resources\Images\setting.png" />
 	  <None Remove="Resources\Images\sino.png" />
 	  <None Remove="Resources\Images\ticket.png" />
