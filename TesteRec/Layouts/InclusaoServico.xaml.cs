@@ -96,6 +96,7 @@ public partial class InclusaoServico : ContentPage
 
     private void CarregarInformacoesIniciais(EMenuSelecionado pMenu)
     {
+        timePickerServico.Time = DateTime.Now.TimeOfDay;
         switch (pMenu)
         {
             case EMenuSelecionado.Lembrete:

@@ -1,5 +1,8 @@
+using Newtonsoft.Json;
 using TesteRec.API;
 using TesteRec.API.Models;
+using TesteRec.Db;
+using TesteRec.Helpers;
 using TesteRec.Layouts.Iniciais.RecuperacaoSenha;
 
 namespace TesteRec.Layouts.Iniciais;
@@ -16,13 +19,17 @@ public partial class PaginaLogin : ContentPage
     private async void Button_Login_Clicked(object sender, EventArgs e)
     {
         TokenService tokenService = new TokenService();
-        ApiResponse<string> vRet = await tokenService.GetTokenAsync(new API.Models.TokenVM()
+        Criptografia crip = new Criptografia();
+        TokenVM tokenVM = new TokenVM()
         {
             user = Entry_Email.Text,
-            password = Entry_Senha.Text
-        });
+            password = crip.Criptografar(Entry_Senha.Text)
+        };
+        ApiResponse<string> vRet = await tokenService.GetTokenAsync(tokenVM);
         if (vRet.Sucesso)
         {
+            await SecureStorage.Default.SetAsync("login", JsonConvert.SerializeObject(tokenVM));
+            Global._login = tokenVM;
             Application.Current.MainPage = new AppShell();
         }
         else

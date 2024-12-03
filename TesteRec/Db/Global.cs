@@ -1,4 +1,5 @@
-﻿using TesteRec.Db.Models;
+﻿using TesteRec.API.Models;
+using TesteRec.Db.Models;
 
 namespace TesteRec.Db
 {
@@ -10,5 +11,6 @@ namespace TesteRec.Db
         public static string EnderecoApi = "https://apicontroledecusto-a3ehhqhmcvgdencd.brazilsouth-01.azurewebsites.net";
         public static string _Usuario;
         public static string _Senha;
+        public static TokenVM _login;
     }
 }

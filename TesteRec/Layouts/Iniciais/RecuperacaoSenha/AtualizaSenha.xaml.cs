@@ -1,14 +1,21 @@
+using CommunityToolkit.Maui.Alerts;
+using TesteRec.API.Communic;
+using TesteRec.API.Models;
+using TesteRec.Helpers;
+
 namespace TesteRec.Layouts.Iniciais.RecuperacaoSenha;
 
 public partial class AtualizaSenha : ContentPage
 {
     private bool isNewPasswordVisible = false;
     private bool isConfirmPasswordVisible = false;
+    private string _EmailSelecionado;
 
-    public AtualizaSenha()
+    public AtualizaSenha(string pEmail)
     {
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);
+        _EmailSelecionado = pEmail;
     }
 
     private void TogglePasswordVisibility_NewPassword(object sender, EventArgs e)
@@ -65,8 +72,25 @@ public partial class AtualizaSenha : ContentPage
 
         // Caso passe pelas validações
         await DisplayAlert("Sucesso", "Senha atualizada com sucesso!", "OK");
-        Application.Current.MainPage = new NavigationPage(new PaginaLogin());
 
-        // Navegar para próxima página, se necessário.
+        RecuperacaoSenhaCommunic rec = new RecuperacaoSenhaCommunic();
+        Criptografia crip = new Criptografia();
+        RecuperacaoSenhaRequest obj = new RecuperacaoSenhaRequest()
+        {
+            NovaSenha = crip.Criptografar(Entry_NewPassword.Text),
+            Codigo = Entry_Code.Text,
+            Email = _EmailSelecionado
+        };
+        var retorno = await rec.RedefinirSenha(obj);
+
+        if(retorno.Sucesso)
+        {
+            await Toast.Make($"Recuperação realizada com sucesso").Show();
+            Application.Current.MainPage = new NavigationPage(new PaginaLogin());
+        }
+        else
+        {
+            await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
+        }
     }
 }

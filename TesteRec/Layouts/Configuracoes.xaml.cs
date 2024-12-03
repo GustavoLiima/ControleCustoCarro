@@ -1,3 +1,4 @@
+using TesteRec.Db;
 using TesteRec.Layouts.crud;
 using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
@@ -98,6 +99,8 @@ public partial class Configuracoes : ContentPage
             case "Sair":
                 if(await DisplayAlert("Atenção", "Você tem certeza que deseja deslogar?", "confirmar", "cancelar"))
                 {
+                    Global._login = null;
+                    SecureStorage.Default.Remove("login");
                     await Navigation.PushAsync(new PaginaLogin());
                 }
                 break;

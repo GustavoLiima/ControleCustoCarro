@@ -59,12 +59,22 @@ namespace TesteRec.API
                 {
                     // Lê o conteúdo de retorno e desserializa para o tipo esperado
                     var jsonResult = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<TResult>(jsonResult);
-                    return new ApiResponse<TResult>()
+                    if(typeof(TResult) != typeof(string))
                     {
-                        Sucesso = true,
-                        Valor = result
-                    };
+                        return new ApiResponse<TResult>()
+                        {
+                            Sucesso = true,
+                            Valor = JsonConvert.DeserializeObject<TResult>(jsonResult)
+                        };
+                    }
+                    else
+                    {
+                        return new ApiResponse<TResult>()
+                        {
+                            Sucesso = true,
+                            Valor = (TResult)(object)jsonResult.ToString()
+                        };
+                    }
                 }
                 else
                 {

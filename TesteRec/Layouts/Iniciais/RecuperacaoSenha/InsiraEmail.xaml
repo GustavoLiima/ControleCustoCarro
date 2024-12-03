@@ -17,7 +17,8 @@
                        TextColor="Gray"
                        HorizontalTextAlignment="Start" />
 
-                    <Entry Placeholder="E-mail"
+                    <Entry x:Name="Entry_InsiraSeuEmail"
+                           Placeholder="E-mail"
                            Keyboard="Email"
                            FontSize="Medium" />
 
