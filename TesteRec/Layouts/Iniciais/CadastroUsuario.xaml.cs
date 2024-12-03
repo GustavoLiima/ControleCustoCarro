@@ -1,5 +1,6 @@
 using TesteRec.API.Communic;
 using TesteRec.API.Models;
+using TesteRec.Helpers;
 using TesteRec.Layouts.crud;
 
 namespace TesteRec.Layouts.Iniciais;
@@ -82,12 +83,13 @@ public partial class CadastroUsuario : ContentPage
         }
 
         UsuarioCommunic chamada = new UsuarioCommunic();
+        Criptografia crip = new Criptografia();
         UsuarioVM obj = new UsuarioVM()
         {
             nome = Entry_Nome.Text,
             sobrenome = Entry_Sobrenome.Text,
             email = Entry_Email.Text,
-            senha = Entry_Senha.Text,
+            senha = crip.Criptografar(Entry_Senha.Text),
             categoriaCnh = "B",
             numeroCnh = "1234",
             vencimentoCnh = DateTime.MinValue
