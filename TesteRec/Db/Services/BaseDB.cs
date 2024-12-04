@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using TesteRec.API.Models;
 using TesteRec.Db.Models;
 
 namespace TesteRec.Db.Services
@@ -24,7 +25,7 @@ namespace TesteRec.Db.Services
             var database = GetDatabaseConnection();
             await database.CreateTableAsync<Servico>();
             await database.CreateTableAsync<TipoServico>();
-            await database.CreateTableAsync<Veiculo>();
+            await database.CreateTableAsync<VeiculoModel>();
         }
     }
 }

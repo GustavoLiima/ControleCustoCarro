@@ -17,7 +17,7 @@
                        HorizontalOptions="Center"
                        Margin="0,0,10,0"/>
                             <!-- Nome do serviço -->
-                            <Label Text="{Binding Nome}" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0"/>
+                            <Label Text="{Binding NomeVeiculo}" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -18,9 +18,6 @@
                     </Label>
 
 
-                    <!-- Apelido -->
-                    <Label Text="Apelido do Carro"/>
-                    <Entry x:Name="Entry_ApelidoVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding Marca}" />
 
 
                     <!-- Marca -->
@@ -61,8 +58,12 @@
                     <Label Text="Ano do Modelo"/>
                     <Entry x:Name="Entry_AnoModelo" Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" Keyboard="Numeric"/>
 
-                    <Label Text="Placa do veículo *opcional"/>
+                    <Label Text="Placa do veículo"/>
                     <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}"/>
+                    
+                    <!-- Litragem -->
+                    <Label Text="Capacidade tanque de combustível (Litros)"/>
+                    <Entry x:Name="Entry_LitragemVeiculo" Placeholder="Digite a litragem do tanque" Keyboard="Numeric"/>
 
                     <Label Text="Renavam *opcional"/>
                     <Entry x:Name="Entry_Renavam" Placeholder="Digite o renavam" Text="{Binding Renavam}"/>

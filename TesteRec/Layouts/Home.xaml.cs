@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using TesteRec.API.Models;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -23,8 +24,14 @@ public partial class Home : ContentPage
         string veiculoSelecionado = await SecureStorage.Default.GetAsync("veiculoSelecionado");
         if (!string.IsNullOrEmpty(veiculoSelecionado))
         {
-            Global.carroSelecionado = JsonConvert.DeserializeObject<Veiculo>(veiculoSelecionado);
+            Global.carroSelecionado = JsonConvert.DeserializeObject<VeiculoModel>(veiculoSelecionado);
         }
+        string usuario = await SecureStorage.Default.GetAsync("usuario");
+        if (!string.IsNullOrEmpty(usuario))
+        {
+            Global._UsuarioSelecionado = JsonConvert.DeserializeObject<UsuarioVM>(usuario);
+        }
+
         carregarTela();
     }
 
@@ -32,28 +39,29 @@ public partial class Home : ContentPage
     {
         if(Global.carroSelecionado != null)
         {
-            Label_VeiculoSelecionado.Text = Global.carroSelecionado.Nome;
+            Label_VeiculoSelecionado.Text = Global.carroSelecionado.NomeVeiculo;
             switch (Global.carroSelecionado.TipoVeiculo)
             {
-                case "Carro":
+                case 0:
                     Image_TipoVeiculo.Source = "carro.png";
                     break;
-                case "Moto":
+                case 1:
                     Image_TipoVeiculo.Source = "moto.png";
                     break;
-                case "Onibus":
+                case 2:
                     Image_TipoVeiculo.Source = "onibus.png";
                     break;
-                case "Caminhao":
+                case 3:
                     Image_TipoVeiculo.Source = "caminhao.png";
                     break;
                 default:
                     break;
             }
-            Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Quilometros}";
+            Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Kilometragem}";
         }
+        var objCarregar = await servicoService.GetServicosAsync();
         CollectionView_Servicos.ItemsSource = null;
-        CollectionView_Servicos.ItemsSource = await servicoService.GetServicosAsync();
+        CollectionView_Servicos.ItemsSource = objCarregar;
     }
 
     private void OnAddServiceClicked(object sender, EventArgs e)

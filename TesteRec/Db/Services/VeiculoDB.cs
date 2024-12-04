@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using TesteRec.API.Models;
 using TesteRec.Db.Models;
 
 namespace TesteRec.Db.Services
@@ -13,24 +14,24 @@ namespace TesteRec.Db.Services
         }
 
         // Adiciona um novo veiculo
-        public async Task<int> AddVeiculoAsync(Veiculo pVeiculo)
+        public async Task<int> AddVeiculoAsync(VeiculoModel pVeiculo)
         {
             return await _database.InsertAsync(pVeiculo);
         }
 
-        public async Task<int> UpdateVeiculoAsync(Veiculo pVeiculo)
+        public async Task<int> UpdateVeiculoAsync(VeiculoModel pVeiculo)
         {
             return await _database.UpdateAsync(pVeiculo);
         }
 
         // Obtém todos os veiculos
-        public async Task<List<Veiculo>> GetVeiculosAsync()
+        public async Task<List<VeiculoModel>> GetVeiculosAsync()
         {
-            return await _database.Table<Veiculo>().ToListAsync();
+            return await _database.Table<VeiculoModel>().ToListAsync();
         }
 
         // Remove um veiculo
-        public async Task<int> DeleteVeiculoAsync(Veiculo pVeiculo)
+        public async Task<int> DeleteVeiculoAsync(VeiculoModel pVeiculo)
         {
             return await _database.DeleteAsync(pVeiculo);
         }

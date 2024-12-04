@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using TesteRec.API.Communic;
+using TesteRec.API.Models;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -8,8 +10,36 @@ namespace TesteRec.Layouts.crud;
 
 public partial class CadastroVeiculo : ContentPage
 {
-    Veiculo _veiculo;
+    VeiculoModel _veiculo;
     bool _novoCadastro = false;
+    private TipoVeiculo _tipoVeiculoSelecionado = null;
+    private List<TipoVeiculo> _listaTipoVeiculo = new List<TipoVeiculo>()
+        {
+            new TipoVeiculo()
+            {
+                ID = 0,
+                Descricao = "Carro",
+                Imagem = "carro.png"
+            },
+            new TipoVeiculo()
+            {
+                ID = 1,
+                Descricao = "Moto",
+                Imagem = "moto.png"
+            },
+            new TipoVeiculo()
+            {
+                ID = 2,
+                Descricao = "Ônibus",
+                Imagem = "onibus.png"
+            },
+            new TipoVeiculo()
+            {
+                ID = 3,
+                Descricao = "Caminhão",
+                Imagem = "caminhao.png"
+            },
+        };
 
     public CadastroVeiculo(bool pNovoCadastro)
     {
@@ -17,20 +47,21 @@ public partial class CadastroVeiculo : ContentPage
         _novoCadastro = pNovoCadastro;
     }
 
-    public CadastroVeiculo(Veiculo pVeiculoSelecionado)
+    public CadastroVeiculo(VeiculoModel pVeiculoSelecionado)
     {
         InitializeComponent();
         _veiculo = pVeiculoSelecionado;
-        Entry_ApelidoVeiculo.Text = _veiculo.Nome;
+        _tipoVeiculoSelecionado = _listaTipoVeiculo.Find(x => x.ID == _veiculo.TipoVeiculo);
         Entry_MarcaVeiculo.Text = _veiculo.Marca;
-        Entry_TipoVeiculo.Text = _veiculo.TipoVeiculo;
-        Entry_NomeVeiculo.Text = _veiculo.Modelo;
-        Entry_Quilometragem.Text = _veiculo.Quilometros.ToString();
-        Entry_AnoFabricacao.Text = _veiculo.Ano.ToString();
-        Entry_AnoModelo.Text = _veiculo.Ano.ToString();
+        Entry_TipoVeiculo.Text = _tipoVeiculoSelecionado.Descricao;
+        Entry_NomeVeiculo.Text = _veiculo.NomeVeiculo;
+        Entry_Quilometragem.Text = _veiculo.Kilometragem?.ToString();
+        Entry_AnoFabricacao.Text = _veiculo.AnoFabricacao?.ToString();
+        Entry_AnoModelo.Text = _veiculo.AnoModelo?.ToString();
         Entry_Placa.Text = _veiculo.Placa;
-        Entry_Renavam.Text = _veiculo.Renavam.ToString();
+        Entry_Renavam.Text = _veiculo.Renavam?.ToString();
         Entry_Chassi.Text = _veiculo.Chassi;
+        Entry_LitragemVeiculo.Text = _veiculo.CapacidadeTanque?.ToString();
     }
 
     protected override void OnAppearing()
@@ -46,29 +77,7 @@ public partial class CadastroVeiculo : ContentPage
         {
             BancoMarca._ListaMarcas = listaMarcas;
         }
-        CollectionView_TipoVeiculo.ItemsSource = new List<TipoVeiculo>()
-        {
-            new TipoVeiculo()
-            {
-                Descricao = "Carro",
-                Imagem = "carro.png"
-            },
-            new TipoVeiculo()
-            {
-                Descricao = "Moto",
-                Imagem = "moto.png"
-            },
-            new TipoVeiculo()
-            {
-                Descricao = "Ônibus",
-                Imagem = "onibus.png"
-            },
-            new TipoVeiculo()
-            {
-                Descricao = "Caminhão",
-                Imagem = "caminhao.png"
-            },
-        };
+        CollectionView_TipoVeiculo.ItemsSource = _listaTipoVeiculo;
     }
 
     private async void AtualizaFoto_Tapped(object sender, TappedEventArgs e)
@@ -130,6 +139,7 @@ public partial class CadastroVeiculo : ContentPage
 
         if (selectedItem != null)
         {
+            _tipoVeiculoSelecionado = selectedItem;
             Entry_TipoVeiculo.Text = selectedItem.Descricao;
             Popup_TipoVeiculo.IsVisible = false;
             ((CollectionView)sender).SelectedItem = null;
@@ -153,26 +163,44 @@ public partial class CadastroVeiculo : ContentPage
     private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
     {
         VeiculoDB instancia = new VeiculoDB();
-        Veiculo objAdd = new Veiculo()
+        VeiculoController communic = new VeiculoController();
+        VeiculoModel objAdd = new VeiculoModel()
         {
-            Ano = int.Parse(Entry_AnoFabricacao.Text),
-            Quilometros = double.Parse(Entry_Quilometragem.Text),
-            Nome = Entry_ApelidoVeiculo.Text,
+            AnoFabricacao = int.Parse(Entry_AnoFabricacao.Text),
+            AnoModelo = int.Parse(Entry_AnoModelo.Text),
+            Kilometragem = int.Parse(Entry_Quilometragem.Text),
+            CapacidadeTanque = int.Parse(Entry_LitragemVeiculo.Text),
+            NomeVeiculo = Entry_NomeVeiculo.Text,
             Marca = Entry_MarcaVeiculo.Text,
             Chassi = Entry_Chassi.Text,
             Renavam = Entry_Renavam.Text,
-            Modelo = Entry_NomeVeiculo.Text,
-            TipoVeiculo = Entry_TipoVeiculo.Text,
+            TipoVeiculo = _tipoVeiculoSelecionado.ID,
             Placa = Entry_Placa.Text,
         };
         if(_veiculo != null)
         {
-            objAdd.Id = _veiculo.Id;
-            await instancia.UpdateVeiculoAsync(objAdd);
+            objAdd.ID = _veiculo.ID;
+            var retorno = await communic.AtualizarVeiculo(objAdd);
+            if (retorno.Sucesso)
+            {
+                await instancia.UpdateVeiculoAsync(objAdd);
+            }
+            else
+            {
+                await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
+            }
         }
         else
         {
-            await instancia.AddVeiculoAsync(objAdd);
+            var retorno = await communic.CriarVeiculo(objAdd);
+            if(retorno.Sucesso)
+            {
+                await instancia.AddVeiculoAsync(retorno.Valor);
+            }
+            else
+            {
+                await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
+            }
         }
 
         if(_novoCadastro)
@@ -193,6 +221,7 @@ public partial class CadastroVeiculo : ContentPage
 
 public class TipoVeiculo
 {
+    public int ID { get; set; }
     public string? Descricao { get; set; }
     public string? Imagem { get; set; }
 }

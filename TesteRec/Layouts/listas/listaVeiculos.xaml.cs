@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
 using Newtonsoft.Json;
+using TesteRec.API.Models;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -28,7 +29,7 @@ public partial class listaVeiculos : ContentPage
 
     private async void CollectionView_Veiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        Veiculo veiculoSelecionado = (Veiculo)((CollectionView)sender).SelectedItem;
+        VeiculoModel veiculoSelecionado = (VeiculoModel)((CollectionView)sender).SelectedItem;
 
         if (((CollectionView)sender).SelectedItem != null)
         {
@@ -39,13 +40,12 @@ public partial class listaVeiculos : ContentPage
             {
                 case "Selecionar veículo":
                     Global.carroSelecionado = veiculoSelecionado;
-                    await Toast.Make($"Você selecionou {Global.carroSelecionado.Nome}").Show();
+                    await Toast.Make($"Você selecionou {Global.carroSelecionado.NomeVeiculo}").Show();
                     await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
                     await Navigation.PopAsync();
                     break;
                 case "Editar veículo":
                     await Navigation.PushAsync(new CadastroVeiculo(veiculoSelecionado));
-                    await DisplayAlert("Ação", "Você escolheu editar o veículo!", "OK");
                     break;
                 default:
                     // O usuário cancelou ou fechou o menu

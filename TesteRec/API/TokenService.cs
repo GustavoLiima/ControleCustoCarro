@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Text.Json;
+﻿using Newtonsoft.Json;
+using System.Text;
 using TesteRec.API.Models;
 using TesteRec.Db;
 
@@ -22,7 +22,7 @@ namespace TesteRec.API
             try
             {
                 // Serializando o objeto TokenVM em JSON
-                var jsonContent = JsonSerializer.Serialize(tokenRequest);
+                var jsonContent = System.Text.Json.JsonSerializer.Serialize(tokenRequest);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 // Configurando a requisição
@@ -37,9 +37,12 @@ namespace TesteRec.API
                 // Verificando se a resposta foi bem-sucedida
                 if (response.IsSuccessStatusCode)
                 {
+                    TokenReturn objRet = JsonConvert.DeserializeObject<TokenReturn>(await response.Content.ReadAsStringAsync());
                     // Lendo o conteúdo da resposta como string
                     Global._DataToken = DateTime.Now;
-                    Global._Token = await response.Content.ReadAsStringAsync();
+                    Global._Token = objRet.Token;
+                    Global._UsuarioSelecionado = objRet.Usuario;
+                    await SecureStorage.Default.SetAsync("usuario", JsonConvert.SerializeObject(objRet.Usuario));
                     return new ApiResponse<string>()
                     {
                         Sucesso = true,
