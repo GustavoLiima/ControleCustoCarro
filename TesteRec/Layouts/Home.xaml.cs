@@ -59,9 +59,12 @@ public partial class Home : ContentPage
             }
             Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Kilometragem}";
         }
-        var objCarregar = await servicoService.GetServicosAsync();
-        CollectionView_Servicos.ItemsSource = null;
-        CollectionView_Servicos.ItemsSource = objCarregar;
+        if(Global.carroSelecionado != null)
+        {
+            var objCarregar = await servicoService.GetServicosAsync(Global.carroSelecionado.ID);
+            CollectionView_Servicos.ItemsSource = null;
+            CollectionView_Servicos.ItemsSource = objCarregar;
+        }
     }
 
     private void OnAddServiceClicked(object sender, EventArgs e)

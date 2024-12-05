@@ -9,6 +9,7 @@ namespace TesteRec.Db.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int idVeiculo { get; set; }
         public int AcaoSelecionada { get; set; }
         public DateTime Data { get; set; }
         public TimeSpan Hora { get; set; }

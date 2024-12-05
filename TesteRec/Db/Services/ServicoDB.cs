@@ -26,6 +26,7 @@ namespace TesteRec.Db.Services
         // Adiciona um novo serviço
         public async Task<int> AddServicoAsync(Servico servico)
         {
+            servico.idVeiculo = Global.carroSelecionado.ID;
             if(servico.Id == 0)
             {
                 return await _database.InsertAsync(servico);
@@ -35,9 +36,13 @@ namespace TesteRec.Db.Services
         }
 
         // Obtém todos os serviços, exceto lembretes
-        public async Task<List<Servico>> GetServicosAsync()
+        public async Task<List<Servico>> GetServicosAsync(int pIdVeiculo)
         {
-            List<Servico> objRetorno = await _database.Table<Servico>().Where(x => x.AcaoSelecionada != 0).OrderByDescending(x => x.Data).ToListAsync();
+            if(pIdVeiculo == 0)
+            {
+                return null;
+            }
+            List<Servico> objRetorno = await _database.Table<Servico>().Where(x => x.AcaoSelecionada != 0 && x.idVeiculo == pIdVeiculo).OrderByDescending(x => x.Data).ToListAsync();
             if (objRetorno != null)
             {
                 return objRetorno;

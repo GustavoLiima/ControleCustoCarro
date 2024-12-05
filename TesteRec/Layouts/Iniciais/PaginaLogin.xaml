@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:TesteRec.Helpers.Componentes"
              x:Class="TesteRec.Layouts.Iniciais.PaginaLogin">
     <ContentPage.Content>
         <Grid BackgroundColor="#F5F5F5" Padding="30">
@@ -63,6 +64,14 @@
                             <TapGestureRecognizer Tapped="EsqueciMinhaSenha_Tapped" />
                         </Label.GestureRecognizers>
                     </Label>
+
+                    <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="25" BackgroundColor="#007AFF" Padding="5" IsVisible="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                            <ActivityIndicator IsRunning="True" Color="White"/>
+                            <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
 
                     <!-- Botão de login -->
                     <Button x:Name="Button_Login" Text="Entrar"

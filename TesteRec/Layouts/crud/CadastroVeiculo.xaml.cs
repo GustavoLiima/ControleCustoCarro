@@ -162,6 +162,7 @@ public partial class CadastroVeiculo : ContentPage
 
     private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
     {
+        
         VeiculoDB instancia = new VeiculoDB();
         VeiculoController communic = new VeiculoController();
         VeiculoModel objAdd = new VeiculoModel()

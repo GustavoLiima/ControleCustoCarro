@@ -16,8 +16,15 @@ public partial class PaginaLogin : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
+    private void HabilitarDesabilitarLoading()
+    {
+        Frame_LoadingLogin.IsVisible = !Frame_LoadingLogin.IsVisible;
+        Button_Login.IsVisible = !Button_Login.IsVisible;
+    }
+
     private async void Button_Login_Clicked(object sender, EventArgs e)
     {
+        HabilitarDesabilitarLoading();
         TokenService tokenService = new TokenService();
         Criptografia crip = new Criptografia();
         TokenVM tokenVM = new TokenVM()
@@ -31,9 +38,11 @@ public partial class PaginaLogin : ContentPage
             await SecureStorage.Default.SetAsync("login", JsonConvert.SerializeObject(tokenVM));
             Global._login = tokenVM;
             Application.Current.MainPage = new AppShell();
+            HabilitarDesabilitarLoading();
         }
         else
         {
+            HabilitarDesabilitarLoading();
             await DisplayAlert("Atenção", vRet.Mensagem, "continuar");
         }
     }

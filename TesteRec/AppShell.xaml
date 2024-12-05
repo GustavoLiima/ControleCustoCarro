@@ -8,6 +8,8 @@
     Shell.FlyoutBehavior="Disabled"
     Title="TesteRec">
 
+        
+
     <TabBar>
         <ShellContent Title="Histórico" 
                       Icon="history.png"

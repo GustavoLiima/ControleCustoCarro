@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TesteRec.Helpers.Componentes.ButtonLoading"
+             Title="ButtonLoading">
+    <Frame HeightRequest="50" CornerRadius="25" BackgroundColor="#007AFF" Padding="5">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+            <ActivityIndicator IsRunning="True" Color="White"/>
+            <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+        </StackLayout>
+    </Frame>
+</ContentPage>
