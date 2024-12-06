@@ -9,27 +9,29 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="10" Padding="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="sino" Grid.Column="0" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            <StackLayout Grid.Column="1">
-                                <Label Text="Financiamento" FontSize="Medium"/>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="odometer.png" WidthRequest="25" VerticalOptions="Center"/>
-                                    <Label Text="1000" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                                    <Label Text="Em 300 km" HorizontalOptions="End" VerticalOptions="Center"/>
+                        <StackLayout IsVisible="{Binding FoiServico}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="sino" Grid.Column="0" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding TituloLembrete}" TextColor="Black" FontSize="Medium"/>
+                                    <StackLayout IsVisible="{Binding LembrarEmKm}" Orientation="Horizontal">
+                                        <Image Source="odometer.png" WidthRequest="25" VerticalOptions="Center"/>
+                                        <Label Text="{Binding LembreteKilometragem}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="Black"/>
+                                        <Label Text="Em 300 km" HorizontalOptions="End" VerticalOptions="Center" TextColor="Black"/>
+                                    </StackLayout>
+                                    <StackLayout IsVisible="{Binding LembrarEmData}" Orientation="Horizontal">
+                                        <Image Source="calendario.png" WidthRequest="25" VerticalOptions="Center"/>
+                                        <Label Text="{Binding DataLembrete, StringFormat='{0:dd/MM/yyyy}'}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="Black"/>
+                                        <Label Text="{Binding AlertaData}" HorizontalOptions="End" VerticalOptions="Center" TextColor="Black"/>
+                                    </StackLayout>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="calendario.png" WidthRequest="25" VerticalOptions="Center"/>
-                                    <Label Text="20/11/2024" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                                    <Label Text="Alerta em 3 dias" HorizontalOptions="End" VerticalOptions="Center"/>
-                                </StackLayout>
-                            </StackLayout>
-                            
-                        </Grid>
+                            </Grid>
+                        </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

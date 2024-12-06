@@ -1,5 +1,7 @@
+using Newtonsoft.Json;
 using TesteRec.API.Communic;
 using TesteRec.API.Models;
+using TesteRec.Db;
 using TesteRec.Helpers;
 using TesteRec.Layouts.crud;
 
@@ -28,6 +30,12 @@ public partial class CadastroUsuario : ContentPage
         isReconfirmPasswordVisible = !isReconfirmPasswordVisible;
         Entry_ReconfirmacaoSenha.IsPassword = !isReconfirmPasswordVisible;
         ((ImageButton)sender).Source = isReconfirmPasswordVisible ? "visible" : "invisible";
+    }
+
+    private void InverterVisibilidade()
+    {
+        Frame_LoadingCadastro.IsVisible = !Frame_LoadingCadastro.IsVisible;
+        Button_Cadastrar.IsVisible = !Button_Cadastrar.IsVisible;
     }
 
     private async void Button_Avancar_Clicked(object sender, EventArgs e)
@@ -82,6 +90,8 @@ public partial class CadastroUsuario : ContentPage
             return;
         }
 
+        InverterVisibilidade();
+
         UsuarioCommunic chamada = new UsuarioCommunic();
         Criptografia crip = new Criptografia();
         UsuarioVM obj = new UsuarioVM()
@@ -95,17 +105,20 @@ public partial class CadastroUsuario : ContentPage
             vencimentoCnh = DateTime.MinValue
         };
 
-        ApiResponse<bool> vRet = await chamada.CadastrarUsuario(obj);
+        ApiResponse<UsuarioVM> vRet = await chamada.CadastrarUsuario(obj);
 
         if (vRet.Sucesso)
         {
-            await DisplayAlert("Atenção", "Deu certo!", "Continuar");
+            Global._UsuarioSelecionado = vRet.Valor;
+            await SecureStorage.Default.SetAsync("usuario", JsonConvert.SerializeObject(Global._UsuarioSelecionado));
+            await DisplayAlert("Atenção", "Usuário cadastro! Agora você irá fazer a configuração do seu primeiro veículo!", "Continuar");
             Application.Current.MainPage = new NavigationPage(new CadastroVeiculo(true));
         }
         else
         {
             await DisplayAlert("Atenção", vRet.Mensagem, "Continuar");
         }
+        InverterVisibilidade();
     }
 
     private void Button_Voltar_Clicked(object sender, EventArgs e)

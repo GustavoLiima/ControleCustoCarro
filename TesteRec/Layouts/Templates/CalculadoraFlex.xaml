@@ -2,81 +2,85 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.Templates.CalculadoraFlex"
-             Title="CalculadoraFlex">
-    <StackLayout Padding="20" Spacing="20">
-        <!-- Entradas para preços -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Image Source="posto" WidthRequest="35" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Preço da gasolina"/>
-                <Entry x:Name="GasolinaEntry"
+             Title="Calculadora Flex"
+             Shell.BackgroundColor="#7114E7"
+            Shell.TitleColor="White">
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="20">
+
+                <!-- Entradas para preços -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="posto" WidthRequest="35" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Preço da gasolina"/>
+                        <Entry x:Name="GasolinaEntry"
                        Grid.Row="1"
                        Placeholder="Preço da Gasolina"
                        HorizontalTextAlignment="Center"
                        Keyboard="Numeric"/>
-            </Grid>
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Preço do etanol"/>
-                <Entry x:Name="EtanolEntry" 
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Preço do etanol"/>
+                        <Entry x:Name="EtanolEntry" 
                        Grid.Row="1"
                        Placeholder="Preço do Etanol"
                        HorizontalTextAlignment="Center"
                        Keyboard="Numeric"/>
-            </Grid>
-        </Grid>
+                    </Grid>
+                </Grid>
 
-        <Label Text="Etanol é eficiente até:" VerticalOptions="Center"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Slider x:Name="SliderPercentual" 
+                <Label Text="Etanol é eficiente até:" VerticalOptions="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="SliderPercentual" 
                     Minimum="0" 
                     Maximum="100" 
                     Value="70" 
                     VerticalOptions="Center"
                     Grid.Column="0"
                     ValueChanged="SliderPercentual_ValueChanged"/>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Entry x:Name="PercentualEntry" 
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry x:Name="PercentualEntry" 
                        WidthRequest="60" 
                        Keyboard="Numeric"
                        HorizontalTextAlignment="Center"
                        Grid.Column="0"
                        VerticalOptions="Center"
                        Text="{Binding Source={x:Reference SliderPercentual}, Path=Value, Mode=TwoWay}"/>
-                <Label Text="%" Grid.Column="1" VerticalOptions="Center"/>
-            </Grid>
-        </Grid>
+                        <Label Text="%" Grid.Column="1" VerticalOptions="Center"/>
+                    </Grid>
+                </Grid>
 
-        <Button Text="Calcular" Clicked="CalcularButton_Clicked" />
+                <Button Text="Calcular" Clicked="CalcularButton_Clicked" />
 
-        <!-- Resultado -->
-        <Frame>
+                <!-- Resultado -->
+                <Frame>
 
-            <Label x:Name="ResultadoLabel"
+                    <Label x:Name="ResultadoLabel"
                    Text="Insira os valores para calcular..."
                    FontSize="18"
                    HorizontalTextAlignment="Center"/>
-        </Frame>
+                </Frame>
                 <Label x:Name="KmLabel"
                Text=""
                FontSize="14"
@@ -85,5 +89,17 @@
                Text=""
                FontSize="14"
                HorizontalTextAlignment="Center"/>
-    </StackLayout>
+                <StackLayout x:Name="Stack_EscolhaCombustivel">
+                    <Label Text="Escolha abaixo qual o combustível que você irá abastecer" HorizontalTextAlignment="Center"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Text="Gasolina" Clicked="Gasolina_Clicked" Margin="5"/>
+                        <Button Grid.Column="1" Text="Etanol" Clicked="Etanol_Clicked" Margin="5"/>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
 </ContentPage>

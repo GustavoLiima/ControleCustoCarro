@@ -8,11 +8,11 @@ namespace TesteRec.API.Communic
 
         public async Task<ApiResponse<VeiculoModel>> CriarVeiculo(VeiculoModel pVeiculo)
         {
-            return await ApiService.SendRequestAsync<VeiculoModel, VeiculoModel>(Endereco + "/criar", HttpMethod.Post, pVeiculo, false);
+            return await ApiService.SendRequestAsync<VeiculoModel, VeiculoModel>(Endereco + "/criar", HttpMethod.Post, pVeiculo, true);
         }
         public async Task<ApiResponse<string>> AtualizarVeiculo(VeiculoModel pVeiculo)
         {
-            return await ApiService.SendRequestAsync<VeiculoModel, string>(Endereco + "/atualizar", HttpMethod.Put, pVeiculo, false);
+            return await ApiService.SendRequestAsync<VeiculoModel, string>(Endereco + "/atualizar", HttpMethod.Put, pVeiculo, true);
         }
     }
 }

@@ -6,7 +6,9 @@
     xmlns:local="clr-namespace:TesteRec"
     xmlns:layouts="clr-namespace:TesteRec.Layouts"
     Shell.FlyoutBehavior="Disabled"
-    Title="TesteRec">
+    Title="TesteRec"
+    Shell.TabBarForegroundColor="#7114E7"
+    Shell.TabBarTitleColor="#7114E7">
 
         
 

@@ -2,23 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.crud.CadastroVeiculo"
-             Title="Cadastro Veiculo">
+             Title="Cadastro Veiculo"
+             Shell.BackgroundColor="#7114E7"
+             Shell.TitleColor="White">
     <Grid>
-
-            <ScrollView>
-        <VerticalStackLayout Padding="30,0">
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
                 <StackLayout>
-                    <Frame WidthRequest="150" HeightRequest="150" CornerRadius="75" Padding="0" HasShadow="True">
-                        <Image x:Name="Image_FotoCarro" Source="dotnet_bot.png" HeightRequest="210" Aspect="AspectFit" SemanticProperties.Description="dot net bot in a race car number eight" />
-                    </Frame>
-                    <Label Text="Atualizar Foto" HorizontalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="AtualizaFoto_Tapped"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-
-
-
 
                     <!-- Marca -->
                     <Label Text="Marca"/>
@@ -60,7 +50,7 @@
 
                     <Label Text="Placa do veículo"/>
                     <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}"/>
-                    
+
                     <!-- Litragem -->
                     <Label Text="Capacidade tanque de combustível (Litros)"/>
                     <Entry x:Name="Entry_LitragemVeiculo" Placeholder="Digite a litragem do tanque" Keyboard="Numeric"/>
@@ -99,13 +89,19 @@
                             <Label Text="GNV" VerticalOptions="Center" />
                         </StackLayout>
                     </StackLayout>
+                    <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="8" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-                    <Button Text="Cadastrar Veículo" Clicked="CadastrarVeiculo_Clicked"/>
+                            <ActivityIndicator IsRunning="True" Color="White"/>
+                            <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="Button_CadastrarCarro" Text="Cadastrar Veículo" Clicked="CadastrarVeiculo_Clicked" BackgroundColor="#7114E7" TextColor="White"/>
                 </StackLayout>
 
 
-        </VerticalStackLayout>
-            </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
         <!-- Popup de seleção de serviço -->
         <ContentView x:Name="Popup_TipoVeiculo" BackgroundColor="#80000000" IsVisible="False">
             <Frame WidthRequest="300" 

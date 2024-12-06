@@ -95,5 +95,53 @@ namespace TesteRec.Db.Models
         public bool LembrarEmData { get; set; }
         public double LembreteKilometragem { get; set; }
         public DateTime DataLembrete { get; set; }
+
+        [NotMapped]
+        public string AlertaKM
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+        [NotMapped]
+        public string AlertaData
+        {
+            get
+            {
+                DateTime hoje = DateTime.Now.Date; // Pega a data atual sem a hora
+                TimeSpan diferenca = DataLembrete.Date - hoje;
+
+                if (diferenca.Days > 0)
+                {
+                    return $"Falta {diferenca.Days} dias";
+                }
+                else if (diferenca.Days == 0)
+                {
+                    return "Hoje vence o prazo";
+                }
+                else
+                {
+                    return $"Já passou {Math.Abs(diferenca.Days)} dias do prazo";
+                }
+            }
+        }
+
+        [NotMapped]
+        public string TituloLembrete
+        {
+            get
+            {
+                if(LembreteFoiServico)
+                {
+                    return TipoServicoModelo.Descricao;
+                }
+                else
+                {
+                    return DespesaModelo.Descricao;
+                }
+            }
+        }
     }
 }

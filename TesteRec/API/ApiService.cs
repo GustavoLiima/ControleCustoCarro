@@ -37,8 +37,8 @@ namespace TesteRec.API
                         var tokenService = new TokenService();
                         var tokenRequest = new TokenVM
                         {
-                            user = Global._Usuario,
-                            password = Global._Senha
+                            user = Global._UsuarioSelecionado.email,
+                            password = Global._UsuarioSelecionado.senha
                         };
                         await tokenService.GetTokenAsync(tokenRequest);
                     }

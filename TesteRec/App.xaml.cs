@@ -27,7 +27,7 @@ namespace TesteRec
 
         private async void CarregarPaginaInicial()
         {
-            string retorno = await SecureStorage.Default.GetAsync("login");
+            string retorno = await SecureStorage.Default.GetAsync("usuario");
 
             if (retorno == null)
             {
@@ -35,7 +35,7 @@ namespace TesteRec
             }
             else
             {
-                Global._login = JsonConvert.DeserializeObject<TokenVM>(retorno);
+                Global._UsuarioSelecionado = JsonConvert.DeserializeObject<UsuarioVM>(retorno);
                 MainPage = new AppShell();
             }
         }

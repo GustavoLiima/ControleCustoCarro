@@ -1,5 +1,4 @@
 using TesteRec.Db;
-using TesteRec.Layouts.crud;
 using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
 using TesteRec.Layouts.Templates;
@@ -54,6 +53,7 @@ public partial class Configuracoes : ContentPage
 	public Configuracoes()
 	{
 		InitializeComponent();
+        NavigationPage.SetHasNavigationBar(this, false);
         ListView_Interacoes.ItemsSource = _listaMenus;
 	}
 
@@ -94,14 +94,14 @@ public partial class Configuracoes : ContentPage
                 await Navigation.PushAsync(new TipoReceita());
                 break;
             case "Calculadora flex":
-                await Navigation.PushAsync(new CalculadoraFlex());
+                await Navigation.PushAsync(new CalculadoraFlex(false));
                 break;
             case "Sair":
                 if(await DisplayAlert("Atenção", "Você tem certeza que deseja deslogar?", "confirmar", "cancelar"))
                 {
                     Global._login = null;
                     SecureStorage.Default.Remove("login");
-                    await Navigation.PushAsync(new PaginaLogin());
+                    Application.Current.MainPage = new PaginaLogin();
                 }
                 break;
         }

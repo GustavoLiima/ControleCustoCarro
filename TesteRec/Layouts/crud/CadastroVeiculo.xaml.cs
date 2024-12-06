@@ -78,6 +78,7 @@ public partial class CadastroVeiculo : ContentPage
             BancoMarca._ListaMarcas = listaMarcas;
         }
         CollectionView_TipoVeiculo.ItemsSource = _listaTipoVeiculo;
+        _tipoVeiculoSelecionado = _listaTipoVeiculo[0];
     }
 
     private async void AtualizaFoto_Tapped(object sender, TappedEventArgs e)
@@ -91,7 +92,7 @@ public partial class CadastroVeiculo : ContentPage
             if (photo != null)
             {
                 var stream = await photo.OpenReadAsync();
-                Image_FotoCarro.Source = ImageSource.FromStream(() => stream);
+                //Image_FotoCarro.Source = ImageSource.FromStream(() => stream);
             }
         }
         else if (action == "Escolher da Galeria")
@@ -101,7 +102,7 @@ public partial class CadastroVeiculo : ContentPage
             if (photo != null)
             {
                 var stream = await photo.OpenReadAsync();
-                Image_FotoCarro.Source = ImageSource.FromStream(() => stream);
+                //Image_FotoCarro.Source = ImageSource.FromStream(() => stream);
             }
         }
     }
@@ -150,8 +151,6 @@ public partial class CadastroVeiculo : ContentPage
     {
         // Ocultar o teclado
         Entry_TipoVeiculo.Unfocus();
-
-
         Popup_TipoVeiculo.IsVisible = true;
     }
 
@@ -160,9 +159,21 @@ public partial class CadastroVeiculo : ContentPage
         Popup_TipoVeiculo.IsVisible = false;
     }
 
+    private void InverterBotoes()
+    {
+        Frame_LoadingLogin.IsVisible = !Frame_LoadingLogin.IsVisible;
+        Button_CadastrarCarro.IsVisible = !Button_CadastrarCarro.IsVisible;
+    }
+
     private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
     {
-        
+        if(_tipoVeiculoSelecionado == null)
+        {
+            await DisplayAlert("Atenção", "É necessário selecionar um tipo de veículo", "continuar");
+            Entry_TipoVeiculo_Focused(null, null);
+            return;
+        }
+        InverterBotoes();
         VeiculoDB instancia = new VeiculoDB();
         VeiculoController communic = new VeiculoController();
         VeiculoModel objAdd = new VeiculoModel()
@@ -185,6 +196,7 @@ public partial class CadastroVeiculo : ContentPage
             if (retorno.Sucesso)
             {
                 await instancia.UpdateVeiculoAsync(objAdd);
+                await Navigation.PopAsync();
             }
             else
             {
@@ -197,6 +209,7 @@ public partial class CadastroVeiculo : ContentPage
             if(retorno.Sucesso)
             {
                 await instancia.AddVeiculoAsync(retorno.Valor);
+                await Navigation.PopAsync();
             }
             else
             {
@@ -204,18 +217,17 @@ public partial class CadastroVeiculo : ContentPage
             }
         }
 
-        if(_novoCadastro)
+        InverterBotoes();
+
+        if (_novoCadastro)
         {
             Global.carroSelecionado = objAdd;
+            await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
             Application? current = Application.Current;
             if (current != null)
             {
                 current.MainPage = new AppShell();
             }
-        }
-        else
-        {
-            await Navigation.PopAsync();
         }
     }
 }

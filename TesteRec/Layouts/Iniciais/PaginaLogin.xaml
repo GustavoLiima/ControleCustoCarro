@@ -16,6 +16,7 @@
                     <!-- Mensagem de boas-vindas -->
                     <Label Text="Bem-vindo!"
                            FontSize="Title"
+                           TextColor="Black"
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center" />
                     <Label Text="Faça o login abaixo para começar o controle financeiro do seu veículo"
@@ -26,6 +27,7 @@
                     <!-- Campo de e-mail -->
                     <Entry x:Name="Entry_Email"
                            Placeholder="E-mail"
+                           TextColor="Black"
                            Keyboard="Email"
                            FontSize="Medium" />
 
@@ -39,6 +41,7 @@
                                Grid.Column="0"
                                HeightRequest="50"
                                VerticalOptions="Start"
+                               TextColor="Black"
                                Placeholder="Senha"
                                IsPassword="True"
                                FontSize="Medium" />

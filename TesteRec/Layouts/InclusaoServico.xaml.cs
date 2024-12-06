@@ -2,6 +2,7 @@ using TesteRec.Db.Models;
 using TesteRec.Db.Services;
 using TesteRec.Enum;
 using TesteRec.Layouts.listas;
+using TesteRec.Layouts.Templates;
 using TesteRec.Model;
 
 namespace TesteRec.Layouts;
@@ -156,7 +157,7 @@ public partial class InclusaoServico : ContentPage
             case EMenuSelecionado.Abastecimento:
                 Shell.SetBackgroundColor(this, Color.FromHex("#f39c12"));
                 Title = "Abastecimento";
-                Grid_ValoresCombustivel.IsVisible = Grid_Combustivel.IsVisible = true;
+                Button_CalculadoraFlex.IsVisible = Grid_ValoresCombustivel.IsVisible = Grid_Combustivel.IsVisible = true;
                 Grid_TipoPagamento.IsVisible = true;
                 Grid_DataHorario.IsVisible = true;
                 Grid_Odometro.IsVisible = true;
@@ -180,31 +181,6 @@ public partial class InclusaoServico : ContentPage
         CollectionView_TipoServico.ItemsSource = DbTipoServico._tipoServicos;
         CollectionView_TipoReceita.ItemsSource = DbTipoReceita._tipoReceitas;
     }
-
-    //await servicoService.AddServicoAsync(new Servico
-    //            {
-    //                AcaoSelecionada = (int) _menuSelecionado,
-    //                Combustivel = _combustivelSelecionado.Id,
-    //                Preco = double.Parse(entryPreco.Text),
-    //                ValorTotal = double.Parse(entryValorTotal.Text),
-    //                Litros = double.Parse(entryLitros.Text),
-    //                Motorista = entryMotorista.Text,
-    //                Odometro = double.Parse(entryOdometro.Text),
-    //                Data = datePickerServico.Date,
-    //                Hora = timePickerServico.Time,
-    //                Descricao = Editor_Observacao.Text,
-    //                FormaPagamento = _pagamentoSelecionado.Id,
-    //                TipoDespesa = _despesaSelecionada.Id,
-    //                TipoServico = _servicoSelecionado.Id,
-    //                Receita = _receitaSelecionada.Id,
-    //                ValorReceita = double.Parse(entryValor.Text),
-    //                LembreteFoiServico = Grid_Servico.IsVisible,
-    //                ApenasUmaVez = _ApenasUmaVez,
-    //                LembrarEmKm = CheckBox_Kilometragem.IsChecked,
-    //                LembrarEmData = CheckBox_Data.IsChecked,
-    //                DataLembrete = DatePicker_Lembrete.Date,
-    //                LembreteKilometragem = double.Parse(Entry_OdometroLembrete.Text)
-    //            });
 
     private async void OnSalvarServicoClicked(object sender, EventArgs e)
     {
@@ -427,7 +403,7 @@ public partial class InclusaoServico : ContentPage
             litros = double.Parse(entryLitros.Text);
             if(litros > 0 && valGas > 0)
             {
-                entryValorTotal.Text = (valGas * litros).ToString("F4");
+                entryValorTotal.Text = (valGas * litros).ToString("N2");
                 return;
             }
         }
@@ -450,7 +426,7 @@ public partial class InclusaoServico : ContentPage
             valGas = double.Parse(entryPreco.Text);
             if(valGas > 0 && valTotal > 0)
             {
-                entryLitros.Text = (valTotal / valGas).ToString("F4");
+                entryLitros.Text = (valTotal / valGas).ToString("N2");
                 return;
             }
         }
@@ -460,7 +436,7 @@ public partial class InclusaoServico : ContentPage
             litros = double.Parse(entryLitros.Text);
             if (litros > 0 && valTotal > 0)
             {
-                entryPreco.Text = (valTotal / litros).ToString("F4");
+                entryPreco.Text = (valTotal / litros).ToString("N2");
                 return;
             }
         }
@@ -483,7 +459,7 @@ public partial class InclusaoServico : ContentPage
             valTotal = double.Parse(entryValorTotal.Text);
             if (litros > 0 && valTotal > 0)
             {
-                entryPreco.Text = (valTotal / litros).ToString("F4");
+                entryPreco.Text = (valTotal / litros).ToString("N2");
                 return;
             }
         }
@@ -493,7 +469,7 @@ public partial class InclusaoServico : ContentPage
             valGas = double.Parse(entryPreco.Text);
             if (valGas > 0 && litros > 0)
             {
-                entryValorTotal.Text = (valGas * litros).ToString("F4");
+                entryValorTotal.Text = (valGas * litros).ToString("N2");
                 return;
             }
         }
@@ -659,6 +635,25 @@ public partial class InclusaoServico : ContentPage
             {
                 CheckBox_Kilometragem.IsChecked = true;
             }
+        }
+    }
+
+    private async void Button_CalculadoraFlex_Clicked(object sender, EventArgs e)
+    {
+        var selecionarPage = new CalculadoraFlex(true);
+
+        var result = Navigation.PushAsync(selecionarPage);
+        // Aguardamos o retorno de uma variável selecionada
+        var resultado = await selecionarPage.AguardarSelecaoAsync();
+
+        if (resultado != null)
+        {
+            // Use o valor retornado
+            entryPreco.Text = resultado.Preco.ToString("N2");
+            listas.TiposCombustivel tiposCombustivel = new listas.TiposCombustivel();
+            _combustivelSelecionado = tiposCombustivel._tipoCombustivel.Find(x => x.Id == resultado.TipoCombustivel);
+            Label_Combustivel.Text = _combustivelSelecionado.Descricao;
+            Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
         }
     }
 }

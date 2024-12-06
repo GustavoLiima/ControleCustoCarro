@@ -6,43 +6,43 @@ public partial class TiposCombustivel : ContentPage
     {
         new Model.TiposCombustivel() 
         {
-            Id = 1,
+            Id = 0,
             Descricao = "Gas. Comum",
             Imagem = "posto.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 2,
+            Id = 1,
             Descricao = "Gas. Aditivada",
             Imagem = "posto.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 3,
+            Id = 2,
             Descricao = "Gas. Premium",
             Imagem = "posto.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 4,
+            Id = 3,
             Descricao = "Etanol",
             Imagem = "etanol.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 5,
+            Id = 4,
             Descricao = "Diesel",
             Imagem = "diesel.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 6,
+            Id = 5,
             Descricao = "GNV",
             Imagem = "gnv.png"
         },
         new Model.TiposCombustivel()
         {
-            Id = 7,
+            Id = 6,
             Descricao = "Elétrico",
             Imagem = "tomada.png"
         }

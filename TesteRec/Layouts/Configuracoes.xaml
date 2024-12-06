@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.Configuracoes"
-             Title="Configuracoes">
+             Title="">
     <VerticalStackLayout>
         <StackLayout Margin="10">
             <ListView x:Name="ListView_Interacoes" ItemTapped="ListView_Interacoes_ItemTapped" RowHeight="70">

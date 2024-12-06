@@ -6,9 +6,9 @@ namespace TesteRec.API.Communic
     {
         private string Endereco = "/api/v1/Usuario";
 
-        public async Task<ApiResponse<bool>> CadastrarUsuario(UsuarioVM pUsuario)
+        public async Task<ApiResponse<UsuarioVM>> CadastrarUsuario(UsuarioVM pUsuario)
         {
-            return await ApiService.SendRequestAsync<UsuarioVM, bool>(Endereco, HttpMethod.Post, pUsuario, false);
+            return await ApiService.SendRequestAsync<UsuarioVM, UsuarioVM>(Endereco, HttpMethod.Post, pUsuario, false);
         }
     }
 }
