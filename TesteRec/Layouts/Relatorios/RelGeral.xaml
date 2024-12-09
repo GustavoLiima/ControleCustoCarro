@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinaGear.Layouts.Relatorios.RelGeral"
+             Title="">
+    <VerticalStackLayout Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
+                <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
+                <Label Text="De " VerticalOptions="Center" HorizontalOptions="Center"/>
+                <DatePicker />
+            </StackLayout>
+            <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
+                <Label Text="Até " VerticalOptions="Center" HorizontalOptions="Center"/>
+                <DatePicker/>
+            </StackLayout>
+        </Grid>
+
+        <Label Text="Selecione veiculo" TextColor="Gray"/>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+            <Image x:Name="Image_CarroSelecionado" WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
+            <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Selecione a categoria" TextColor="Gray"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+            <Image WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
+            <Label Text="Geral" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Custos do período" TextColor="Red" FontAttributes="Bold"/>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="2">
+                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+        
+        <Label Text="Distância percorrida no período" TextColor="DarkOrange" FontAttributes="Bold"/>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Média diária" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="0 km" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="0 km" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+
+        <Label Text="Ganhos do período" TextColor="Green" FontAttributes="Bold"/>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="2">
+                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+
+
+    </VerticalStackLayout>
+</ContentPage>

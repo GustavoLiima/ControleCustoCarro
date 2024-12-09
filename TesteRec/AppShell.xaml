@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TesteRec"
     xmlns:layouts="clr-namespace:TesteRec.Layouts"
+    xmlns:layoutsRel="clr-namespace:FinaGear.Layouts.Relatorios"
     Shell.FlyoutBehavior="Disabled"
     Title="TesteRec"
     Shell.TabBarForegroundColor="#7114E7"
@@ -18,7 +19,10 @@
                       ContentTemplate="{DataTemplate layouts:Home}" />
         <ShellContent Title="Lembretes" 
                       Icon="bell.png"
-                      ContentTemplate="{DataTemplate layouts:Lembretes}" /> 
+                      ContentTemplate="{DataTemplate layouts:Lembretes}" />
+        <ShellContent Title="Relatórios" 
+                      Icon="relatorio.png"
+                      ContentTemplate="{DataTemplate layoutsRel:RelGeral}" />
         <ShellContent Title="Configurações" 
                       Icon="setting.png"
                       ContentTemplate="{DataTemplate layouts:Configuracoes}" />

@@ -143,6 +143,7 @@ public partial class CadastroVeiculo : ContentPage
             _tipoVeiculoSelecionado = selectedItem;
             Entry_TipoVeiculo.Text = selectedItem.Descricao;
             Popup_TipoVeiculo.IsVisible = false;
+            Entry_NomeVeiculo.Focus();
             ((CollectionView)sender).SelectedItem = null;
         }
     }
@@ -167,7 +168,7 @@ public partial class CadastroVeiculo : ContentPage
 
     private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
     {
-        if(_tipoVeiculoSelecionado == null)
+        if (_tipoVeiculoSelecionado == null)
         {
             await DisplayAlert("Atenção", "É necessário selecionar um tipo de veículo", "continuar");
             Entry_TipoVeiculo_Focused(null, null);
@@ -189,7 +190,7 @@ public partial class CadastroVeiculo : ContentPage
             TipoVeiculo = _tipoVeiculoSelecionado.ID,
             Placa = Entry_Placa.Text,
         };
-        if(_veiculo != null)
+        if (_veiculo != null)
         {
             objAdd.ID = _veiculo.ID;
             var retorno = await communic.AtualizarVeiculo(objAdd);
@@ -206,9 +207,20 @@ public partial class CadastroVeiculo : ContentPage
         else
         {
             var retorno = await communic.CriarVeiculo(objAdd);
-            if(retorno.Sucesso)
+            if (retorno.Sucesso)
             {
                 await instancia.AddVeiculoAsync(retorno.Valor);
+                if (_novoCadastro)
+                {
+                    Global.carroSelecionado = retorno.Valor;
+                    await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
+                    Application? current = Application.Current;
+                    if (current != null)
+                    {
+                        current.MainPage = new AppShell();
+                    }
+                    return;
+                }
                 await Navigation.PopAsync();
             }
             else
@@ -216,19 +228,54 @@ public partial class CadastroVeiculo : ContentPage
                 await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
             }
         }
-
         InverterBotoes();
+    }
 
-        if (_novoCadastro)
-        {
-            Global.carroSelecionado = objAdd;
-            await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
-            Application? current = Application.Current;
-            if (current != null)
-            {
-                current.MainPage = new AppShell();
-            }
-        }
+    private void Entry_MarcaVeiculo_Completed(object sender, EventArgs e)
+    {
+        Entry_MarcaVeiculo.Unfocus();
+        Popup_TipoVeiculo.IsVisible = true;
+    }
+
+    private void Entry_NomeVeiculo_Completed(object sender, EventArgs e)
+    {
+        Entry_Quilometragem.Focus();
+    }
+
+    private void Entry_Quilometragem_Completed(object sender, EventArgs e)
+    {
+        Entry_AnoFabricacao.Focus();
+    }
+
+    private void Entry_AnoFabricacao_Completed(object sender, EventArgs e)
+    {
+        Entry_AnoModelo.Focus();
+    }
+
+    private void Entry_AnoModelo_Completed(object sender, EventArgs e)
+    {
+        Entry_Placa.Focus();
+    }
+
+    private void Entry_Placa_Completed(object sender, EventArgs e)
+    {
+        Entry_LitragemVeiculo.Focus();
+    }
+
+    private void Entry_LitragemVeiculo_Completed(object sender, EventArgs e)
+    {
+        Entry_Renavam.Focus();
+    }
+
+    private void Entry_Renavam_Completed(object sender, EventArgs e)
+    {
+        Entry_Chassi.Focus();
+    }
+
+    private void Entry_Chassi_Completed(object sender, EventArgs e)
+    {
+        Entry_Chassi.Unfocus();
+        ScrollView.ScrollToAsync(0, ScrollView.ContentSize.Height, true);
     }
 }
 
