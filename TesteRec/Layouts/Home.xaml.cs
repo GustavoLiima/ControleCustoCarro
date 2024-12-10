@@ -9,6 +9,8 @@ namespace TesteRec.Layouts;
 public partial class Home : ContentPage
 {
     ServicoDB servicoService = new ServicoDB();
+    VeiculoDB veiculoDB = new VeiculoDB();
+    private bool _CarregouBase = false;
 
     public Home()
     {
@@ -18,20 +20,37 @@ public partial class Home : ContentPage
         CollectionView_Inclusoes.ItemsSource = DbMenu._menus;
     }
 
-    protected async override void OnAppearing()
+    private async Task CarregarInformacaoInicial()
     {
-        base.OnAppearing();
+        if(Global._Veiculos.Count == 0)
+        {
+            Global._Veiculos = await veiculoDB.GetVeiculosAsync();
+        }
         string veiculoSelecionado = await SecureStorage.Default.GetAsync("veiculoSelecionado");
         if (!string.IsNullOrEmpty(veiculoSelecionado))
         {
             Global.carroSelecionado = JsonConvert.DeserializeObject<VeiculoModel>(veiculoSelecionado);
+        }
+        else
+        {
+            Global.carroSelecionado = Global._Veiculos[0];
+            await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
         }
         string usuario = await SecureStorage.Default.GetAsync("usuario");
         if (!string.IsNullOrEmpty(usuario))
         {
             Global._UsuarioSelecionado = JsonConvert.DeserializeObject<UsuarioVM>(usuario);
         }
+        _CarregouBase = true;
+    }
 
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        if(!_CarregouBase)
+        {
+            await CarregarInformacaoInicial();
+        }
         carregarTela();
     }
 

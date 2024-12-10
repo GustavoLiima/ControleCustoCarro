@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cofauto.Layouts.Templates.PopUp_Veiculos"
+             Title="PopUp_Veiculos">
+    <StackLayout Padding="10">
+        <!-- Entry para filtro -->
+        <Entry x:Name="FiltroEntry"
+               Placeholder="Digite para filtrar veículos..."
+               TextChanged="FiltroEntry_TextChanged"
+               Margin="0,0,0,10" />
+
+        <!-- ListView para exibir os veículos -->
+        <ListView x:Name="VeiculosListView"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <!-- Imagem do veículo -->
+                            <Image Source="{Binding Imagem}" WidthRequest="40" HeightRequest="40" Margin="0,0,10,0" />
+
+                            <!-- Nome do veículo -->
+                            <Label Text="{Binding NomeVeiculo}" VerticalOptions="Center" FontSize="16" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -12,6 +12,7 @@ namespace TesteRec.Db
         public static string _Usuario;
         public static string _Senha;
         public static TokenVM _login;
+        public static List<VeiculoModel> _Veiculos = new List<VeiculoModel>();
         public static UsuarioVM _UsuarioSelecionado { get; set; }
     }
 }

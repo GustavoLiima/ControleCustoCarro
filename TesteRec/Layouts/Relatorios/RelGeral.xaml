@@ -12,17 +12,20 @@
             <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
                 <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
                 <Label Text="De " VerticalOptions="Center" HorizontalOptions="Center"/>
-                <DatePicker />
+                <DatePicker x:Name="DatePicker_De" />
             </StackLayout>
             <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
                 <Label Text="Até " VerticalOptions="Center" HorizontalOptions="Center"/>
-                <DatePicker/>
+                <DatePicker x:Name="DatePicker_Ate"/>
             </StackLayout>
         </Grid>
 
         <Label Text="Selecione veiculo" TextColor="Gray"/>
         <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </HorizontalStackLayout.GestureRecognizers>
             <Image x:Name="Image_CarroSelecionado" WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
             <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center"/>
         </HorizontalStackLayout>
@@ -43,15 +46,15 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_CustoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
             <StackLayout Grid.Column="1">
                 <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_CustoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
             <StackLayout Grid.Column="2">
                 <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_CustoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
         </Grid>
         
@@ -63,11 +66,11 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Média diária" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="0 km" HorizontalOptions="Center"/>
+                <Label x:Name="Label_KmMediaDiaria" Text="0 km" HorizontalOptions="Center"/>
             </StackLayout>
             <StackLayout Grid.Column="1">
                 <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="0 km" HorizontalOptions="Center"/>
+                <Label x:Name="Label_KmTotal" Text="0 km" HorizontalOptions="Center"/>
             </StackLayout>
         </Grid>
 
@@ -80,15 +83,37 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_GanhoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
             <StackLayout Grid.Column="1">
                 <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_GanhoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
             <StackLayout Grid.Column="2">
                 <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="R$ 0,00" HorizontalOptions="Center"/>
+                <Label x:Name="Label_GanhoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+
+
+        <Label Text="Líquido do período" TextColor="CadetBlue" FontAttributes="Bold"/>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label x:Name="Label_LiquidoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label x:Name="Label_LiquidoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Grid.Column="2">
+                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label x:Name="Label_LiquidoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
             </StackLayout>
         </Grid>
 

@@ -2,7 +2,9 @@ using Newtonsoft.Json;
 using TesteRec.API;
 using TesteRec.API.Models;
 using TesteRec.Db;
+using TesteRec.Db.Services;
 using TesteRec.Helpers;
+using TesteRec.Layouts.crud;
 using TesteRec.Layouts.Iniciais.RecuperacaoSenha;
 
 namespace TesteRec.Layouts.Iniciais;
@@ -24,6 +26,20 @@ public partial class PaginaLogin : ContentPage
 
     private async void Button_Login_Clicked(object sender, EventArgs e)
     {
+        if(string.IsNullOrEmpty(Entry_Email.Text))
+        {
+            await DisplayAlert("Atenção", "Preencha o email para continuar", "continuar");
+            Entry_Email.Focus();
+            return;
+        }
+        if (string.IsNullOrEmpty(Entry_Senha.Text))
+        {
+            await DisplayAlert("Atenção", "Preencha a senha para continuar", "continuar");
+            Entry_Senha.Focus();
+            return;
+        }
+        DesfocarEntrys();
+
         HabilitarDesabilitarLoading();
         TokenService tokenService = new TokenService();
         Criptografia crip = new Criptografia();
@@ -37,7 +53,27 @@ public partial class PaginaLogin : ContentPage
         {
             await SecureStorage.Default.SetAsync("login", JsonConvert.SerializeObject(tokenVM));
             Global._login = tokenVM;
-            Application.Current.MainPage = new AppShell();
+
+
+
+            if (Global._Veiculos.Count == 0)
+            {
+                await DisplayAlert("Atenção", "Você não tem nenhum veículo cadastrado, cadastre seu primeiro veículo para continuar", "Continuar");
+                Application.Current.MainPage = new NavigationPage(new CadastroVeiculo(true));
+            }
+            else
+            {
+                VeiculoDB veiculoDB = new VeiculoDB();
+                var ret = await veiculoDB.GetVeiculosAsync();
+                if (ret.Count == 0)
+                {
+                    foreach (var item in Global._Veiculos)
+                    {
+                        await veiculoDB.AddVeiculoAsync(item);
+                    }
+                }
+                Application.Current.MainPage = new AppShell();
+            }
             HabilitarDesabilitarLoading();
         }
         else
@@ -49,12 +85,20 @@ public partial class PaginaLogin : ContentPage
 
     private void EsqueciMinhaSenha_Tapped(object sender, TappedEventArgs e)
     {
+        DesfocarEntrys();
         Navigation.PushAsync(new InsiraEmail());
     }
 
     private void Button_Cadastro_Clicked(object sender, EventArgs e)
     {
+        DesfocarEntrys();
         Navigation.PushAsync(new CadastroUsuario());
+    }
+
+    private void DesfocarEntrys()
+    {
+        Entry_Email.Unfocus();
+        Entry_Senha.Unfocus();
     }
 
     private void Button_OlharSenha_Clicked(object sender, EventArgs e)

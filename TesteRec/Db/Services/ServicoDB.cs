@@ -1,10 +1,5 @@
 ﻿using SQLite;
 using TesteRec.Db.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TesteRec.Db.Services
 {
@@ -77,6 +72,14 @@ namespace TesteRec.Db.Services
         public async Task<Servico> GetServicoByIdAsync(int id)
         {
             return await _database.Table<Servico>().Where(s => s.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Servico>> GetServicosEntreDatas(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
+        {
+            var listaServicos = await _database.Table<Servico>()
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada != 0 && s.idVeiculo == pVeiculo)
+            .ToListAsync();
+            return listaServicos;
         }
     }
 }

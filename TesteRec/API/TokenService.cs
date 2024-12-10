@@ -2,6 +2,7 @@
 using System.Text;
 using TesteRec.API.Models;
 using TesteRec.Db;
+using TesteRec.Db.Services;
 
 namespace TesteRec.API
 {
@@ -42,6 +43,13 @@ namespace TesteRec.API
                     Global._DataToken = DateTime.Now;
                     Global._Token = objRet.Token;
                     Global._UsuarioSelecionado = objRet.Usuario;
+
+                    if (objRet.veiculos != null && objRet.veiculos.Count != 0)
+                    {
+                        Global._Veiculos = objRet.veiculos;
+                        
+                    }
+
                     await SecureStorage.Default.SetAsync("usuario", JsonConvert.SerializeObject(objRet.Usuario));
                     return new ApiResponse<string>()
                     {
