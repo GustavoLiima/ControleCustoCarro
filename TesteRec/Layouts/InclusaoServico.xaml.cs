@@ -237,7 +237,7 @@ public partial class InclusaoServico : ContentPage
             case EMenuSelecionado.Checklist:
                 break;
             case EMenuSelecionado.Receita:
-                if(string.IsNullOrEmpty(entryValor.Text))
+                if (string.IsNullOrEmpty(entryValor.Text))
                 {
                     await DisplayAlert("Atenção", "É necessário colocar o valor recebido", "continuar");
                     entryValor.Focus();
@@ -254,11 +254,12 @@ public partial class InclusaoServico : ContentPage
                     Motorista = entryMotorista.Text,
                     Descricao = Editor_Observacao.Text,
                 };
-                if(_servico != null)
+                if (_servico != null)
                 {
                     objAdd.Id = _servico.Id;
                 }
                 await servicoService.AddServicoAsync(objAdd);
+                await AtualizarKMVeiculo(objAdd);
                 break;
             case EMenuSelecionado.Percurso:
                 break;
@@ -269,7 +270,7 @@ public partial class InclusaoServico : ContentPage
                     Entry_ValorDespesa.Focus();
                     return;
                 }
-                await servicoService.AddServicoAsync(new Servico
+                Servico objAddServ = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     Data = datePickerServico.Date,
@@ -280,7 +281,9 @@ public partial class InclusaoServico : ContentPage
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Entry_ValorDespesa.Text)
-                });
+                };
+                await servicoService.AddServicoAsync(objAddServ);
+                await AtualizarKMVeiculo(objAddServ);
                 break;
             case EMenuSelecionado.Despesa:
                 if (string.IsNullOrEmpty(Entry_ValorDespesa.Text))
@@ -289,7 +292,7 @@ public partial class InclusaoServico : ContentPage
                     Entry_ValorDespesa.Focus();
                     return;
                 }
-                await servicoService.AddServicoAsync(new Servico
+                Servico objAddDesp = new Servico() 
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     Data = datePickerServico.Date,
@@ -300,7 +303,9 @@ public partial class InclusaoServico : ContentPage
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Entry_ValorDespesa.Text)
-                });
+                };
+                await servicoService.AddServicoAsync(objAddDesp);
+                await AtualizarKMVeiculo(objAddDesp);
                 break;
             case EMenuSelecionado.Abastecimento:
                 if(string.IsNullOrEmpty(entryPreco.Text))
@@ -321,7 +326,7 @@ public partial class InclusaoServico : ContentPage
                     entryLitros.Focus();
                     return;
                 }
-                await servicoService.AddServicoAsync(new Servico
+                Servico objAddAbast = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     Data = datePickerServico.Date,
@@ -334,13 +339,24 @@ public partial class InclusaoServico : ContentPage
                     Motorista = entryMotorista.Text,
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text
-                });
+                };
+                await servicoService.AddServicoAsync(objAddAbast);
+                await AtualizarKMVeiculo(objAddAbast);
                 break;
             default:
                 break;
         }
 
         await Navigation.PopAsync();
+    }
+
+    private static async Task AtualizarKMVeiculo(Servico objAdd)
+    {
+        if (objAdd.Odometro > Global.carroSelecionado.Kilometragem)
+        {
+            Global.carroSelecionado.Kilometragem = (int)objAdd.Odometro;
+            await new VeiculoDB().UpdateVeiculoAsync(Global.carroSelecionado);
+        }
     }
 
     // Quando a data é selecionada, foca no próximo campo (TimePicker)
