@@ -17,6 +17,7 @@ public partial class PopUp_Veiculos : ContentPage
         VeiculosFiltrados = new ObservableCollection<VeiculoModel>(veiculos);
 
         VeiculosListView.ItemsSource = VeiculosFiltrados;
+        _taskCompletionSource = new TaskCompletionSource<VeiculoModel>();
 
         // Configura o evento de seleção
         VeiculosListView.ItemTapped += VeiculosListView_ItemTapped;
@@ -25,7 +26,6 @@ public partial class PopUp_Veiculos : ContentPage
     // Função para retornar o veículo selecionado
     public Task<VeiculoModel> ObterVeiculoSelecionadoAsync()
     {
-        _taskCompletionSource = new TaskCompletionSource<VeiculoModel>();
         return _taskCompletionSource.Task;
     }
 
@@ -34,10 +34,10 @@ public partial class PopUp_Veiculos : ContentPage
         if (e.Item is VeiculoModel veiculoSelecionado)
         {
             // Completa a Task com o veículo selecionado
-            _taskCompletionSource?.SetResult(veiculoSelecionado);
-
+            _taskCompletionSource.TrySetResult(veiculoSelecionado);
+            ((ListView)sender).SelectedItem = null;
             // Fecha o popup
-            Navigation.PopModalAsync();
+            Navigation.PopAsync();
         }
     }
 

@@ -35,6 +35,12 @@ namespace TesteRec.Db.Models
                         return "onibus.png";
                     case "Caminhão":
                         return "caminhao.png";
+                    case "Van":
+                        return "van.png";
+                    case "Bicicleta":
+                        return "bicicleta.png";
+                    case "Caminhonete":
+                        return "caminhonete.png";
                     default:
                         return null;
                 }

@@ -7,6 +7,35 @@
     }
     public static class DbMenu
     {
+        public static List<Menu> _menusRelatorios = new List<Menu>()
+        {
+            new Menu()
+            {
+                Descricao = "Geral",
+                Imagem = "geral.png"
+            },
+            new Menu()
+            {
+                Descricao = "Serviço",
+                Imagem = "oleo.png"
+            },
+            new Menu()
+            {
+                Descricao = "Ganhos",
+                Imagem = "bolsadedinheiro.png"
+            },
+            new Menu()
+            {
+                Descricao = "Gastos",
+                Imagem = "despesa.png"
+            },
+            new Menu()
+            {
+                Descricao = "Abastecimento",
+                Imagem = "postomenu.png"
+            },
+        };
+
         public static List<Menu> _menus = new List<Menu>()
         {
             new Menu()

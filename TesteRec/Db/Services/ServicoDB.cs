@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using TesteRec.Db.Models;
+using TesteRec.Enum;
 
 namespace TesteRec.Db.Services
 {
@@ -77,7 +78,30 @@ namespace TesteRec.Db.Services
         public async Task<List<Servico>> GetServicosEntreDatas(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
         {
             var listaServicos = await _database.Table<Servico>()
-            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada != 0 && s.idVeiculo == pVeiculo)
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada != (int)EMenuSelecionado.Lembrete && s.idVeiculo == pVeiculo)
+            .ToListAsync();
+            return listaServicos;
+        }
+
+        public async Task<List<Servico>> GetServicosEntreDatasDespesas(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
+        {
+            var listaServicos = await _database.Table<Servico>()
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada == (int)EMenuSelecionado.Despesa && s.idVeiculo == pVeiculo)
+            .ToListAsync();
+            return listaServicos;
+        }
+        public async Task<List<Servico>> GetServicosEntreDatasGanhos(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
+        {
+            var listaServicos = await _database.Table<Servico>()
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada == (int)EMenuSelecionado.Receita && s.idVeiculo == pVeiculo)
+            .ToListAsync();
+            return listaServicos;
+        }
+
+        public async Task<List<Servico>> GetServicosEntreDatasServico(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
+        {
+            var listaServicos = await _database.Table<Servico>()
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada == (int)EMenuSelecionado.Serviço && s.idVeiculo == pVeiculo)
             .ToListAsync();
             return listaServicos;
         }

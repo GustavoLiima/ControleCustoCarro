@@ -53,6 +53,12 @@ namespace TesteRec.API.Models
                         return "caminhao.png";
                     case 3:
                         return "onibus.png";
+                    case 4:
+                        return "van.png";
+                    case 5:
+                        return "bicicleta.png";
+                    case 6:
+                        return "caminhonete.png";
                     default:
                         return null;
                 }

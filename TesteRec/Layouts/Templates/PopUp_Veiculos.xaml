@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cofauto.Layouts.Templates.PopUp_Veiculos"
-             Title="PopUp_Veiculos">
+             Title="Selecione o veiculo"
+             Shell.BackgroundColor="#7114E7"
+             Shell.TitleColor="White">
     <StackLayout Padding="10">
         <!-- Entry para filtro -->
         <Entry x:Name="FiltroEntry"

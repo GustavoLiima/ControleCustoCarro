@@ -16,7 +16,7 @@ public partial class Home : ContentPage
     {
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);
-        
+        var menu = DbMenu._menus;
         CollectionView_Inclusoes.ItemsSource = DbMenu._menus;
     }
 
@@ -72,6 +72,15 @@ public partial class Home : ContentPage
                     break;
                 case 3:
                     Image_TipoVeiculo.Source = "caminhao.png";
+                    break;
+                case 4:
+                    Image_TipoVeiculo.Source = "van.png";
+                    break;
+                case 5:
+                    Image_TipoVeiculo.Source = "bicicleta.png";
+                    break;
+                case 6:
+                    Image_TipoVeiculo.Source = "caminhonete.png";
                     break;
                 default:
                     break;

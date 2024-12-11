@@ -39,6 +39,24 @@ public partial class CadastroVeiculo : ContentPage
                 Descricao = "Caminhão",
                 Imagem = "caminhao.png"
             },
+            new TipoVeiculo()
+            {
+                ID = 4,
+                Descricao = "Van",
+                Imagem = "van.png"
+            },
+            new TipoVeiculo()
+            {
+                ID = 5,
+                Descricao = "Bicicleta",
+                Imagem = "bicicleta.png"
+            },
+            new TipoVeiculo()
+            {
+                ID = 6,
+                Descricao = "Caminhonete",
+                Imagem = "caminhonete.png"
+            },
         };
 
     public CadastroVeiculo(bool pNovoCadastro)

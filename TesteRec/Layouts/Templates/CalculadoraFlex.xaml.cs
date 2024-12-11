@@ -68,6 +68,7 @@ public partial class CalculadoraFlex : ContentPage
         else
         {
             await Toast.Make("Coloque um valor válido").Show();
+            EtanolEntry.Focus();
         }
     }
 
@@ -90,6 +91,7 @@ public partial class CalculadoraFlex : ContentPage
         else
         {
             await Toast.Make("Coloque um valor válido").Show();
+            GasolinaEntry.Focus();
         }
     }
 

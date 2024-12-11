@@ -1,3 +1,4 @@
+using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
 using TesteRec.Enum;
@@ -98,6 +99,7 @@ public partial class InclusaoServico : ContentPage
     private void CarregarInformacoesIniciais(EMenuSelecionado pMenu)
     {
         timePickerServico.Time = DateTime.Now.TimeOfDay;
+        entryOdometro.Text = Global.carroSelecionado.Kilometragem.ToString();
         switch (pMenu)
         {
             case EMenuSelecionado.Lembrete:
@@ -207,7 +209,7 @@ public partial class InclusaoServico : ContentPage
                         return;
                     }
                 }
-                await servicoService.AddServicoAsync(new Servico
+                Servico objAddServico = new Servico
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     TipoDespesa = _despesaSelecionada.Id,
@@ -217,9 +219,20 @@ public partial class InclusaoServico : ContentPage
                     LembrarEmKm = CheckBox_Kilometragem.IsChecked,
                     LembrarEmData = CheckBox_Data.IsChecked,
                     DataLembrete = DatePicker_Lembrete.Date,
-                    LembreteKilometragem = double.Parse(Entry_OdometroLembrete.Text),
                     Descricao = Editor_Observacao.Text,
-                });
+                };
+                if(CheckBox_Kilometragem.IsChecked && string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
+                {
+                    await DisplayAlert("Atenção", "Preencha daqui quantos kilometros deseja ser alertado", "Continuar");
+                    Entry_OdometroLembrete.Focus();
+                    return;
+                }
+                else if(CheckBox_Kilometragem.IsChecked && !string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
+                {
+                    double.TryParse(Entry_OdometroLembrete.Text, out double valor);
+                    objAddServico.LembreteKilometragem = valor;
+                }
+                await servicoService.AddServicoAsync(objAddServico);
                 break;
             case EMenuSelecionado.Checklist:
                 break;
