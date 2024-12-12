@@ -35,6 +35,12 @@ public partial class RelGeral : ContentPage
         await CarregarRelatorio();
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        // Libere eventos ou referências aqui
+    }
+
     private async Task CarregarRelatorio()
     {
         OcultarTodosRelatorios();
@@ -48,6 +54,8 @@ public partial class RelGeral : ContentPage
         if (_RelatorioSelecionado.Descricao == "Abastecimento")
         {
             await CarregarRelatorioAbastecimento();
+            ActivityIndicator_Loading.IsVisible = false;
+            Stack_Abastecimento.IsVisible = true;
         }
         if (_RelatorioSelecionado.Descricao == "Serviço")
         {
@@ -243,9 +251,83 @@ public partial class RelGeral : ContentPage
         }
     }
 
-    private Task CarregarRelatorioAbastecimento()
+    private async Task CarregarRelatorioAbastecimento()
     {
-        throw new NotImplementedException();
+        Label_AbastecimentoDetalhado.IsVisible = false;
+        ListView_DetalhesComb.IsVisible = false;
+        ListView_RelAbastecimento.IsVisible = false;
+        Label_QtdLitros.IsVisible = false;
+        Label_QtdAbastecimentos.IsVisible = false;
+        double Abastecimento = 0;
+        double Litros = 0;
+        double AbastecimentoPorDia = 0;
+        double AbastecimentoPorKM = 0;
+        double KmMinima = 0;
+        double KmMax = 0;
+        double KmPercorrida = 0;
+        List<ModeloBaseRelatorio> listaObjetos = new List<ModeloBaseRelatorio>();
+
+
+        List<Servico> dadosRelatorio = await servicoService.GetServicosEntreDatasAbastecimento(DatePicker_De.Date, DatePicker_Ate.Date, _VeiculoSelecionado.ID);
+        if (dadosRelatorio.Count > 0)
+        {
+            KmMinima = dadosRelatorio.Min(x => x.Odometro);
+            KmMax = dadosRelatorio.Max(x => x.Odometro);
+            KmPercorrida = KmMax - KmMinima;
+
+            foreach (var item in dadosRelatorio)
+            {
+                Abastecimento += item.ValorTotal;
+                Litros += item.Litros;
+                listaObjetos.Add(new ModeloBaseRelatorio()
+                {
+                    Descricao = item.DescricaoReceita,
+                    Valor = item.ValorTotal,
+                    Data = item.Data,
+                    Hora = item.Hora
+                });
+            }
+
+            int diferencaDias = Math.Abs((DatePicker_De.Date - DatePicker_Ate.Date).Days);
+
+            AbastecimentoPorDia = Abastecimento / diferencaDias;
+            AbastecimentoPorKM = Abastecimento / KmPercorrida;
+
+            Label_QtdAbastecimentos.IsVisible = true;
+            Label_QtdAbastecimentos.Text = $"O veículo foi abastecido {listaObjetos.Count} vezes no período de {diferencaDias} dias";
+            Label_QtdLitros.Text = $"Foi abastecido um total de {Litros.ToString("N2")} litros";
+            Label_QtdLitros.IsVisible = true;
+
+            if (listaObjetos.Count > 0)
+            {
+                ListView_RelAbastecimento.ItemsSource = listaObjetos;
+                ListView_RelAbastecimento.IsVisible = true;
+                Label_AbastecimentoDetalhado.IsVisible = true;
+            }
+            Label_AbastecimentoPorKmAbastecimento.Text = AbastecimentoPorKM.ToString("N2");
+            Label_AbastecimentoPorDiaAbastecimento.Text = AbastecimentoPorDia.ToString("N2");
+            Label_AbastecimentoTotalAbastecimento.Text = Abastecimento.ToString("N2");
+
+            var agrupados = dadosRelatorio
+                .GroupBy(s => s.Combustivel)
+                .Select(g => new
+                {
+                    Combustivel = g.Key,
+                    DescricaoReceita = g.First().DescricaoReceita,   // Pegando a descrição do primeiro item do grupo
+                    TotalValor = g.Sum(s => s.ValorTotal),            // Soma de ValorTotal
+                    MediaPreco = g.Average(s => s.Preco),            // Média de Preco
+                    TotalLitros = g.Sum(s => s.Litros)               // Soma de Litros
+                })
+                .ToList();
+            ListView_DetalhesComb.IsVisible = true;
+            ListView_DetalhesComb.ItemsSource = agrupados;
+        }
+        else
+        {
+            Label_AbastecimentoPorKmAbastecimento.Text = "0,00";
+            Label_AbastecimentoPorDiaAbastecimento.Text = "0,00";
+            Label_AbastecimentoTotalAbastecimento.Text = "0,00";
+        }
     }
 
     private async Task CarregarRelatorioGeral()

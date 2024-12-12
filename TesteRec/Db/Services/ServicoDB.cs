@@ -105,5 +105,18 @@ namespace TesteRec.Db.Services
             .ToListAsync();
             return listaServicos;
         }
+
+        public async Task<List<Servico>> GetServicosEntreDatasAbastecimento(DateTime pDataInicial, DateTime pDataFinal, int pVeiculo)
+        {
+            var listaServicos = await _database.Table<Servico>()
+            .Where(s => s.Data >= pDataInicial && s.Data <= pDataFinal && s.AcaoSelecionada == (int)EMenuSelecionado.Abastecimento && s.idVeiculo == pVeiculo)
+            .ToListAsync();
+            return listaServicos;
+        }
+
+        public async Task<Servico> GetUltimoAbastecimento()
+        {
+            return await _database.Table<Servico>().Where(s => s.AcaoSelecionada == (int)EMenuSelecionado.Abastecimento).OrderByDescending(s => s.Data).FirstOrDefaultAsync();
+        }
     }
 }

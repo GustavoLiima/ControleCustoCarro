@@ -96,7 +96,7 @@ public partial class InclusaoServico : ContentPage
         }
     }
 
-    private void CarregarInformacoesIniciais(EMenuSelecionado pMenu)
+    private async void CarregarInformacoesIniciais(EMenuSelecionado pMenu)
     {
         timePickerServico.Time = DateTime.Now.TimeOfDay;
         entryOdometro.Text = Global.carroSelecionado.Kilometragem.ToString();
@@ -164,6 +164,11 @@ public partial class InclusaoServico : ContentPage
                 Grid_DataHorario.IsVisible = true;
                 Grid_Odometro.IsVisible = true;
                 Grid_Motorista.IsVisible = true;
+                var servicoService = new ServicoDB();
+                Servico obj = await servicoService.GetUltimoAbastecimento();
+                _combustivelSelecionado = obj.CombustivelModelo;
+                Label_Combustivel.Text = _combustivelSelecionado.Descricao;
+                Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
                 break;
             default:
                 break;
