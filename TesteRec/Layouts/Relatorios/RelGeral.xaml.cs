@@ -83,6 +83,7 @@ public partial class RelGeral : ContentPage
         Stack_Ganho.IsVisible = false;
         Stack_Despesas.IsVisible = false;
         Stack_Servico.IsVisible = false;
+        Stack_Abastecimento.IsVisible = false;
     }
 
     private async Task CarregarRelatorioGanhos()
