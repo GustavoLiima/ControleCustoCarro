@@ -167,9 +167,12 @@ public partial class InclusaoServico : ContentPage
                 Grid_Motorista.IsVisible = true;
                 var servicoService = new ServicoDB();
                 Servico obj = await servicoService.GetUltimoAbastecimento();
-                _combustivelSelecionado = obj.CombustivelModelo;
-                Label_Combustivel.Text = _combustivelSelecionado.Descricao;
-                Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
+                if(obj != null)
+                {
+                    _combustivelSelecionado = obj.CombustivelModelo;
+                    Label_Combustivel.Text = _combustivelSelecionado.Descricao;
+                    Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
+                }
                 break;
             default:
                 break;
