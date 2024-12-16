@@ -58,8 +58,17 @@
                              Clicked="TogglePasswordVisibility_ConfirmPassword" />
                 </Grid>
 
+                <Frame x:Name="Frame_Loading" HeightRequest="50" CornerRadius="25" BackgroundColor="#007AFF" Padding="5" IsVisible="False">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                        <ActivityIndicator IsRunning="True" Color="White"/>
+                        <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+
                 <!-- Botão para avançar -->
-                <Button Text="Avançar"
+                <Button x:Name="Button_Avançar"
+                    Text="Avançar"
                     BackgroundColor="#007AFF"
                     TextColor="White"
                     FontAttributes="Bold"

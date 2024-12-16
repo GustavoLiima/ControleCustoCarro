@@ -101,7 +101,7 @@ public partial class Configuracoes : ContentPage
                 {
                     Global._login = null;
                     SecureStorage.Default.Remove("login");
-                    Application.Current.MainPage = new PaginaLogin();
+                    Application.Current.MainPage = new NavigationPage(new PaginaLogin());
                 }
                 break;
         }

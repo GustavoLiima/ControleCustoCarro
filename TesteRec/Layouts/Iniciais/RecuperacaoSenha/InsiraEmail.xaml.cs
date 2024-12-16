@@ -11,6 +11,12 @@ public partial class InsiraEmail : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
+    private void InverterBotaoLoading()
+    {
+        Frame_Loading.IsVisible = !Frame_Loading.IsVisible;
+        Button_Email.IsVisible = !Button_Email.IsVisible;
+    }
+
     private async void Button_Email_Clicked(object sender, EventArgs e)
     {
         RecuperacaoSenhaCommunic vReq = new RecuperacaoSenhaCommunic();
@@ -20,6 +26,7 @@ public partial class InsiraEmail : ContentPage
             Entry_InsiraSeuEmail.Focus();
             return;
         }
+        InverterBotaoLoading();
 
         var retorno = await vReq.SolicitarCodigo(Entry_InsiraSeuEmail.Text);
         if (retorno.Sucesso)
@@ -30,5 +37,6 @@ public partial class InsiraEmail : ContentPage
         {
             await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
         }
+        InverterBotaoLoading();
     }
 }

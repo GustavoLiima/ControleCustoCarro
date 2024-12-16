@@ -83,16 +83,16 @@ public partial class PaginaLogin : ContentPage
         }
     }
 
-    private void EsqueciMinhaSenha_Tapped(object sender, TappedEventArgs e)
+    private async void EsqueciMinhaSenha_Tapped(object sender, TappedEventArgs e)
     {
         DesfocarEntrys();
-        Navigation.PushAsync(new InsiraEmail());
+        await Navigation.PushAsync(new InsiraEmail());
     }
 
-    private void Button_Cadastro_Clicked(object sender, EventArgs e)
+    private async void Button_Cadastro_Clicked(object sender, EventArgs e)
     {
         DesfocarEntrys();
-        Navigation.PushAsync(new CadastroUsuario());
+        await Navigation.PushAsync(new CadastroUsuario());
     }
 
     private void DesfocarEntrys()

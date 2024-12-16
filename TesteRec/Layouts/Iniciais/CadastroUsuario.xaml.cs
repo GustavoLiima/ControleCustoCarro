@@ -121,8 +121,8 @@ public partial class CadastroUsuario : ContentPage
         InverterVisibilidade();
     }
 
-    private void Button_Voltar_Clicked(object sender, EventArgs e)
+    private async void Button_Voltar_Clicked(object sender, EventArgs e)
     {
-        Navigation.PopAsync();
+        await Navigation.PopAsync();
     }
 }

@@ -32,6 +32,12 @@ public partial class AtualizaSenha : ContentPage
         ((ImageButton)sender).Source = isConfirmPasswordVisible ? "visible" : "invisible";
     }
 
+    private void InverterBotaoLoading()
+    {
+        Frame_Loading.IsVisible = !Frame_Loading.IsVisible;
+        Button_Avançar.IsVisible = !Button_Avançar.IsVisible;
+    }
+
     private async void Button_Avancar_Clicked(object sender, EventArgs e)
     {
         // Validações
@@ -69,9 +75,7 @@ public partial class AtualizaSenha : ContentPage
             Entry_ConfirmPassword.Focus();
             return;
         }
-
-        // Caso passe pelas validações
-        await DisplayAlert("Sucesso", "Senha atualizada com sucesso!", "OK");
+        InverterBotaoLoading();
 
         RecuperacaoSenhaCommunic rec = new RecuperacaoSenhaCommunic();
         Criptografia crip = new Criptografia();
@@ -92,5 +96,7 @@ public partial class AtualizaSenha : ContentPage
         {
             await DisplayAlert("Atenção", retorno.Mensagem, "continuar");
         }
+        InverterBotaoLoading();
+
     }
 }
