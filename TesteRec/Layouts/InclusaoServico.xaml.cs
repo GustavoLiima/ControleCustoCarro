@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -201,6 +202,9 @@ public partial class InclusaoServico : ContentPage
                 return;
             }
         }
+        DateTime dataComHora = datePickerServico.Date;
+        dataComHora.AddHours(timePickerServico.Time.Hours);
+        dataComHora.AddMinutes(timePickerServico.Time.Minutes);
 
         switch (_menuSelecionado)
         {
@@ -251,7 +255,7 @@ public partial class InclusaoServico : ContentPage
                 Servico objAdd = new Servico
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
-                    Data = datePickerServico.Date,
+                    Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
                     ValorReceita = double.Parse(entryValor.Text),
@@ -278,7 +282,7 @@ public partial class InclusaoServico : ContentPage
                 Servico objAddServ = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
-                    Data = datePickerServico.Date,
+                    Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
                     TipoServico = _servicoSelecionado.Id,
@@ -300,7 +304,7 @@ public partial class InclusaoServico : ContentPage
                 Servico objAddDesp = new Servico() 
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
-                    Data = datePickerServico.Date,
+                    Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
                     TipoDespesa = _despesaSelecionada.Id,
@@ -334,7 +338,7 @@ public partial class InclusaoServico : ContentPage
                 Servico objAddAbast = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
-                    Data = datePickerServico.Date,
+                    Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
                     Combustivel = _combustivelSelecionado.Id,
@@ -360,6 +364,7 @@ public partial class InclusaoServico : ContentPage
         if (objAdd.Odometro > Global.carroSelecionado.Kilometragem)
         {
             Global.carroSelecionado.Kilometragem = (int)objAdd.Odometro;
+            await SecureStorage.Default.SetAsync("veiculoSelecionado", JsonConvert.SerializeObject(Global.carroSelecionado));
             await new VeiculoDB().UpdateVeiculoAsync(Global.carroSelecionado);
         }
     }

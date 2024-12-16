@@ -1,3 +1,4 @@
+using Cofauto.Layouts.Templates;
 using Newtonsoft.Json;
 using TesteRec.API.Models;
 using TesteRec.Db;
@@ -58,7 +59,8 @@ public partial class Home : ContentPage
     {
         if(Global.carroSelecionado != null)
         {
-            Label_VeiculoSelecionado.Text = Global.carroSelecionado.NomeVeiculo;
+            Label_VeiculoSelecionado.Text = Global.carroSelecionado.Placa + " - " + Global.carroSelecionado.NomeVeiculo;
+            Label_VeiculoSelecionadoMarca.Text = Global.carroSelecionado.Marca;
             switch (Global.carroSelecionado.TipoVeiculo)
             {
                 case 0:
@@ -168,6 +170,24 @@ public partial class Home : ContentPage
         if (servico != null)
         {
             await Navigation.PushAsync(new InclusaoServico(servico));
+        }
+    }
+
+    private async void Button_Clicked_1(object sender, EventArgs e)
+    {
+        var popup = new PopUp_Veiculos(Global._Veiculos);
+
+        // Exibe o popup e aguarda o veículo selecionado
+        var veiculoSelecionado = Navigation.PushAsync(popup);
+
+        var resultado = await popup.ObterVeiculoSelecionadoAsync();
+
+
+        // Exibe o veículo selecionado
+        if (resultado != null)
+        {
+            Global.carroSelecionado = resultado;
+            carregarTela();
         }
     }
 }

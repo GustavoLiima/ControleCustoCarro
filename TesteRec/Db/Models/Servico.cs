@@ -133,7 +133,7 @@ namespace TesteRec.Db.Models
         {
             get
             {
-                if(LembreteFoiServico)
+                if (LembreteFoiServico)
                 {
                     return TipoServicoModelo.Descricao;
                 }
@@ -143,5 +143,10 @@ namespace TesteRec.Db.Models
                 }
             }
         }
+
+        [NotMapped]
+        public bool IsSelected { get; set; } // Para indicar se o serviço foi selecionado
+        [NotMapped]
+        public decimal? Valor { get; set; } // Valor associado ao serviço selecionado
     }
 }

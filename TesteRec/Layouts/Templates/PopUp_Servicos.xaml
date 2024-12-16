@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cofauto.Layouts.Templates.PopUp_Servicos"
+             Title="PopUp_Servicos">
+    <StackLayout Padding="10">
+        <!-- Entry para filtro -->
+        <Entry x:Name="FiltroEntry"
+           Placeholder="Digite para filtrar veículos..."
+           TextChanged="FiltroEntry_TextChanged"
+           Margin="0,0,0,10" />
+
+        <!-- ListView para exibir os veículos -->
+        <ListView x:Name="ServicosListView"
+              HasUnevenRows="True"
+              SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <!-- Imagem do veículo -->
+                            <CheckBox Margin="0,0,10,0" />
+
+                            <!-- Nome do veículo -->
+                            <Label Text="{Binding DescricaoReceita}" VerticalOptions="Center" FontSize="16" />
+                            <Entry Text="{Binding Valor, StringFormat='{}{0:F2}'}" 
+                                   IsVisible="{Binding IsSelected}" 
+                                   Keyboard="Numeric" 
+                                   Placeholder="0,00"
+                                   HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#7114E7" TextColor="White"/>
+
+    </StackLayout>
+</ContentPage>

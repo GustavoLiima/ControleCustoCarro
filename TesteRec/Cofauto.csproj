@@ -178,6 +178,9 @@
 	  <MauiXaml Update="Layouts\Templates\CalculadoraFlex.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Layouts\Templates\PopUp_Servicos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Layouts\Templates\PopUp_Veiculos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
