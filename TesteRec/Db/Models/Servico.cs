@@ -1,14 +1,17 @@
 ﻿using SQLite;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using TesteRec.Db.Services;
 using TesteRec.Enum;
 using TesteRec.Model;
 
 namespace TesteRec.Db.Models
 {
-    public class Servico
+    public class Servico : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public bool EnviadoServidor { get; set; }
         public int idVeiculo { get; set; }
         public int AcaoSelecionada { get; set; }
         public DateTime Data { get; set; }
@@ -21,8 +24,29 @@ namespace TesteRec.Db.Models
         public string? Motorista { get; set; }
         public int FormaPagamento { get; set; }
         public string Descricao { get; set; }
+        public string DescricaoServico { get; set; }
         public int TipoDespesa { get; set; }
         public int TipoServico { get; set; }
+        [NotMapped]
+        private LineBreakMode _lineBreakMode = LineBreakMode.TailTruncation;
+        [NotMapped]
+        public LineBreakMode LineBreakMode
+        {
+            get => _lineBreakMode;
+            set
+            {
+                if (_lineBreakMode != value)
+                {
+                    _lineBreakMode = value;
+                    OnPropertyChanged(nameof(LineBreakMode));  // Notifica a mudança
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         [NotMapped]
         public string DescricaoReceita
         {
@@ -36,8 +60,6 @@ namespace TesteRec.Db.Models
                         return DbDespesa._listaDespesa.Find(x => x.Id == TipoDespesa).Descricao;
                     case EMenuSelecionado.Abastecimento:
                         return new Layouts.listas.TiposCombustivel()._tipoCombustivel.Find(x => x.Id == Combustivel).Descricao;
-                    case EMenuSelecionado.Serviço:
-                        return DbTipoServico._tipoServicos.Find(x => x.Id == TipoServico).Descricao;
                     default:
                         return null;
                 }
@@ -143,10 +165,5 @@ namespace TesteRec.Db.Models
                 }
             }
         }
-
-        [NotMapped]
-        public bool IsSelected { get; set; } // Para indicar se o serviço foi selecionado
-        [NotMapped]
-        public decimal? Valor { get; set; } // Valor associado ao serviço selecionado
     }
 }

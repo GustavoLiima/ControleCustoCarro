@@ -1,5 +1,6 @@
 ﻿using TesteRec.API.Models;
 using TesteRec.Db.Models;
+using TesteRec.Db.Services;
 
 namespace TesteRec.Db
 {
@@ -14,5 +15,7 @@ namespace TesteRec.Db
         public static TokenVM _login;
         public static List<VeiculoModel> _Veiculos = new List<VeiculoModel>();
         public static UsuarioVM _UsuarioSelecionado { get; set; }
+        public static ServicoDB ServicoDB { get; set; } = new ServicoDB();
+        public static List<TipoServico> tipoServicos = new List<TipoServico>();
     }
 }

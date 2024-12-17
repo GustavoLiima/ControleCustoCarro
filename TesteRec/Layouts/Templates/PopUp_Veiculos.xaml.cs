@@ -34,8 +34,8 @@ public partial class PopUp_Veiculos : ContentPage
         if (e.Item is VeiculoModel veiculoSelecionado)
         {
             // Completa a Task com o veículo selecionado
-            _taskCompletionSource.TrySetResult(veiculoSelecionado);
             ((ListView)sender).SelectedItem = null;
+            _taskCompletionSource.TrySetResult(veiculoSelecionado);
             // Fecha o popup
             Navigation.PopAsync();
         }

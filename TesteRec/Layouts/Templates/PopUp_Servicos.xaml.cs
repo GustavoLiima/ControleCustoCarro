@@ -5,38 +5,30 @@ namespace Cofauto.Layouts.Templates;
 
 public partial class PopUp_Servicos : ContentPage
 {
-    private TaskCompletionSource<Servico> _taskCompletionSource;
-    private ObservableCollection<Servico> ServicosOriginal { get; set; }
-    private ObservableCollection<Servico> ServicosFiltrados { get; set; }
-    public PopUp_Servicos()
+    private TaskCompletionSource<List<TipoServico>> _taskCompletionSource;
+    private ObservableCollection<TipoServico> ServicosOriginal { get; set; }
+    private ObservableCollection<TipoServico> ServicosFiltrados { get; set; }
+    public PopUp_Servicos(List<TipoServico> pServicos)
 	{
 		InitializeComponent();
 
-        //ServicosOriginal = new ObservableCollection<Servico>(veiculos);
-        //ServicosFiltrados = new ObservableCollection<Servico>(veiculos);
-
+        ServicosOriginal = new ObservableCollection<TipoServico>(pServicos);
+        ServicosFiltrados = new ObservableCollection<TipoServico>(pServicos);
         ServicosListView.ItemsSource = ServicosFiltrados;
-        _taskCompletionSource = new TaskCompletionSource<Servico>();
+        _taskCompletionSource = new TaskCompletionSource<List<TipoServico>>();
 
         // Configura o evento de seleção
         ServicosListView.ItemTapped += ServicoListView_ItemTapped;
     }
 
-    public Task<Servico> ObterServicoSelecionadoAsync()
+    public Task<List<TipoServico>> ObterServicoSelecionadoAsync()
     {
         return _taskCompletionSource.Task;
     }
 
     private void ServicoListView_ItemTapped(object sender, ItemTappedEventArgs e)
     {
-        if (e.Item is Servico servicoSelecionado)
-        {
-            // Completa a Task com o veículo selecionado
-            _taskCompletionSource.TrySetResult(servicoSelecionado);
-            ((ListView)sender).SelectedItem = null;
-            // Fecha o popup
-            Navigation.PopAsync();
-        }
+        ((ListView)sender).SelectedItem = null;
     }
 
     private void FiltroEntry_TextChanged(object sender, TextChangedEventArgs e)
@@ -46,7 +38,7 @@ public partial class PopUp_Servicos : ContentPage
         ServicosFiltrados.Clear();
         foreach (var veiculo in ServicosOriginal)
         {
-            if (veiculo.DescricaoReceita.ToLower().Contains(filtro))
+            if (veiculo.Descricao.ToLower().Contains(filtro))
             {
                 ServicosFiltrados.Add(veiculo);
             }
@@ -55,6 +47,13 @@ public partial class PopUp_Servicos : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
+        // Recupera os itens selecionados (onde IsSelected é true)
+        var servicosSelecionados = ServicosOriginal
+        .Where(s => s.IsSelected)
+        .ToList();
 
+        _taskCompletionSource.TrySetResult(servicosSelecionados);
+        // Fecha o popup
+        Navigation.PopAsync();
     }
 }

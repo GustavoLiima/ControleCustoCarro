@@ -1,4 +1,5 @@
 using Cofauto.Layouts.Templates;
+using CommunityToolkit.Maui.Views;
 using Newtonsoft.Json;
 using TesteRec.API.Models;
 using TesteRec.Db;
@@ -188,6 +189,24 @@ public partial class Home : ContentPage
         {
             Global.carroSelecionado = resultado;
             carregarTela();
+        }
+    }
+
+    private void Expander_IsExpandedChanged(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
+    {
+        var expander = (Expander)sender;
+
+        // Acessar o item associado à célula (geralmente, o item de dados vinculado ao item da lista)
+        var item = (Servico)expander.BindingContext;
+
+        // Verifica o estado de expansão do Expander e atualiza a propriedade LineBreakMode
+        if (expander.IsExpanded)
+        {
+            item.LineBreakMode = LineBreakMode.CharacterWrap;
+        }
+        else
+        {
+            item.LineBreakMode = LineBreakMode.TailTruncation;
         }
     }
 }

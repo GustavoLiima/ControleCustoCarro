@@ -1,3 +1,4 @@
+using Cofauto.Layouts.Templates;
 using Newtonsoft.Json;
 using TesteRec.Db;
 using TesteRec.Db.Models;
@@ -18,6 +19,9 @@ public partial class InclusaoServico : ContentPage
     private Db.Models.TipoReceita _receitaSelecionada = new Db.Models.TipoReceita();
     private Db.Models.TipoServico _servicoSelecionado = new Db.Models.TipoServico();
     private bool _ApenasUmaVez = true;
+
+
+    private List<Db.Models.TipoServico> _tiposServico = null;
 
     private Servico _servico;
 
@@ -144,7 +148,6 @@ public partial class InclusaoServico : ContentPage
                 Grid_DataHorario.IsVisible = true;
                 Grid_Odometro.IsVisible = true;
                 Grid_Motorista.IsVisible = true;
-                Grid_ValorDespesa.IsVisible = true;
                 break;
             case EMenuSelecionado.Despesa:
                 Shell.SetBackgroundColor(this, Color.FromHex("#c0392b"));
@@ -276,12 +279,12 @@ public partial class InclusaoServico : ContentPage
             case EMenuSelecionado.Percurso:
                 break;
             case EMenuSelecionado.Serviço:
-                if (string.IsNullOrEmpty(Entry_ValorDespesa.Text))
+                if(!ListView_ServicosSelecionados.IsVisible)
                 {
-                    await DisplayAlert("Atenção", "Preencha o valor da despesa", "continuar");
-                    Entry_ValorDespesa.Focus();
+                    await DisplayAlert("Atenção", "É necessário selecionar no mínimo 1 serviço", "continuar");
                     return;
                 }
+
                 Servico objAddServ = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
@@ -292,9 +295,24 @@ public partial class InclusaoServico : ContentPage
                     Motorista = entryMotorista.Text,
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
-                    ValorDespesa = double.Parse(Entry_ValorDespesa.Text)
+                    ValorDespesa = double.Parse(Label_ValorTotalServicos.Text)
                 };
-                await servicoService.AddServicoAsync(objAddServ);
+                var descricaoServicos = _tiposServico.Where(x => x.IsSelected).Select(s => s.Descricao).ToList();
+                objAddServ.DescricaoServico = string.Join(" \n", descricaoServicos);
+                int IdServico = await servicoService.AddServicoAsync(objAddServ);
+                foreach (var item in _tiposServico.Where(x => x.IsSelected))
+                {
+                    Db.Models.TipoServico objAd = new Db.Models.TipoServico()
+                    {
+                        Id = item.Id,
+                        Descricao = item.Descricao,
+                        EnviadoServidor = item.EnviadoServidor,
+                        IdServico = IdServico,
+                        IsSelected = item.IsSelected,
+                        Valor = item.Valor
+                    };
+                    await servicoService.AddTipoServicoAsync(objAd);
+                }
                 await AtualizarKMVeiculo(objAddServ);
                 break;
             case EMenuSelecionado.Despesa:
@@ -596,9 +614,57 @@ public partial class InclusaoServico : ContentPage
         }
     }
 
-    private void TapGestureRecognizerTipoServico_Tapped(object sender, TappedEventArgs e)
+    private async void TapGestureRecognizerTipoServico_Tapped(object sender, TappedEventArgs e)
     {
-        PopupTipoServico.IsVisible = true;
+        //PopupTipoServico.IsVisible = true;
+        if(_tiposServico == null)
+        {
+            _tiposServico = new List<Db.Models.TipoServico>();
+            foreach (var item in DbTipoServico._tipoServicos.ToList())
+            {
+                Db.Models.TipoServico objAdd = new Db.Models.TipoServico()
+                {
+                    Id = item.Id,
+                    Valor = item.Valor,
+                    Descricao = item.Descricao,
+                    EnviadoServidor = item.EnviadoServidor,
+                    IdServico = item.IdServico,
+                    IsSelected = item.IsSelected
+                };
+                _tiposServico.Add(objAdd);
+            }
+        }
+        
+        var popup = new PopUp_Servicos(_tiposServico);
+
+        // Exibe o popup e aguarda o veículo selecionado
+        var veiculoSelecionado = Navigation.PushAsync(popup);
+
+        var resultado = await popup.ObterServicoSelecionadoAsync();
+
+
+        // Exibe o veículo selecionado
+        if (resultado != null)
+        {
+            if(resultado.Count > 0)
+            {
+                ListView_ServicosSelecionados.ItemsSource = resultado;
+                ListView_ServicosSelecionados.IsVisible = true;
+                double ValorTotal = 0;
+                foreach (var item in resultado)
+                {
+                    ValorTotal += item.Valor;
+                }
+                Label_ValorTotalServicos.Text = ValorTotal.ToString("N2");
+                Stack_ValoresTotaisServicos.IsVisible = true;
+            }
+            else
+            {
+                ListView_ServicosSelecionados.ItemsSource = null;
+                ListView_ServicosSelecionados.IsVisible = false;
+                Label_ValorTotalServicos.IsVisible = false;
+            }
+        }
     }
 
     private void OnSelectionChangedTipoReceita(object sender, SelectionChangedEventArgs e)

@@ -5,7 +5,7 @@
              Title="Inclusão de servico">
     <Grid Padding="0">
 
-        <ScrollView>
+        <ScrollView Padding="0,0,0,50">
             <VerticalStackLayout Padding="20">
 
                 <Grid x:Name="Grid_BotoesServicoDespesa" IsVisible="False">
@@ -170,7 +170,7 @@
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="Image_TipoServico" Grid.Column="0" WidthRequest="30" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image x:Name="Image_TipoServico" Grid.Column="0" WidthRequest="30" HeightRequest="30" Source="oleo.png" HorizontalOptions="Center" VerticalOptions="Center"/>
 
                     <StackLayout Grid.Column="1" Margin="10,0,0,0">
                         <Label Text="Tipo de Servico" FontSize="Medium" TextColor="Gray">
@@ -178,13 +178,33 @@
                                 <TapGestureRecognizer Tapped="TapGestureRecognizerTipoServico_Tapped"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <Label x:Name="Label_TipoServico" Text="Selecione um serviço" FontSize="Medium">
+                        <Label x:Name="Label_TipoServico" Text="Clique e selecione" FontSize="Medium">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizerTipoServico_Tapped"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
                 </Grid>
+                <ListView x:Name="ListView_ServicosSelecionados" IsVisible="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Descricao}" VerticalOptions="Center"/>
+                                    <Label Grid.Column="1" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout x:Name="Stack_ValoresTotaisServicos" IsVisible="False" Orientation="Horizontal" Padding="5">
+                    <Label Text="Valor total:" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="Label_ValorTotalServicos" HorizontalOptions="End"/>
+                </StackLayout>
 
                 <!-- Valores combustível -->
                 <Grid x:Name="Grid_ValoresCombustivel" IsVisible="False" Margin="0,5">

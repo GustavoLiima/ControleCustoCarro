@@ -19,16 +19,49 @@ namespace TesteRec.Db.Services
             return await _database.InsertAsync(pTipoServico);
         }
 
+        public async Task<List<TipoServico>> GetTipoServicoPorIDAsync(int pId)
+        {
+            return await _database.Table<TipoServico>().Where(x => x.IdServico == pId).ToListAsync();
+        }
+
+        public async Task<string> GetDescricaoServicoAsync(int pId)
+        {
+            // Busca a lista de serviços filtrada
+            var servicos = await _database.Table<TipoServico>()
+                                          .Where(x => x.IdServico == pId)
+                                          .ToListAsync();
+
+            // Verifica se há pelo menos um serviço
+            if (servicos == null || !servicos.Any())
+                return string.Empty; // Retorna vazio se não houver nenhum serviço
+
+            // Pega a descrição do primeiro serviço
+            string descricao = servicos[0].Descricao;
+
+            // Verifica se há mais de um serviço
+            if (servicos.Count > 1)
+            {
+                int quantidadeExtra = servicos.Count - 1;
+                return $"{descricao} (+{quantidadeExtra})";
+            }
+
+            // Se houver apenas um serviço, retorna a descrição
+            return descricao;
+        }
+
         // Adiciona um novo serviço
         public async Task<int> AddServicoAsync(Servico servico)
         {
             servico.idVeiculo = Global.carroSelecionado.ID;
-            if(servico.Id == 0)
+            if (servico.Id == 0)
             {
-                return await _database.InsertAsync(servico);
+                await _database.InsertAsync(servico);
             }
-            return await _database.InsertOrReplaceAsync(servico);
-
+            else
+            {
+                await _database.InsertOrReplaceAsync(servico);
+            }
+            return servico.Id;
         }
 
         // Obtém todos os serviços, exceto lembretes

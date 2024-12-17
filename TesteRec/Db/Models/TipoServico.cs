@@ -1,12 +1,62 @@
 ﻿using SQLite;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TesteRec.Db.Models
 {
-    public class TipoServico
+    public class TipoServico : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string? Descricao { get; set; }
+        public int IdServico { get; set; }
+        public bool EnviadoServidor { get; set; }
+        public string? Descricao
+        {
+            get => _descricao;
+            set
+            {
+                if (_descricao != value)
+                {
+                    _descricao = value;
+                    OnPropertyChanged(nameof(Descricao));
+                }
+            }
+        }
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        } // Para indicar se o serviço foi selecionado
+        public double Valor
+        {
+            get => _valor;
+            set
+            {
+                if (_valor != value)
+                {
+                    _valor = value;
+                    OnPropertyChanged(nameof(Valor));
+                }
+            }
+        } // Valor associado ao serviço selecionado
+        [NotMapped]
+        private bool _isSelected;
+        [NotMapped]
+        private string _descricao;
+        [NotMapped]
+        private double _valor;
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public static class DbTipoServico
@@ -52,7 +102,7 @@ namespace TesteRec.Db.Models
         new TipoServico()
         {
             Id = 8,
-            Descricao = "Lava-rápido",
+            Descricao = "Lavagem",
         },
         new TipoServico()
         {
