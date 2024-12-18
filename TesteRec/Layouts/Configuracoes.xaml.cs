@@ -1,3 +1,4 @@
+using Cofauto.Layouts.crud;
 using TesteRec.Db;
 using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
@@ -43,6 +44,11 @@ public partial class Configuracoes : ContentPage
         {
             Imagem = "calculator.png",
             Descricao = "Calculadora flex"
+        },
+        new Menu()
+        {
+            Imagem = "perfil.png",
+            Descricao = "Perfil"
         },
         new Menu()
         {
@@ -95,6 +101,9 @@ public partial class Configuracoes : ContentPage
                 break;
             case "Calculadora flex":
                 await Navigation.PushAsync(new CalculadoraFlex(false));
+                break;
+            case "Perfil":
+                await Navigation.PushAsync(new Perfil());
                 break;
             case "Sair":
                 if(await DisplayAlert("Atenção", "Você tem certeza que deseja deslogar?", "confirmar", "cancelar"))

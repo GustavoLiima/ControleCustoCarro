@@ -92,6 +92,7 @@
 	  <None Remove="Resources\Images\oil.png" />
 	  <None Remove="Resources\Images\oleo.png" />
 	  <None Remove="Resources\Images\onibus.png" />
+	  <None Remove="Resources\Images\perfil.png" />
 	  <None Remove="Resources\Images\pix.png" />
 	  <None Remove="Resources\Images\posto.png" />
 	  <None Remove="Resources\Images\postomenu.png" />
@@ -128,6 +129,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\crud\CadastroVeiculo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\crud\Perfil.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\Home.xaml">

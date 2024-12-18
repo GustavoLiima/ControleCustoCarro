@@ -5,17 +5,17 @@
              Title="">
     <VerticalStackLayout>
         <StackLayout Margin="10">
-            <ListView x:Name="ListView_Interacoes" ItemTapped="ListView_Interacoes_ItemTapped" RowHeight="70">
+            <ListView x:Name="ListView_Interacoes" ItemTapped="ListView_Interacoes_ItemTapped" RowHeight="60">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid Margin="10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" Source="{Binding Imagem}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <Label Grid.Column="1" Text="{Binding Descricao}" FontSize="Medium" VerticalOptions="Center"/>
+                                <Image Grid.Column="0" Source="{Binding Imagem}" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding Descricao}" VerticalOptions="Center"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

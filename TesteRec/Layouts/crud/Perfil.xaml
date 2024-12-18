@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cofauto.Layouts.crud.Perfil"
+             Title="Perfil"
+             Shell.BackgroundColor="#7114E7"
+             Shell.TitleColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Nome -->
+            <Label Text="Nome" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="NomeEntry" Placeholder="Digite seu nome"/>
+
+            <!-- Sobrenome -->
+            <Label Text="Sobrenome" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="SobrenomeEntry" Placeholder="Digite seu sobrenome"/>
+
+            <!-- Telefone -->
+            <Label Text="Telefone" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="TelefoneEntry" Placeholder="Digite seu telefone" Keyboard="Telephone"/>
+
+            <!-- Email -->
+            <Label Text="Email" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="EmailEntry" Placeholder="Digite seu email" Keyboard="Email"/>
+
+            <!-- Número CNH -->
+            <Label Text="Número da CNH" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="NumeroCnhEntry" Placeholder="Digite o número da CNH"/>
+
+            <!-- Categoria CNH -->
+            <Label Text="Categoria da CNH" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="CategoriaCnhEntry" Placeholder="Digite a categoria da CNH"/>
+
+            <!-- Vencimento CNH -->
+            <Label Text="Vencimento da CNH" FontSize="14" TextColor="Gray"/>
+            <DatePicker x:Name="VencimentoCnhPicker" Format="dd/MM/yyyy"/>
+
+            <!-- Botão de Salvar -->
+            <Button Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#007AFF" TextColor="White" CornerRadius="10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
