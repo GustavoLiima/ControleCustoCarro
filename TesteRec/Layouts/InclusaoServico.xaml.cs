@@ -1,5 +1,7 @@
 using Cofauto.Layouts.Templates;
+using Microsoft.Maui;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using TesteRec.Db;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
@@ -43,9 +45,9 @@ public partial class InclusaoServico : ContentPage
         CarregarDadosTela();
     }
 
-    private void CarregarDadosTela()
+    private async void CarregarDadosTela()
     {
-        if(_servico.AcaoSelecionada != (int)EMenuSelecionado.Lembrete)
+        if (_servico.AcaoSelecionada != (int)EMenuSelecionado.Lembrete)
         {
             datePickerServico.Date = _servico.Data;
             timePickerServico.Time = _servico.Hora;
@@ -69,11 +71,44 @@ public partial class InclusaoServico : ContentPage
                 break;
             case (int)EMenuSelecionado.Serviço:
                 _pagamentoSelecionado = _servico.FormaPagamentoModelo;
-                Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
-                Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                if (_pagamentoSelecionado != null)
+                {
+                    Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                    Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                }
                 _servicoSelecionado = _servico.TipoServicoModelo;
-                Label_TipoServico.Text = _servicoSelecionado.Descricao;
                 Entry_ValorDespesa.Text = _servico.ValorDespesa.ToString();
+
+
+                ServicoDB db = new ServicoDB();
+                var resultado = await db.GetTipoServicoPorIDAsync(_servico.Id);
+                if (resultado.Count > 0)
+                {
+                    CarregarTiposServicos();
+                    foreach (var item in resultado)
+                    {
+                        var item2 = _tiposServico.FirstOrDefault(x => x.Descricao == item.Descricao);
+
+                        if (item2 != null)
+                        {
+                            // Atualiza as propriedades de item2 com base em item1
+                            item2.IsSelected = item.IsSelected;
+                            item2.Valor = item.Valor;
+                            item2.EnviadoServidor = item.EnviadoServidor;
+                        }
+                    }
+
+                    ListView_ServicosSelecionados.ItemsSource = resultado;
+                    ListView_ServicosSelecionados.IsVisible = true;
+                    double ValorTotal = 0;
+                    foreach (var item in resultado)
+                    {
+                        ValorTotal += item.Valor;
+                    }
+                    Label_ValorTotalServicos.Text = ValorTotal.ToString("N2");
+                    Stack_ValoresTotaisServicos.IsVisible = true;
+                }
+                
                 //Image_TipoServico.Source = _servicoSelecionado.Imagem;
                 break;
             case (int)EMenuSelecionado.Despesa:
@@ -170,7 +205,7 @@ public partial class InclusaoServico : ContentPage
                 Grid_Motorista.IsVisible = true;
                 var servicoService = new ServicoDB();
                 Servico obj = await servicoService.GetUltimoAbastecimento();
-                if(obj != null)
+                if (obj != null)
                 {
                     _combustivelSelecionado = obj.CombustivelModelo;
                     Label_Combustivel.Text = _combustivelSelecionado.Descricao;
@@ -199,7 +234,7 @@ public partial class InclusaoServico : ContentPage
     private async void OnSalvarServicoClicked(object sender, EventArgs e)
     {
         var servicoService = new ServicoDB();
-        if(_menuSelecionado != EMenuSelecionado.Lembrete)
+        if (_menuSelecionado != EMenuSelecionado.Lembrete)
         {
             if (string.IsNullOrEmpty(entryOdometro.Text))
             {
@@ -215,7 +250,7 @@ public partial class InclusaoServico : ContentPage
         switch (_menuSelecionado)
         {
             case EMenuSelecionado.Lembrete:
-                if(CheckBox_Kilometragem.IsChecked)
+                if (CheckBox_Kilometragem.IsChecked)
                 {
                     if (string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
                     {
@@ -236,13 +271,13 @@ public partial class InclusaoServico : ContentPage
                     DataLembrete = DatePicker_Lembrete.Date,
                     Descricao = Editor_Observacao.Text,
                 };
-                if(CheckBox_Kilometragem.IsChecked && string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
+                if (CheckBox_Kilometragem.IsChecked && string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
                 {
                     await DisplayAlert("Atenção", "Preencha daqui quantos kilometros deseja ser alertado", "Continuar");
                     Entry_OdometroLembrete.Focus();
                     return;
                 }
-                else if(CheckBox_Kilometragem.IsChecked && !string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
+                else if (CheckBox_Kilometragem.IsChecked && !string.IsNullOrEmpty(Entry_OdometroLembrete.Text))
                 {
                     double.TryParse(Entry_OdometroLembrete.Text, out double valor);
                     objAddServico.LembreteKilometragem = valor;
@@ -279,7 +314,7 @@ public partial class InclusaoServico : ContentPage
             case EMenuSelecionado.Percurso:
                 break;
             case EMenuSelecionado.Serviço:
-                if(!ListView_ServicosSelecionados.IsVisible)
+                if (!ListView_ServicosSelecionados.IsVisible)
                 {
                     await DisplayAlert("Atenção", "É necessário selecionar no mínimo 1 serviço", "continuar");
                     return;
@@ -322,7 +357,7 @@ public partial class InclusaoServico : ContentPage
                     Entry_ValorDespesa.Focus();
                     return;
                 }
-                Servico objAddDesp = new Servico() 
+                Servico objAddDesp = new Servico()
                 {
                     AcaoSelecionada = (int)_menuSelecionado,
                     Data = dataComHora,
@@ -338,7 +373,7 @@ public partial class InclusaoServico : ContentPage
                 await AtualizarKMVeiculo(objAddDesp);
                 break;
             case EMenuSelecionado.Abastecimento:
-                if(string.IsNullOrEmpty(entryPreco.Text))
+                if (string.IsNullOrEmpty(entryPreco.Text))
                 {
                     await DisplayAlert("Atenção", "Preencha o valor do preço do combustível", "continuar");
                     entryPreco.Focus();
@@ -461,7 +496,7 @@ public partial class InclusaoServico : ContentPage
         if (!string.IsNullOrEmpty(entryLitros.Text))
         {
             litros = double.Parse(entryLitros.Text);
-            if(litros > 0 && valGas > 0)
+            if (litros > 0 && valGas > 0)
             {
                 entryValorTotal.Text = (valGas * litros).ToString("N2");
                 return;
@@ -484,7 +519,7 @@ public partial class InclusaoServico : ContentPage
         if (!string.IsNullOrEmpty(entryPreco.Text))
         {
             valGas = double.Parse(entryPreco.Text);
-            if(valGas > 0 && valTotal > 0)
+            if (valGas > 0 && valTotal > 0)
             {
                 entryLitros.Text = (valTotal / valGas).ToString("N2");
                 return;
@@ -511,7 +546,7 @@ public partial class InclusaoServico : ContentPage
         if (!string.IsNullOrEmpty(entryLitros.Text))
         {
             litros = double.Parse(entryLitros.Text);
-            
+
         }
 
         if (!string.IsNullOrEmpty(entryValorTotal.Text))
@@ -616,8 +651,50 @@ public partial class InclusaoServico : ContentPage
 
     private async void TapGestureRecognizerTipoServico_Tapped(object sender, TappedEventArgs e)
     {
-        //PopupTipoServico.IsVisible = true;
-        if(_tiposServico == null)
+        if (_menuSelecionado == EMenuSelecionado.Lembrete)
+        {
+            PopupTipoServico.IsVisible = true;
+        }
+        else
+        {
+            CarregarTiposServicos();
+
+            var popup = new PopUp_Servicos(_tiposServico);
+
+            // Exibe o popup e aguarda o veículo selecionado
+            var veiculoSelecionado = Navigation.PushAsync(popup);
+
+            var resultado = await popup.ObterServicoSelecionadoAsync();
+
+
+            // Exibe o veículo selecionado
+            if (resultado != null)
+            {
+                if (resultado.Count > 0)
+                {
+                    ListView_ServicosSelecionados.ItemsSource = resultado;
+                    ListView_ServicosSelecionados.IsVisible = true;
+                    double ValorTotal = 0;
+                    foreach (var item in resultado)
+                    {
+                        ValorTotal += item.Valor;
+                    }
+                    Label_ValorTotalServicos.Text = ValorTotal.ToString("N2");
+                    Stack_ValoresTotaisServicos.IsVisible = true;
+                }
+                else
+                {
+                    ListView_ServicosSelecionados.ItemsSource = null;
+                    ListView_ServicosSelecionados.IsVisible = false;
+                    Label_ValorTotalServicos.IsVisible = false;
+                }
+            }
+        }
+    }
+
+    private void CarregarTiposServicos()
+    {
+        if (_tiposServico == null)
         {
             _tiposServico = new List<Db.Models.TipoServico>();
             foreach (var item in DbTipoServico._tipoServicos.ToList())
@@ -632,37 +709,6 @@ public partial class InclusaoServico : ContentPage
                     IsSelected = item.IsSelected
                 };
                 _tiposServico.Add(objAdd);
-            }
-        }
-        
-        var popup = new PopUp_Servicos(_tiposServico);
-
-        // Exibe o popup e aguarda o veículo selecionado
-        var veiculoSelecionado = Navigation.PushAsync(popup);
-
-        var resultado = await popup.ObterServicoSelecionadoAsync();
-
-
-        // Exibe o veículo selecionado
-        if (resultado != null)
-        {
-            if(resultado.Count > 0)
-            {
-                ListView_ServicosSelecionados.ItemsSource = resultado;
-                ListView_ServicosSelecionados.IsVisible = true;
-                double ValorTotal = 0;
-                foreach (var item in resultado)
-                {
-                    ValorTotal += item.Valor;
-                }
-                Label_ValorTotalServicos.Text = ValorTotal.ToString("N2");
-                Stack_ValoresTotaisServicos.IsVisible = true;
-            }
-            else
-            {
-                ListView_ServicosSelecionados.ItemsSource = null;
-                ListView_ServicosSelecionados.IsVisible = false;
-                Label_ValorTotalServicos.IsVisible = false;
             }
         }
     }
@@ -689,8 +735,8 @@ public partial class InclusaoServico : ContentPage
     private void Button_Servico_Clicked(object sender, EventArgs e)
     {
         Button_Despesa.BackgroundColor = Color.FromHex("#ffffff");
-        Button_Despesa.TextColor = Color.FromHex("#2c3e50"); 
-        Button_Servico.BackgroundColor = Color.FromHex("#d35400"); 
+        Button_Despesa.TextColor = Color.FromHex("#2c3e50");
+        Button_Servico.BackgroundColor = Color.FromHex("#d35400");
         Button_Servico.TextColor = Color.FromHex("#ffffff");
         Grid_Despesa.IsVisible = false;
         Grid_Servico.IsVisible = true;
@@ -726,9 +772,9 @@ public partial class InclusaoServico : ContentPage
 
     private void CheckBox_Kilometragem_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if(CheckBox_Kilometragem != null && CheckBox_Data != null)
+        if (CheckBox_Kilometragem != null && CheckBox_Data != null)
         {
-            if(!CheckBox_Kilometragem.IsChecked && !CheckBox_Data.IsChecked)
+            if (!CheckBox_Kilometragem.IsChecked && !CheckBox_Data.IsChecked)
             {
                 CheckBox_Data.IsChecked = true;
             }

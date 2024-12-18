@@ -149,7 +149,7 @@
                 </Grid>
                 <Label x:Name="Label_CustoDetalhado" Text="Custos detalhados" TextColor="Red" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelDespesa" IsVisible="False" Margin="10,0">
+                <ListView x:Name="ListView_RelDespesa" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -198,7 +198,7 @@
                 </Grid>
                 <Label x:Name="Label_GanhoDetalhado" Text="Ganhos detalhados" TextColor="Green" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelGanho" IsVisible="False" Margin="10,0">
+                <ListView x:Name="ListView_RelGanho" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -207,12 +207,8 @@
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                    <Label Grid.Column="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                    <Label Grid.Column="1" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
                                     <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                                         <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
@@ -247,11 +243,11 @@
                 </Grid>
                 <Label x:Name="Label_ServicoDetalhado" Text="Serviços detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelServico" IsVisible="False" Margin="10,0">
+                <ListView x:Name="ListView_RelServico" IsVisible="False" HasUnevenRows="True" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
+                                <Grid Padding="10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="*"/>
@@ -278,7 +274,7 @@
                 <Label x:Name="Label_QtdAbastecimentos"/>
                 <Label x:Name="Label_QtdLitros"/>
 
-                <ListView x:Name="ListView_DetalhesComb" HasUnevenRows="True" Margin="10">
+                <ListView x:Name="ListView_DetalhesComb" HasUnevenRows="True" Margin="10" ItemSelected="ListView_RelServico_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -324,7 +320,7 @@
                 </Grid>
                 <Label x:Name="Label_AbastecimentoDetalhado" Text="Abastecimentos detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelAbastecimento" IsVisible="False" Margin="10,0">
+                <ListView x:Name="ListView_RelAbastecimento" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

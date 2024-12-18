@@ -28,7 +28,7 @@
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>
                                     </StackLayout>
                                 </StackLayout>
-                                <Label Grid.Column="2" Text="{Binding ValorReceita}" TextColor="Green" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding ValorReceita}" TextColor="Green" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Start" Margin="0,5,0,0"/>
                             </Grid>
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
@@ -36,9 +36,11 @@
                                 <Label Text="Odometro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
-                            <Label Text="Descrição:" TextColor="Gray"/>
-                            <Label Text="{Binding Descricao}" TextColor="Black"/>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout IsVisible="{Binding MostraDescricao}">
+                                <Label Text="Descrição:" TextColor="Gray"/>
+                                <Label Text="{Binding Descricao}" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding MostraMotorista}">
                                 <Label Text="Motorista: " TextColor="Gray"/>
                                 <Label Text="{Binding Motorista}" TextColor="Black"/>
                             </StackLayout>
@@ -69,7 +71,7 @@
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>
                                     </StackLayout>
                                 </StackLayout>
-                                <Label Grid.Column="2" Text="{Binding ValorDespesa}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding ValorDespesa}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Start" Margin="0,5,0,0"/>
                             </Grid>
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
@@ -77,9 +79,11 @@
                                 <Label Text="Odometro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
-                            <Label Text="Descrição:" TextColor="Gray"/>
-                            <Label Text="{Binding Descricao}" TextColor="Black"/>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout IsVisible="{Binding MostraDescricao}">
+                                <Label Text="Descrição:" TextColor="Gray"/>
+                                <Label Text="{Binding Descricao}" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding MostraMotorista}">
                                 <Label Text="Motorista: " TextColor="Gray"/>
                                 <Label Text="{Binding Motorista}" TextColor="black"/>
                             </StackLayout>
@@ -112,7 +116,7 @@
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>
                                     </StackLayout>
                                 </StackLayout>
-                                <Label Grid.Column="2" Text="{Binding ValorTotal}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding ValorTotal}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Start" Margin="0,5,0,0"/>
                             </Grid>
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
@@ -129,9 +133,11 @@
                                 <Label Text="Odometro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
-                            <Label Text="Descrição:" TextColor="Gray"/>
-                            <Label Text="{Binding Descricao}" TextColor="Black"/>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout IsVisible="{Binding MostraDescricao}">
+                                <Label Text="Descrição:" TextColor="Gray"/>
+                                <Label Text="{Binding Descricao}" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding MostraMotorista}">
                                 <Label Text="Motorista: " TextColor="Gray"/>
                                 <Label Text="{Binding Motorista}" TextColor="black"/>
                             </StackLayout>
@@ -163,7 +169,7 @@
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>
                                     </StackLayout>
                                 </StackLayout>
-                                <Label Grid.Column="2" Text="{Binding ValorDespesa}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding ValorDespesa}" TextColor="Red" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Start" Margin="0,5,0,0"/>
                             </Grid>
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
@@ -171,9 +177,11 @@
                                 <Label Text="Odometro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
-                            <Label Text="Descrição:" TextColor="Gray"/>
-                            <Label Text="{Binding Descricao}" TextColor="Black"/>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout IsVisible="{Binding MostraDescricao}">
+                                <Label Text="Descrição:" TextColor="Gray"/>
+                                <Label Text="{Binding Descricao}" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding MostraMotorista}">
                                 <Label Text="Motorista: " TextColor="Gray"/>
                                 <Label Text="{Binding Motorista}" TextColor="black"/>
                             </StackLayout>

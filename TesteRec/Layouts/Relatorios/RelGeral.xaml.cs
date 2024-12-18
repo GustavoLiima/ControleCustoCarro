@@ -222,7 +222,7 @@ public partial class RelGeral : ContentPage
                 Servico += item.ValorDespesa;
                 listaObjetos.Add(new ModeloBaseRelatorio()
                 {
-                    Descricao = item.DescricaoReceita,
+                    Descricao = item.DescricaoServico,
                     Valor = item.ValorDespesa,
                     Data = item.Data,
                     Hora = item.Hora
@@ -438,5 +438,10 @@ public partial class RelGeral : ContentPage
             PopupServiceSelection.IsVisible = false;
             await CarregarRelatorio();
         }
+    }
+
+    private void ListView_RelServico_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        ((ListView)sender).SelectedItem = null;
     }
 }

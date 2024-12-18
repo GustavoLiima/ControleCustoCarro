@@ -21,8 +21,38 @@ namespace TesteRec.Db.Models
         public double Preco { get; set; }
         public double ValorTotal { get; set; }
         public double Litros { get; set; }
+        [NotMapped]
+        public bool MostraMotorista
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(Motorista))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
         public string? Motorista { get; set; }
         public int FormaPagamento { get; set; }
+        [NotMapped]
+        public bool MostraDescricao
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Descricao))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
         public string Descricao { get; set; }
         public string DescricaoServico { get; set; }
         public int TipoDespesa { get; set; }
