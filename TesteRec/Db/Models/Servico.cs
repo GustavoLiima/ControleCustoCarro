@@ -55,6 +55,7 @@ namespace TesteRec.Db.Models
         }
         public string Descricao { get; set; }
         public string DescricaoServico { get; set; }
+        public string DescricaoDespesa { get; set; }
         public int TipoDespesa { get; set; }
         public int TipoServico { get; set; }
         [NotMapped]
@@ -86,8 +87,6 @@ namespace TesteRec.Db.Models
                 {
                     case EMenuSelecionado.Receita:
                         return DbTipoReceita._tipoReceitas.Find(x => x.Id == Receita).Descricao;
-                    case EMenuSelecionado.Despesa:
-                        return DbDespesa._listaDespesa.Find(x => x.Id == TipoDespesa).Descricao;
                     case EMenuSelecionado.Abastecimento:
                         return new Layouts.listas.TiposCombustivel()._tipoCombustivel.Find(x => x.Id == Combustivel).Descricao;
                     default:

@@ -26,6 +26,7 @@ namespace TesteRec.Db.Services
             await database.CreateTableAsync<Servico>();
             await database.CreateTableAsync<TipoServico>();
             await database.CreateTableAsync<VeiculoModel>();
+            await database.CreateTableAsync<Despesa>();
         }
     }
 }

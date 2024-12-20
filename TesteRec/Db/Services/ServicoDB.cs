@@ -16,7 +16,7 @@ namespace TesteRec.Db.Services
         // Adiciona um novo tipo de serviço
         public async Task<int> AddTipoServicoAsync(TipoServico pTipoServico)
         {
-            return await _database.InsertAsync(pTipoServico);
+            return await _database.InsertOrReplaceAsync(pTipoServico);
         }
 
         public async Task<List<TipoServico>> GetTipoServicoPorIDAsync(int pId)

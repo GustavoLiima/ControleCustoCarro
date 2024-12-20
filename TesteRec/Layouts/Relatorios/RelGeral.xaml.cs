@@ -166,7 +166,7 @@ public partial class RelGeral : ContentPage
                 Custos += item.ValorDespesa;
                 listaObjetos.Add(new ModeloBaseRelatorio()
                 {
-                    Descricao = item.DescricaoReceita,
+                    Descricao = item.DescricaoDespesa,
                     Valor = item.ValorDespesa,
                     Data = item.Data,
                     Hora = item.Hora

@@ -55,7 +55,7 @@
 
             <DataTemplate x:Key="CustosTemplate">
                 <Frame Padding="10" Margin="5">
-                    <toolkit:Expander>
+                    <toolkit:Expander ExpandedChanged="Expander_IsExpandedChanged">
                         <toolkit:Expander.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -65,7 +65,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="despesa" WidthRequest="40"/>
                                 <StackLayout Grid.Column="1" >
-                                    <Label Text="{Binding DescricaoReceita}" TextColor="Black" FontSize="Medium"/>
+                                    <Label LineBreakMode="{Binding LineBreakMode}" Text="{Binding DescricaoDespesa}" TextColor="Black" FontSize="Medium"/>
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" TextColor="Gray"/>
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" Margin="5,0,0,0"/>

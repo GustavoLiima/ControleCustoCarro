@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Cofauto.Layouts.Templates.PopUp_Servicos"
-             Title="Servicos"
+             x:Class="Cofauto.Layouts.Templates.PopUpDespesas"
+             Title="Despesas"
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <StackLayout Padding="10">
         <!-- Entry para filtro -->
         <Entry x:Name="FiltroEntry"
-           Placeholder="Digite para filtrar serviços..."
+           Placeholder="Digite para filtrar veículos..."
            TextChanged="FiltroEntry_TextChanged"
            Margin="0,0,0,10" />
 
         <!-- ListView para exibir os veículos -->
-        <ListView x:Name="ServicosListView"
+        <ListView x:Name="DespesasListView"
               HasUnevenRows="True"
-              SeparatorVisibility="Default">
+              SeparatorVisibility="Default"
+              ItemTapped="DespesasListView_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -48,4 +49,5 @@
         <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#7114E7" TextColor="White"/>
 
     </StackLayout>
+
 </ContentPage>

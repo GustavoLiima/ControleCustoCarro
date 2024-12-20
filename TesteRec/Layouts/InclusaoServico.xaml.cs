@@ -1,3 +1,4 @@
+using Cofauto.Db.Services;
 using Cofauto.Layouts.Templates;
 using Microsoft.Maui;
 using Newtonsoft.Json;
@@ -24,6 +25,7 @@ public partial class InclusaoServico : ContentPage
 
 
     private List<Db.Models.TipoServico> _tiposServico = null;
+    private List<Despesa> _tiposDespesa = null;
 
     private Servico _servico;
 
@@ -114,7 +116,7 @@ public partial class InclusaoServico : ContentPage
             case (int)EMenuSelecionado.Despesa:
                 Entry_ValorDespesa.Text = _servico.ValorDespesa.ToString();
                 _despesaSelecionada = _servico.DespesaModelo;
-                Label_TipoDespesa.Text = _despesaSelecionada.Descricao;
+                Label_TipoDespesa.Text = _servico.DescricaoDespesa;
                 Image_TipoDespesa.Source = _despesaSelecionada.Imagem;
                 _pagamentoSelecionado = _servico.FormaPagamentoModelo;
                 Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
@@ -234,6 +236,7 @@ public partial class InclusaoServico : ContentPage
     private async void OnSalvarServicoClicked(object sender, EventArgs e)
     {
         var servicoService = new ServicoDB();
+        var despesaService = new DespesaDB();
         if (_menuSelecionado != EMenuSelecionado.Lembrete)
         {
             if (string.IsNullOrEmpty(entryOdometro.Text))
@@ -351,10 +354,9 @@ public partial class InclusaoServico : ContentPage
                 await AtualizarKMVeiculo(objAddServ);
                 break;
             case EMenuSelecionado.Despesa:
-                if (string.IsNullOrEmpty(Entry_ValorDespesa.Text))
+                if (!ListView_DespesasSelecionados.IsVisible)
                 {
-                    await DisplayAlert("Atenção", "Preencha o valor da despesa", "continuar");
-                    Entry_ValorDespesa.Focus();
+                    await DisplayAlert("Atenção", "É necessário selecionar no mínimo uma despesa", "continuar");
                     return;
                 }
                 Servico objAddDesp = new Servico()
@@ -367,9 +369,26 @@ public partial class InclusaoServico : ContentPage
                     Motorista = entryMotorista.Text,
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
-                    ValorDespesa = double.Parse(Entry_ValorDespesa.Text)
+                    ValorDespesa = double.Parse(Label_ValorTotalDespesas.Text)
                 };
-                await servicoService.AddServicoAsync(objAddDesp);
+                var descricaoDespesa = _tiposDespesa.Where(x => x.IsSelected).Select(s => s.Descricao).ToList();
+                objAddDesp.DescricaoDespesa = string.Join(" \n", descricaoDespesa);
+                int IdServ = await servicoService.AddServicoAsync(objAddDesp);
+
+                foreach (var item in _tiposDespesa.Where(x => x.IsSelected))
+                {
+                    Despesa objAd = new Despesa()
+                    {
+                        Id = item.Id,
+                        Descricao = item.Descricao,
+                        EnviadoServidor = item.EnviadoServidor,
+                        IdServico = IdServ,
+                        IsSelected = item.IsSelected,
+                        Valor = item.Valor
+                    };
+                    await despesaService.AddDespesaAsync(objAd);
+                }
+
                 await AtualizarKMVeiculo(objAddDesp);
                 break;
             case EMenuSelecionado.Abastecimento:
@@ -616,9 +635,48 @@ public partial class InclusaoServico : ContentPage
         }
     }
 
-    private void TapGestureRecognizerTipoDespesa_Tapped(object sender, TappedEventArgs e)
+    private async void TapGestureRecognizerTipoDespesa_Tapped(object sender, TappedEventArgs e)
     {
-        PopupTipoDespesa.IsVisible = true;
+
+        if (_menuSelecionado == EMenuSelecionado.Lembrete)
+        {
+            PopupTipoDespesa.IsVisible = true;
+        }
+        else
+        {
+            CarregarTiposDespesa();
+
+            var popup = new PopUpDespesas(_tiposDespesa);
+
+            // Exibe o popup e aguarda o veículo selecionado
+            var despesasSelecionado = Navigation.PushAsync(popup);
+
+            var resultado = await popup.ObterDespesasSelecionadoAsync();
+
+
+            // Exibe o veículo selecionado
+            if (resultado != null)
+            {
+                if (resultado.Count > 0)
+                {
+                    ListView_DespesasSelecionados.ItemsSource = resultado;
+                    ListView_DespesasSelecionados.IsVisible = true;
+                    double ValorTotal = 0;
+                    foreach (var item in resultado)
+                    {
+                        ValorTotal += item.Valor;
+                    }
+                    Label_ValorTotalDespesas.Text = ValorTotal.ToString("N2");
+                    Stack_ValoresTotaisDespesas.IsVisible = true;
+                }
+                else
+                {
+                    ListView_DespesasSelecionados.ItemsSource = null;
+                    ListView_DespesasSelecionados.IsVisible = false;
+                    Label_ValorTotalDespesas.IsVisible = false;
+                }
+            }
+        }
     }
 
     private void OnSelectionChangedTipoDespesa(object sender, SelectionChangedEventArgs e)
@@ -709,6 +767,27 @@ public partial class InclusaoServico : ContentPage
                     IsSelected = item.IsSelected
                 };
                 _tiposServico.Add(objAdd);
+            }
+        }
+    }
+
+    private void CarregarTiposDespesa()
+    {
+        if (_tiposDespesa == null)
+        {
+            _tiposDespesa = new List<Despesa>();
+            foreach (var item in DbDespesa._listaDespesa.ToList())
+            {
+                Despesa objAdd = new Despesa()
+                {
+                    Id = item.Id,
+                    Valor = item.Valor,
+                    Descricao = item.Descricao,
+                    EnviadoServidor = item.EnviadoServidor,
+                    IdServico = item.IdServico,
+                    IsSelected = item.IsSelected
+                };
+                _tiposDespesa.Add(objAdd);
             }
         }
     }
