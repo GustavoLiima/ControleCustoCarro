@@ -110,17 +110,18 @@ public partial class InclusaoServico : ContentPage
                     Label_ValorTotalServicos.Text = ValorTotal.ToString("N2");
                     Stack_ValoresTotaisServicos.IsVisible = true;
                 }
-                
+
                 //Image_TipoServico.Source = _servicoSelecionado.Imagem;
                 break;
             case (int)EMenuSelecionado.Despesa:
                 Entry_ValorDespesa.Text = _servico.ValorDespesa.ToString();
                 _despesaSelecionada = _servico.DespesaModelo;
-                Label_TipoDespesa.Text = _servico.DescricaoDespesa;
-                Image_TipoDespesa.Source = _despesaSelecionada.Imagem;
                 _pagamentoSelecionado = _servico.FormaPagamentoModelo;
-                Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
-                Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                if(_pagamentoSelecionado != null)
+                {
+                    Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                    Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                }
                 break;
             case (int)EMenuSelecionado.Abastecimento:
                 entryPreco.Text = _servico.Preco.ToString();
@@ -195,7 +196,22 @@ public partial class InclusaoServico : ContentPage
                 Grid_DataHorario.IsVisible = true;
                 Grid_Odometro.IsVisible = true;
                 Grid_Motorista.IsVisible = true;
-                Grid_ValorDespesa.IsVisible = true;
+                var despesaService = new ServicoDB();
+                Servico retDesp = await despesaService.GetUltimoAbastecimento();
+                if (retDesp != null)
+                {
+                    if(retDesp.FormaPagamentoModelo != null)
+                    {
+                        _pagamentoSelecionado = retDesp.FormaPagamentoModelo;
+                        Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                        Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                    }
+                }
+                else
+                {
+                    Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                    Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                }
                 break;
             case EMenuSelecionado.Abastecimento:
                 Shell.SetBackgroundColor(this, Color.FromHex("#f39c12"));
@@ -212,6 +228,12 @@ public partial class InclusaoServico : ContentPage
                     _combustivelSelecionado = obj.CombustivelModelo;
                     Label_Combustivel.Text = _combustivelSelecionado.Descricao;
                     Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
+                    if (obj.FormaPagamentoModelo != null)
+                    {
+                        _pagamentoSelecionado = obj.FormaPagamentoModelo;
+                        Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                        Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                    }
                 }
                 break;
             default:

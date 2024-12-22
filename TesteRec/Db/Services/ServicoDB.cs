@@ -151,5 +151,10 @@ namespace TesteRec.Db.Services
         {
             return await _database.Table<Servico>().Where(s => s.AcaoSelecionada == (int)EMenuSelecionado.Abastecimento).OrderByDescending(s => s.Data).FirstOrDefaultAsync();
         }
+
+        public async Task<Servico> GetUltimoGasto()
+        {
+            return await _database.Table<Servico>().Where(s => s.AcaoSelecionada == (int)EMenuSelecionado.Despesa).OrderByDescending(s => s.Data).FirstOrDefaultAsync();
+        }
     }
 }
