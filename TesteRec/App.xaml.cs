@@ -12,6 +12,7 @@ namespace TesteRec
         {
             InitializeComponent();
             // Define uma página inicial temporária
+            Application.Current.UserAppTheme = AppTheme.Light;
             MainPage = new ContentPage
             {
                 Content = new ActivityIndicator

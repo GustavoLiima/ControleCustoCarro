@@ -29,7 +29,8 @@
                            Placeholder="E-mail"
                            TextColor="Black"
                            Keyboard="Email"
-                           FontSize="Medium" />
+                           FontSize="Medium" 
+                           MaxLength="200"/>
 
                     <!-- Campo de senha -->
                     <Grid>
@@ -44,7 +45,8 @@
                                TextColor="Black"
                                Placeholder="Senha"
                                IsPassword="True"
-                               FontSize="Medium" />
+                               FontSize="Medium" 
+                               MaxLength="50"/>
                         <!-- Botão de olho -->
                         <ImageButton 
                              x:Name="Button_OlharSenha"

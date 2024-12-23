@@ -17,68 +17,73 @@
                     <Label Text="Realize o seu cadastro" FontSize="Subtitle"/>
                     <!-- Nome -->
                     <Label Text="Digite o seu nome"
-                   FontSize="Body"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Start" />
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Start" />
                     <Entry x:Name="Entry_Nome"
-                   Placeholder="Nome"
-                   FontSize="Medium" />
+                           Placeholder="Nome"
+                           FontSize="Medium"
+                           MaxLength="200"/>
 
                     <!-- Sobrenome -->
                     <Label Text="Digite o seu sobrenome"
-                   FontSize="Body"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Start" />
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Start" />
                     <Entry x:Name="Entry_Sobrenome"
-                   Placeholder="Sobrenome"
-                   FontSize="Medium" />
+                           Placeholder="Sobrenome"
+                           FontSize="Medium" 
+                           MaxLength="200"/>
 
                     <!-- E-mail -->
                     <Label Text="Digite o seu e-mail"
-                   FontSize="Body"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Start" />
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Start" />
                     <Entry x:Name="Entry_Email"
-                   Placeholder="E-mail"
-                   Keyboard="Email"
-                   FontSize="Medium" />
+                           Placeholder="E-mail"
+                           Keyboard="Email"
+                           FontSize="Medium" 
+                           MaxLength="200"/>
 
                     <!-- Senha -->
                     <Label Text="Crie uma senha"
-                   FontSize="Body"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Start" />
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Start" />
                     <Grid>
                         <Entry x:Name="Entry_Senha"
-                       Placeholder="Senha"
-                       IsPassword="True"
-                       FontSize="Medium" />
+                               Placeholder="Senha"
+                               IsPassword="True"
+                               FontSize="Medium" 
+                               MaxLength="50"/>
                         <ImageButton Source="invisible"
-                             WidthRequest="30"
-                             HeightRequest="30"
-                             BackgroundColor="Transparent"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"
-                             Clicked="TogglePasswordVisibility_Senha" />
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Center"
+                                     Clicked="TogglePasswordVisibility_Senha" />
                     </Grid>
 
                     <!-- Reconfirmação da Senha -->
                     <Label Text="Confirme sua senha"
-                   FontSize="Body"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Start" />
+                           FontSize="Body"
+                           TextColor="Gray"
+                           HorizontalTextAlignment="Start" />
                     <Grid>
                         <Entry x:Name="Entry_ReconfirmacaoSenha"
-                       Placeholder="Reconfirme sua senha"
-                       IsPassword="True"
-                       FontSize="Medium" />
+                               Placeholder="Reconfirme sua senha"
+                               IsPassword="True"
+                               FontSize="Medium" 
+                               MaxLength="50"/>
                         <ImageButton Source="invisible"
-                             WidthRequest="30"
-                             HeightRequest="30"
-                             BackgroundColor="Transparent"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"
-                             Clicked="TogglePasswordVisibility_ReconfirmacaoSenha" />
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Center"
+                                     Clicked="TogglePasswordVisibility_ReconfirmacaoSenha" />
                     </Grid>
 
                     <!-- Botão para avançar -->
@@ -99,15 +104,15 @@
                             HorizontalOptions="FillAndExpand"
                             Clicked="Button_Avancar_Clicked" />
                     <Button x:Name="Button_Voltar" Text="Voltar"
-                        BackgroundColor="Transparent"
-                        TextColor="#7114E7"
-                        FontAttributes="Bold"
-                        CornerRadius="25"
-                        HeightRequest="50"
-                        BorderColor="#7114E7"
-                        BorderWidth="1"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="Button_Voltar_Clicked"/>
+                            BackgroundColor="Transparent"
+                            TextColor="#7114E7"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BorderColor="#7114E7"
+                            BorderWidth="1"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="Button_Voltar_Clicked"/>
                 </VerticalStackLayout>
             </Frame>
         </ScrollView>

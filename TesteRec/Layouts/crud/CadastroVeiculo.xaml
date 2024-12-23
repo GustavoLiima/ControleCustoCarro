@@ -12,7 +12,7 @@
 
                     <!-- Marca -->
                     <Label Text="Marca"/>
-                    <Entry x:Name="Entry_MarcaVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}" Completed="Entry_MarcaVeiculo_Completed"/>
+                    <Entry x:Name="Entry_MarcaVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}" MaxLength="200" Completed="Entry_MarcaVeiculo_Completed"/>
 
                     <!-- CollectionView para exibir as sugestões -->
                     <CollectionView x:Name="CollectionView_Marcas" ItemsSource="{Binding MarcasFiltradas}"
@@ -34,32 +34,32 @@
 
                     <!-- Nome do Veículo -->
                     <Label Text="Nome do Veículo"/>
-                    <Entry x:Name="Entry_NomeVeiculo" Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" Completed="Entry_NomeVeiculo_Completed"/>
+                    <Entry x:Name="Entry_NomeVeiculo" Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" MaxLength="200" Completed="Entry_NomeVeiculo_Completed"/>
 
                     <!-- Quilometragem -->
                     <Label Text="Quilometragem"/>
-                    <Entry x:Name="Entry_Quilometragem" Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" Keyboard="Numeric" Completed="Entry_Quilometragem_Completed"/>
+                    <Entry x:Name="Entry_Quilometragem" Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" MaxLength="8" Keyboard="Numeric" Completed="Entry_Quilometragem_Completed"/>
 
                     <!-- Ano de Fabricação -->
                     <Label Text="Ano de Fabricação"/>
-                    <Entry x:Name="Entry_AnoFabricacao" Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" Keyboard="Numeric" Completed="Entry_AnoFabricacao_Completed"/>
+                    <Entry x:Name="Entry_AnoFabricacao" Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" MaxLength="4" Keyboard="Numeric" Completed="Entry_AnoFabricacao_Completed"/>
 
                     <!-- Ano do Modelo -->
                     <Label Text="Ano do Modelo"/>
-                    <Entry x:Name="Entry_AnoModelo" Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" Keyboard="Numeric" Completed="Entry_AnoModelo_Completed"/>
+                    <Entry x:Name="Entry_AnoModelo" Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" MaxLength="4" Keyboard="Numeric" Completed="Entry_AnoModelo_Completed"/>
 
                     <Label Text="Placa do veículo"/>
-                    <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}" Completed="Entry_Placa_Completed"/>
+                    <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}" MaxLength="12" Completed="Entry_Placa_Completed"/>
 
                     <!-- Litragem -->
                     <Label Text="Capacidade tanque de combustível (Litros)"/>
-                    <Entry x:Name="Entry_LitragemVeiculo" Placeholder="Digite a litragem do tanque" Keyboard="Numeric" Completed="Entry_LitragemVeiculo_Completed"/>
+                    <Entry x:Name="Entry_LitragemVeiculo" Placeholder="Digite a litragem do tanque" Keyboard="Numeric" MaxLength="6" Completed="Entry_LitragemVeiculo_Completed"/>
 
                     <Label Text="Renavam *opcional"/>
-                    <Entry x:Name="Entry_Renavam" Placeholder="Digite o renavam" Text="{Binding Renavam}" Completed="Entry_Renavam_Completed"/>
+                    <Entry x:Name="Entry_Renavam" Placeholder="Digite o renavam" Text="{Binding Renavam}" MaxLength="20" Completed="Entry_Renavam_Completed"/>
 
                     <Label Text="Chassi * opcional"/>
-                    <Entry x:Name="Entry_Chassi" Placeholder="Digite o chassi" Text="{Binding Chassi}" Completed="Entry_Chassi_Completed"/>
+                    <Entry x:Name="Entry_Chassi" Placeholder="Digite o chassi" Text="{Binding Chassi}" MaxLength="30" Completed="Entry_Chassi_Completed"/>
 
                     <!-- Tipo de Combustível -->
                     <Label Text="Tipo de Combustível"/>
