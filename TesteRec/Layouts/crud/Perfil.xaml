@@ -6,7 +6,7 @@
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="5">
 
             <!-- Nome -->
             <Label Text="Nome" FontSize="14" TextColor="Gray"/>
@@ -37,7 +37,8 @@
             <DatePicker x:Name="VencimentoCnhPicker" Format="dd/MM/yyyy"/>
 
             <!-- Botão de Salvar -->
-            <Button Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#007AFF" TextColor="White" CornerRadius="10"/>
+            <Button Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#7114E7" TextColor="White" CornerRadius="10"/>
+            <Button Text="Trocar senha" Clicked="OnTrocarSenhaClicked" BackgroundColor="White" BorderColor="#7114E7" BorderWidth="1" TextColor="#7114E7" CornerRadius="10"/>
 
         </VerticalStackLayout>
     </ScrollView>

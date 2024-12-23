@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cofauto.Layouts.crud.TrocaSenha"
+             Title="TrocaSenha">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="5">
+            <Label Text="Senha Atual" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="Entry_SenhaAtual" Placeholder="Digite sua senha atual"/>
+
+            <Label Text="Nova senha" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="Entry_SenhaNova" Placeholder="Digite sua senha atual"/>
+
+            <Label Text="Repita a nova senha" FontSize="14" TextColor="Gray"/>
+            <Entry x:Name="Entry_SenhaNovaRep" Placeholder="Digite sua senha atual"/>
+
+            <Button Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#7114E7" TextColor="White" CornerRadius="10"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

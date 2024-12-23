@@ -48,11 +48,11 @@
             //    Descricao = "Checklist",
             //    Imagem = "checklist.png"
             //},
-            new Menu()
-            {
-                Descricao = "Percurso",
-                Imagem = "caminho.png"
-            },
+            //new Menu()
+            //{
+            //    Descricao = "Percurso",
+            //    Imagem = "caminho.png"
+            //},
             new Menu()
             {
                 Descricao = "Serviço",

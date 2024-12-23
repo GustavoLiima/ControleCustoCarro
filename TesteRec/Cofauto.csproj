@@ -46,7 +46,7 @@
 		<!-- App Icon -->
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images\branco1.png" Color="#7114E7"/>
+		<MauiSplashScreen Include="Resources\Images\branco1.png" Color="#7114E7" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -132,6 +132,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\crud\Perfil.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\crud\TrocaSenha.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Layouts\Home.xaml">

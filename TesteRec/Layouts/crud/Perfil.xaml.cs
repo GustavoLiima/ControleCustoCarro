@@ -19,4 +19,9 @@ public partial class Perfil : ContentPage
     {
 
     }
+
+    private async void OnTrocarSenhaClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new TrocaSenha());
+    }
 }
