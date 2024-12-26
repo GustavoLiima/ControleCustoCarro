@@ -208,7 +208,7 @@
         <ScrollView VerticalOptions="Fill">
             <StackLayout>
                 
-            <toolkit:Expander>
+            <toolkit:Expander ExpandedChanged="Expander_ExpandedChanged">
                 <toolkit:Expander.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -218,8 +218,8 @@
                         <Image x:Name="Image_TipoVeiculo" Grid.Column="0" Grid.Row="0" WidthRequest="40" HeightRequest="40" VerticalOptions="Center"/>
                         <StackLayout Grid.Column="1" Grid.Row="0" Padding="10" Orientation="Horizontal">
                             <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
-                                <Label x:Name="Label_VeiculoSelecionado" FontSize="Medium" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Black"/>
-                                <Label x:Name="Label_VeiculoSelecionadoMarca" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Gray"/>
+                                <Label x:Name="Label_VeiculoSelecionado" FontSize="Medium" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Black" LineBreakMode="TailTruncation"/>
+                                <Label x:Name="Label_VeiculoSelecionadoMarca" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Gray" LineBreakMode="TailTruncation"/>
                             </StackLayout>
                             <Label Text="Ver detalhes" TextColor="Gray" HorizontalOptions="End" VerticalOptions="Center"/>
                         </StackLayout>

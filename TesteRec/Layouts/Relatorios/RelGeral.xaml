@@ -29,8 +29,9 @@
                 <HorizontalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </HorizontalStackLayout.GestureRecognizers>
+                
                 <Image x:Name="Image_CarroSelecionado" WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
-                <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center"/>
+                <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
             </HorizontalStackLayout>
 
             <Label Text="Selecione a categoria" TextColor="Gray"/>

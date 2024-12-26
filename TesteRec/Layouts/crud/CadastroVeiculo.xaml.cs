@@ -13,6 +13,7 @@ public partial class CadastroVeiculo : ContentPage
     VeiculoModel _veiculo;
     bool _novoCadastro = false;
     private TipoVeiculo _tipoVeiculoSelecionado = null;
+    private int selectedCombustivelId = 0;
     private List<TipoVeiculo> _listaTipoVeiculo = new List<TipoVeiculo>()
         {
             new TipoVeiculo()
@@ -80,13 +81,28 @@ public partial class CadastroVeiculo : ContentPage
         Entry_Renavam.Text = _veiculo.Renavam?.ToString();
         Entry_Chassi.Text = _veiculo.Chassi;
         Entry_LitragemVeiculo.Text = _veiculo.CapacidadeTanque?.ToString();
+        if(_veiculo.TipoCombustivel != null)
+        {
+            SelecionarCombustivel((int)_veiculo.TipoCombustivel);
+        }
     }
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
         CarregarInformacoes();
     }
+
+    private void SelecionarCombustivel(int id)
+    {
+        foreach (var child in CombustivelStackLayout.Children)
+        {
+            if (child is RadioButton radioButton && int.TryParse(radioButton.Value.ToString(), out int value))
+            {
+                radioButton.IsChecked = value == id;
+            }
+        }
+    }
+
 
     public void CarregarInformacoes()
     {
@@ -186,28 +202,61 @@ public partial class CadastroVeiculo : ContentPage
 
     private async void CadastrarVeiculo_Clicked(object sender, EventArgs e)
     {
+        if(selectedCombustivelId == 0)
+        {
+            await DisplayAlert("Atenção", "É necessário selecionar o tipo de combustível do veículo", "continuar");
+            return;
+        }
         if (_tipoVeiculoSelecionado == null)
         {
             await DisplayAlert("Atenção", "É necessário selecionar um tipo de veículo", "continuar");
             Entry_TipoVeiculo_Focused(null, null);
             return;
         }
+        if(string.IsNullOrEmpty(Entry_NomeVeiculo.Text))
+        {
+            await DisplayAlert("Atenção", "É necessário inserir um nome para o veículo", "continuar");
+            Entry_NomeVeiculo.Focus();
+            return;
+        }
+        if (string.IsNullOrEmpty(Entry_MarcaVeiculo.Text))
+        {
+            await DisplayAlert("Atenção", "É necessário inserir uma marca para o veículo", "continuar");
+            Entry_MarcaVeiculo.Focus();
+            return;
+        }
+        if (string.IsNullOrEmpty(Entry_Quilometragem.Text))
+        {
+            await DisplayAlert("Atenção", "É necessário inserir a quilometragem inicial do veículo", "continuar");
+            Entry_Quilometragem.Focus();
+            return;
+        }
+        if (string.IsNullOrEmpty(Entry_Placa.Text))
+        {
+            await DisplayAlert("Atenção", "É necessário inserir a placa do veículo", "continuar");
+            Entry_Placa.Focus();
+            return;
+        }
         InverterBotoes();
         VeiculoDB instancia = new VeiculoDB();
         VeiculoController communic = new VeiculoController();
+        int.TryParse(Entry_AnoFabricacao.Text, out int pAnoFabricacao);
+        int.TryParse(Entry_AnoModelo.Text, out int pAnoModelo);
+        int.TryParse(Entry_LitragemVeiculo.Text, out int pCapacidadeTanque);
         VeiculoModel objAdd = new VeiculoModel()
         {
-            AnoFabricacao = int.Parse(Entry_AnoFabricacao.Text),
-            AnoModelo = int.Parse(Entry_AnoModelo.Text),
             Kilometragem = int.Parse(Entry_Quilometragem.Text),
-            CapacidadeTanque = int.Parse(Entry_LitragemVeiculo.Text),
             NomeVeiculo = Entry_NomeVeiculo.Text,
             Marca = Entry_MarcaVeiculo.Text,
             Chassi = Entry_Chassi.Text,
             Renavam = Entry_Renavam.Text,
             TipoVeiculo = _tipoVeiculoSelecionado.ID,
             Placa = Entry_Placa.Text,
+            TipoCombustivel = selectedCombustivelId
         };
+        objAdd.AnoFabricacao = pAnoFabricacao;
+        objAdd.AnoModelo = pAnoModelo;
+        objAdd.CapacidadeTanque = pCapacidadeTanque;
         if (_veiculo != null)
         {
             objAdd.ID = _veiculo.ID;
@@ -294,6 +343,19 @@ public partial class CadastroVeiculo : ContentPage
     {
         Entry_Chassi.Unfocus();
         ScrollView.ScrollToAsync(0, ScrollView.ContentSize.Height, true);
+    }
+
+    private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (e.Value) // Apenas se o RadioButton foi marcado
+        {
+            var radioButton = sender as RadioButton;
+            if (radioButton != null && int.TryParse(radioButton.Value.ToString(), out int id))
+            {
+                selectedCombustivelId = id;
+                Console.WriteLine($"Combustível selecionado: {selectedCombustivelId}");
+            }
+        }
     }
 }
 

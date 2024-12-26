@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.crud.CadastroVeiculo"
-             Title="Cadastro Veiculo"
+             Title="Cadastro de Veículo"
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <Grid>
@@ -12,7 +12,7 @@
 
                     <!-- Marca -->
                     <Label Text="Marca"/>
-                    <Entry x:Name="Entry_MarcaVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}" MaxLength="200" Completed="Entry_MarcaVeiculo_Completed"/>
+                    <Entry x:Name="Entry_MarcaVeiculo" Placeholder="Digite a marca do veículo" Text="{Binding TextoFiltro, Mode=TwoWay}" MaxLength="100" Completed="Entry_MarcaVeiculo_Completed"/>
 
                     <!-- CollectionView para exibir as sugestões -->
                     <CollectionView x:Name="CollectionView_Marcas" ItemsSource="{Binding MarcasFiltradas}"
@@ -34,28 +34,28 @@
 
                     <!-- Nome do Veículo -->
                     <Label Text="Nome do Veículo"/>
-                    <Entry x:Name="Entry_NomeVeiculo" Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" MaxLength="200" Completed="Entry_NomeVeiculo_Completed"/>
+                    <Entry x:Name="Entry_NomeVeiculo" Placeholder="Digite o nome do veículo" Text="{Binding NomeVeiculo}" MaxLength="100" Completed="Entry_NomeVeiculo_Completed"/>
 
                     <!-- Quilometragem -->
                     <Label Text="Quilometragem"/>
                     <Entry x:Name="Entry_Quilometragem" Placeholder="Digite a quilometragem" Text="{Binding Quilometragem}" MaxLength="8" Keyboard="Numeric" Completed="Entry_Quilometragem_Completed"/>
 
                     <!-- Ano de Fabricação -->
-                    <Label Text="Ano de Fabricação"/>
+                    <Label Text="Ano de Fabricação * opcional"/>
                     <Entry x:Name="Entry_AnoFabricacao" Placeholder="Digite o ano de fabricação" Text="{Binding AnoFabricacao}" MaxLength="4" Keyboard="Numeric" Completed="Entry_AnoFabricacao_Completed"/>
 
                     <!-- Ano do Modelo -->
-                    <Label Text="Ano do Modelo"/>
+                    <Label Text="Ano do Modelo * opcional"/>
                     <Entry x:Name="Entry_AnoModelo" Placeholder="Digite o ano do modelo" Text="{Binding AnoModelo}" MaxLength="4" Keyboard="Numeric" Completed="Entry_AnoModelo_Completed"/>
 
                     <Label Text="Placa do veículo"/>
                     <Entry x:Name="Entry_Placa" Placeholder="Digite a placa do veículo" Text="{Binding Placa}" MaxLength="12" Completed="Entry_Placa_Completed"/>
 
                     <!-- Litragem -->
-                    <Label Text="Capacidade tanque de combustível (Litros)"/>
+                    <Label Text="Capacidade tanque de combustível (Litros) * opcional"/>
                     <Entry x:Name="Entry_LitragemVeiculo" Placeholder="Digite a litragem do tanque" Keyboard="Numeric" MaxLength="6" Completed="Entry_LitragemVeiculo_Completed"/>
 
-                    <Label Text="Renavam *opcional"/>
+                    <Label Text="Renavam * opcional"/>
                     <Entry x:Name="Entry_Renavam" Placeholder="Digite o renavam" Text="{Binding Renavam}" MaxLength="20" Completed="Entry_Renavam_Completed"/>
 
                     <Label Text="Chassi * opcional"/>
@@ -63,32 +63,15 @@
 
                     <!-- Tipo de Combustível -->
                     <Label Text="Tipo de Combustível"/>
-                    <StackLayout Orientation="Vertical" Margin="0,0,0,10">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <CheckBox IsChecked="{Binding IsGasolina}" />
-                            <Label Text="Gasolina" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <CheckBox IsChecked="{Binding IsAlcool}" />
-                            <Label Text="Álcool" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <CheckBox IsChecked="{Binding IsFlex}" />
-                            <Label Text="Flex" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <CheckBox IsChecked="{Binding IsDiesel}" />
-                            <Label Text="Diesel" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <CheckBox IsChecked="{Binding IsGNV}" />
-                            <Label Text="GNV" VerticalOptions="Center" />
-                        </StackLayout>
+                    <StackLayout x:Name="CombustivelStackLayout" Orientation="Vertical" Margin="0,0,0,10">
+                        <RadioButton GroupName="Combustivel" Content="Flex" Value="1" CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton GroupName="Combustivel" Content="Gasolina" Value="2" CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton GroupName="Combustivel" Content="Álcool" Value="3" CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton GroupName="Combustivel" Content="Diesel" Value="4" CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton GroupName="Combustivel" Content="GNV" Value="5" CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton GroupName="Combustivel" Content="Elétrico" Value="6" CheckedChanged="OnRadioButtonCheckedChanged" />
                     </StackLayout>
+                    
                     <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="8" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 

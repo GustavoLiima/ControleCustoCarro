@@ -2,28 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.listas.listaVeiculos"
-             Title="Veiculos"
+             Title="Veículos"
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <Grid>
 
         <ScrollView>
-            <CollectionView x:Name="CollectionView_Veiculos" SelectionMode="Single" EmptyView="Nenhum veículo cadastrado" SelectionChanged="CollectionView_Veiculos_SelectionChanged" >
-                <CollectionView.ItemTemplate>
+            <ListView x:Name="CollectionView_Veiculos" SelectionMode="Single" HasUnevenRows="True" ItemTapped="CollectionView_Veiculos_ItemTapped">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10,5" Margin="5">
-                            <!-- Imagem do serviço (placeholder, substitua com suas imagens) -->
-                            <Image Source="{Binding Imagem}" 
-                       WidthRequest="40" 
-                       HeightRequest="40"
-                       HorizontalOptions="Center"
-                       Margin="0,0,10,0"/>
-                            <!-- Nome do serviço -->
-                            <Label Text="{Binding NomeVeiculo}" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0"/>
-                        </StackLayout>
+                        <ViewCell>
+                            <Grid VerticalOptions="FillAndExpand" Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <!-- Imagem do serviço (placeholder, substitua com suas imagens) -->
+                                <Image
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Source="{Binding Imagem}" 
+                                   WidthRequest="40" 
+                                   HeightRequest="40"
+                                   HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="CenterAndExpand"
+                                   Margin="0,0,10,0"/>
+                                <!-- Nome do serviço -->
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeVeiculo}" FontSize="Medium" VerticalOptions="Center"  Margin="5,0,0,0"/>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
         </ScrollView>
         <Button Text="+" 
                 WidthRequest="60" HeightRequest="60" 

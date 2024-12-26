@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TesteRec.Db.Models

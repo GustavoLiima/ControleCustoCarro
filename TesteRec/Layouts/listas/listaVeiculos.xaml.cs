@@ -26,14 +26,18 @@ public partial class listaVeiculos : ContentPage
         CollectionView_Veiculos.ItemsSource = null;
         CollectionView_Veiculos.ItemsSource = await new VeiculoDB().GetVeiculosAsync();
     }
-
-    private async void CollectionView_Veiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void OnAddVeiculoClicked(object sender, EventArgs e)
     {
-        VeiculoModel veiculoSelecionado = (VeiculoModel)((CollectionView)sender).SelectedItem;
+        Navigation.PushAsync(new CadastroVeiculo(false));
+    }
 
-        if (((CollectionView)sender).SelectedItem != null)
+    private async void CollectionView_Veiculos_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        VeiculoModel veiculoSelecionado = (VeiculoModel)((ListView)sender).SelectedItem;
+
+        if (((ListView)sender).SelectedItem != null)
         {
-            ((CollectionView)sender).SelectedItem = null;
+            ((ListView)sender).SelectedItem = null;
             string action = await DisplayActionSheet("O que você deseja com este veículo?", "Cancelar", null, "Selecionar veículo", "Editar veículo");
             // Verifica a ação selecionada
             switch (action)
@@ -52,10 +56,5 @@ public partial class listaVeiculos : ContentPage
                     break;
             }
         }
-    }
-
-    private void OnAddVeiculoClicked(object sender, EventArgs e)
-    {
-        Navigation.PushAsync(new CadastroVeiculo(false));
     }
 }

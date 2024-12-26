@@ -62,32 +62,33 @@ public partial class Home : ContentPage
         {
             Label_VeiculoSelecionado.Text = Global.carroSelecionado.Placa + " - " + Global.carroSelecionado.NomeVeiculo;
             Label_VeiculoSelecionadoMarca.Text = Global.carroSelecionado.Marca;
-            switch (Global.carroSelecionado.TipoVeiculo)
-            {
-                case 0:
-                    Image_TipoVeiculo.Source = "carro.png";
-                    break;
-                case 1:
-                    Image_TipoVeiculo.Source = "moto.png";
-                    break;
-                case 2:
-                    Image_TipoVeiculo.Source = "onibus.png";
-                    break;
-                case 3:
-                    Image_TipoVeiculo.Source = "caminhao.png";
-                    break;
-                case 4:
-                    Image_TipoVeiculo.Source = "van.png";
-                    break;
-                case 5:
-                    Image_TipoVeiculo.Source = "bicicleta.png";
-                    break;
-                case 6:
-                    Image_TipoVeiculo.Source = "caminhonete.png";
-                    break;
-                default:
-                    break;
-            }
+            Image_TipoVeiculo.Source = Global.carroSelecionado.Imagem;
+            //switch (Global.carroSelecionado.TipoVeiculo)
+            //{
+            //    case 0:
+            //        Image_TipoVeiculo.Source = "carro.png";
+            //        break;
+            //    case 1:
+            //        Image_TipoVeiculo.Source = "moto.png";
+            //        break;
+            //    case 2:
+            //        Image_TipoVeiculo.Source = "onibus.png";
+            //        break;
+            //    case 3:
+            //        Image_TipoVeiculo.Source = "caminhao.png";
+            //        break;
+            //    case 4:
+            //        Image_TipoVeiculo.Source = "van.png";
+            //        break;
+            //    case 5:
+            //        Image_TipoVeiculo.Source = "bicicleta.png";
+            //        break;
+            //    case 6:
+            //        Image_TipoVeiculo.Source = "caminhonete.png";
+            //        break;
+            //    default:
+            //        break;
+            //}
             Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Kilometragem}";
         }
         if(Global.carroSelecionado != null)
@@ -207,6 +208,23 @@ public partial class Home : ContentPage
         else
         {
             item.LineBreakMode = LineBreakMode.TailTruncation;
+        }
+    }
+
+    private void Expander_ExpandedChanged(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
+    {
+        var expander = (Expander)sender;
+
+        // Verifica o estado de expansão do Expander e atualiza a propriedade LineBreakMode
+        if (expander.IsExpanded)
+        {
+            Label_VeiculoSelecionado.LineBreakMode = LineBreakMode.CharacterWrap;
+            Label_VeiculoSelecionadoMarca.LineBreakMode = LineBreakMode.CharacterWrap;
+        }
+        else
+        {
+            Label_VeiculoSelecionado.LineBreakMode = LineBreakMode.TailTruncation;
+            Label_VeiculoSelecionadoMarca.LineBreakMode = LineBreakMode.TailTruncation;
         }
     }
 }
