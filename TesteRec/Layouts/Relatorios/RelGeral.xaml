@@ -24,7 +24,7 @@
                 </StackLayout>
             </Grid>
 
-            <Label Text="Selecione veiculo" TextColor="Gray"/>
+            <Label Text="Selecione veículo" TextColor="Gray"/>
             <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
                 <HorizontalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>

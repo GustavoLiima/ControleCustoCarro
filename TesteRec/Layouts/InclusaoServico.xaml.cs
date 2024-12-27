@@ -351,12 +351,15 @@ public partial class InclusaoServico : ContentPage
                     Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
-                    TipoServico = _servicoSelecionado.Id,
                     Motorista = entryMotorista.Text,
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Label_ValorTotalServicos.Text)
                 };
+                if (_servico != null)
+                {
+                    objAddServ.Id = _servico.Id;
+                }
                 var descricaoServicos = _tiposServico.Where(x => x.IsSelected).Select(s => s.Descricao).ToList();
                 objAddServ.DescricaoServico = string.Join(" \n", descricaoServicos);
                 int IdServico = await servicoService.AddServicoAsync(objAddServ);
@@ -393,6 +396,10 @@ public partial class InclusaoServico : ContentPage
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Label_ValorTotalDespesas.Text)
                 };
+                if (_servico != null)
+                {
+                    objAddDesp.Id = _servico.Id;
+                }
                 var descricaoDespesa = _tiposDespesa.Where(x => x.IsSelected).Select(s => s.Descricao).ToList();
                 objAddDesp.DescricaoDespesa = string.Join(" \n", descricaoDespesa);
                 int IdServ = await servicoService.AddServicoAsync(objAddDesp);
@@ -446,6 +453,10 @@ public partial class InclusaoServico : ContentPage
                     FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text
                 };
+                if (_servico != null)
+                {
+                    objAddAbast.Id = _servico.Id;
+                }
                 await servicoService.AddServicoAsync(objAddAbast);
                 await AtualizarKMVeiculo(objAddAbast);
                 break;
@@ -910,5 +921,10 @@ public partial class InclusaoServico : ContentPage
             Label_Combustivel.Text = _combustivelSelecionado.Descricao;
             Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem;
         }
+    }
+
+    private void Editor_Observacao_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        ScrollView_TelaPrincipal.ScrollToAsync(0, ScrollView_TelaPrincipal.ContentSize.Height, true);
     }
 }

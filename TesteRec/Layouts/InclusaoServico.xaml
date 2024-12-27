@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.InclusaoServico"
+             xmlns:local="clr-namespace:Cofauto.Helpers.Componentes"
              Title="Inclusão de servico">
     <Grid Padding="0">
 
-        <ScrollView Padding="0,0,0,50">
+        <ScrollView x:Name="ScrollView_TelaPrincipal" Padding="0,0,0,50">
             <VerticalStackLayout Padding="20">
 
                 <Grid x:Name="Grid_BotoesServicoDespesa" IsVisible="False">
@@ -59,6 +60,7 @@
                         <Entry x:Name="entryOdometro" 
                                Keyboard="Numeric" 
                                Placeholder="Digite o valor do odômetro"
+                               MaxLength="8"
                                FontSize="Medium"
                                Completed="OnOdometroCompleted"/>
                     </StackLayout>
@@ -76,8 +78,13 @@
                         <Label Text="Valor da despesa" FontSize="Medium" TextColor="Gray"/>
                         <Entry x:Name="Entry_ValorDespesa" 
                                Keyboard="Numeric" 
+                               MaxLength="12"
                                Placeholder="Digite o valor da despesa"
-                               FontSize="Medium"/>
+                               FontSize="Medium">
+                            <Entry.Behaviors>
+                                <local:MascaraValor />
+                            </Entry.Behaviors>
+                        </Entry>
                     </StackLayout>
                 </Grid>
 
@@ -93,8 +100,13 @@
                         <Label Text="Valor" FontSize="Medium" TextColor="Gray"/>
                         <Entry x:Name="entryValor" 
                                Keyboard="Numeric" 
+                               MaxLength="15"
                                Placeholder="Digite o valor"
-                               FontSize="Medium"/>
+                               FontSize="Medium">
+                            <Entry.Behaviors>
+                                <local:MascaraValor />
+                            </Entry.Behaviors>
+                        </Entry>
                     </StackLayout>
                 </Grid>
 
@@ -237,6 +249,7 @@
                     <Entry Grid.Column="0" x:Name="entryPreco" 
                            Keyboard="Numeric" 
                            Placeholder="Preço por litro"
+                           MaxLength="7"
                            Completed="OnPrecoCompleted"
                            FontSize="Medium"
                            Unfocused="entryPreco_Unfocused"/>
@@ -245,12 +258,18 @@
                            Keyboard="Numeric" 
                            Placeholder="Valor total"
                            Completed="OnValorTotalCompleted"
+                           MaxLength="7"
                            FontSize="Medium"
-                           Unfocused="entryValorTotal_Unfocused"/>
+                           Unfocused="entryValorTotal_Unfocused">
+                        <Entry.Behaviors>
+                            <local:MascaraValor />
+                        </Entry.Behaviors>
+                    </Entry>
                     <!-- Litros abastecidos -->
                     <Entry Grid.Column="2" x:Name="entryLitros" 
                            Keyboard="Numeric" 
                            Placeholder="Litros"
+                           MaxLength="7"
                            FontSize="Medium"
                            Completed="OnLitrosCompleted"
                            Unfocused="entryLitros_Unfocused"/>
@@ -268,7 +287,9 @@
                     <Entry x:Name="entryMotorista" 
                             Grid.Row="1"
                            Placeholder="Nome do motorista"
+                           Keyboard="Email"
                            FontSize="Medium"
+                           MaxLength="100"
                            Completed="OnMotoristaCompleted"/>
                 </Grid>
 
@@ -338,6 +359,10 @@
                         <Label Text="Descrição/Observação" FontSize="Medium" TextColor="Gray"/>
                         <Editor x:Name="Editor_Observacao" 
                                Placeholder="Insira uma descrição/observação"
+                               AutoSize="TextChanges"
+                                MaxLength="250"
+                                Keyboard="Email"
+                                TextChanged="Editor_Observacao_TextChanged"
                                FontSize="Medium"/>
                     </StackLayout>
                 </Grid>

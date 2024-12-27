@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cofauto.Layouts.Templates.PopUp_Servicos"
              Title="Servicos"
+             xmlns:local="clr-namespace:Cofauto.Helpers.Componentes"
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <StackLayout Padding="10">
@@ -38,7 +39,11 @@
                                    Keyboard="Numeric" 
                                    HorizontalTextAlignment="Center"
                                    Placeholder="Valor"
-                                   HorizontalOptions="FillAndExpand" />
+                                   HorizontalOptions="FillAndExpand" >
+                                <Entry.Behaviors>
+                                    <local:MascaraValor />
+                                </Entry.Behaviors>
+                            </Entry>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

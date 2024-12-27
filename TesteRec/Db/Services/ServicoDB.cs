@@ -59,7 +59,7 @@ namespace TesteRec.Db.Services
             }
             else
             {
-                await _database.InsertOrReplaceAsync(servico);
+                await _database.UpdateAsync(servico);
             }
             return servico.Id;
         }

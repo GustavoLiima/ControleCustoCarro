@@ -39,7 +39,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -60,54 +60,54 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\appicon.svg" />
-	  <None Remove="Resources\AppIcon\appiconfg.svg" />
-	  <None Remove="Resources\Images\bell.png" />
-	  <None Remove="Resources\Images\bicicleta.png" />
-	  <None Remove="Resources\Images\bolsadedinheiro.png" />
-	  <None Remove="Resources\Images\branco1.png" />
-	  <None Remove="Resources\Images\branco2.png" />
-	  <None Remove="Resources\Images\calculator.png" />
-	  <None Remove="Resources\Images\calendario.png" />
-	  <None Remove="Resources\Images\caminhao.png" />
-	  <None Remove="Resources\Images\caminho.png" />
-	  <None Remove="Resources\Images\caminhonete.png" />
-	  <None Remove="Resources\Images\carro.png" />
-	  <None Remove="Resources\Images\carrodinheiro.png" />
-	  <None Remove="Resources\Images\cartao.png" />
-	  <None Remove="Resources\Images\checklist.png" />
-	  <None Remove="Resources\Images\cilindrogas.png" />
-	  <None Remove="Resources\Images\custos.png" />
-	  <None Remove="Resources\Images\despesa.png" />
-	  <None Remove="Resources\Images\diesel.png" />
-	  <None Remove="Resources\Images\dinheiro.png" />
-	  <None Remove="Resources\Images\escrevendo.png" />
-	  <None Remove="Resources\Images\etanol.png" />
-	  <None Remove="Resources\Images\geral.png" />
-	  <None Remove="Resources\Images\gnv.png" />
-	  <None Remove="Resources\Images\history.png" />
-	  <None Remove="Resources\Images\invisible.png" />
-	  <None Remove="Resources\Images\moto.png" />
-	  <None Remove="Resources\Images\odometer.png" />
-	  <None Remove="Resources\Images\oil.png" />
-	  <None Remove="Resources\Images\oleo.png" />
-	  <None Remove="Resources\Images\onibus.png" />
-	  <None Remove="Resources\Images\perfil.png" />
-	  <None Remove="Resources\Images\pix.png" />
-	  <None Remove="Resources\Images\posto.png" />
-	  <None Remove="Resources\Images\postomenu.png" />
-	  <None Remove="Resources\Images\preto1.png" />
-	  <None Remove="Resources\Images\preto2.png" />
-	  <None Remove="Resources\Images\relatorio.png" />
-	  <None Remove="Resources\Images\roxo1.png" />
-	  <None Remove="Resources\Images\roxo2.png" />
-	  <None Remove="Resources\Images\sairusuario.png" />
-	  <None Remove="Resources\Images\setting.png" />
-	  <None Remove="Resources\Images\sino.png" />
-	  <None Remove="Resources\Images\ticket.png" />
-	  <None Remove="Resources\Images\tomada.png" />
-	  <None Remove="Resources\Images\van.png" />
-	  <None Remove="Resources\Images\visible.png" />
+		<None Remove="Resources\AppIcon\appicon.svg" />
+		<None Remove="Resources\AppIcon\appiconfg.svg" />
+		<None Remove="Resources\Images\bell.png" />
+		<None Remove="Resources\Images\bicicleta.png" />
+		<None Remove="Resources\Images\bolsadedinheiro.png" />
+		<None Remove="Resources\Images\branco1.png" />
+		<None Remove="Resources\Images\branco2.png" />
+		<None Remove="Resources\Images\calculator.png" />
+		<None Remove="Resources\Images\calendario.png" />
+		<None Remove="Resources\Images\caminhao.png" />
+		<None Remove="Resources\Images\caminho.png" />
+		<None Remove="Resources\Images\caminhonete.png" />
+		<None Remove="Resources\Images\carro.png" />
+		<None Remove="Resources\Images\carrodinheiro.png" />
+		<None Remove="Resources\Images\cartao.png" />
+		<None Remove="Resources\Images\checklist.png" />
+		<None Remove="Resources\Images\cilindrogas.png" />
+		<None Remove="Resources\Images\custos.png" />
+		<None Remove="Resources\Images\despesa.png" />
+		<None Remove="Resources\Images\diesel.png" />
+		<None Remove="Resources\Images\dinheiro.png" />
+		<None Remove="Resources\Images\escrevendo.png" />
+		<None Remove="Resources\Images\etanol.png" />
+		<None Remove="Resources\Images\geral.png" />
+		<None Remove="Resources\Images\gnv.png" />
+		<None Remove="Resources\Images\history.png" />
+		<None Remove="Resources\Images\invisible.png" />
+		<None Remove="Resources\Images\moto.png" />
+		<None Remove="Resources\Images\odometer.png" />
+		<None Remove="Resources\Images\oil.png" />
+		<None Remove="Resources\Images\oleo.png" />
+		<None Remove="Resources\Images\onibus.png" />
+		<None Remove="Resources\Images\perfil.png" />
+		<None Remove="Resources\Images\pix.png" />
+		<None Remove="Resources\Images\posto.png" />
+		<None Remove="Resources\Images\postomenu.png" />
+		<None Remove="Resources\Images\preto1.png" />
+		<None Remove="Resources\Images\preto2.png" />
+		<None Remove="Resources\Images\relatorio.png" />
+		<None Remove="Resources\Images\roxo1.png" />
+		<None Remove="Resources\Images\roxo2.png" />
+		<None Remove="Resources\Images\sairusuario.png" />
+		<None Remove="Resources\Images\setting.png" />
+		<None Remove="Resources\Images\sino.png" />
+		<None Remove="Resources\Images\ticket.png" />
+		<None Remove="Resources\Images\tomada.png" />
+		<None Remove="Resources\Images\van.png" />
+		<None Remove="Resources\Images\visible.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -122,96 +122,96 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Helpers\Componentes\ButtonLoading.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Configuracoes.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\crud\CadastroVeiculo.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\crud\Perfil.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\crud\TrocaSenha.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Home.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\InclusaoServico.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Iniciais\Apresentacao.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Iniciais\CadastroUsuario.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Iniciais\PaginaLogin.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\AtualizaSenha.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\InsiraEmail.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Lembretes.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\FormasPagamento.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\listaVeiculos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\TipoReceita.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\TiposCombustivel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\TiposDespesas.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\listas\TiposServico.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Relatorios\RelGeral.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Templates\CalculadoraFlex.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Templates\PopUpDespesas.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Templates\PopUp_Servicos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Templates\PopUp_Veiculos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Layouts\Templates\TemplateHistoricoServicos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Helpers\Componentes\ButtonLoading.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Configuracoes.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\crud\CadastroVeiculo.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\crud\Perfil.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\crud\TrocaSenha.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Home.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\InclusaoServico.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Iniciais\Apresentacao.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Iniciais\CadastroUsuario.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Iniciais\PaginaLogin.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\AtualizaSenha.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Iniciais\RecuperacaoSenha\InsiraEmail.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Lembretes.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\FormasPagamento.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\listaVeiculos.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\TipoReceita.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\TiposCombustivel.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\TiposDespesas.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\TiposServico.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Relatorios\RelGeral.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Templates\CalculadoraFlex.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Templates\PopUpDespesas.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Templates\PopUp_Servicos.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Templates\PopUp_Veiculos.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\Templates\TemplateHistoricoServicos.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Helpers\Interfaces\" />
+		<Folder Include="Helpers\Interfaces\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\appicon.svg" />
-	  <MauiIcon Include="Resources\AppIcon\appiconfg.svg" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
+		<MauiIcon Include="Resources\AppIcon\appiconfg.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Layouts\Relatorios\RelGeral.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </None>
+		<None Update="Layouts\Relatorios\RelGeral.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
 	</ItemGroup>
 
 </Project>
