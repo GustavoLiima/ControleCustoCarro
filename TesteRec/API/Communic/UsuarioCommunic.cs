@@ -10,5 +10,9 @@ namespace TesteRec.API.Communic
         {
             return await ApiService.SendRequestAsync<UsuarioVM, UsuarioVM>(Endereco, HttpMethod.Post, pUsuario, false);
         }
+        public async Task<ApiResponse<string>> AlterarSenhaUsuario(string pSenha)
+        {
+            return await ApiService.SendRequestAsync<string, string>(Endereco + "/AtualizarSenha", HttpMethod.Put, pSenha, true);
+        }
     }
 }

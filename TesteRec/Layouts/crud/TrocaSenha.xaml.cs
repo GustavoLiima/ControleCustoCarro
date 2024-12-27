@@ -1,3 +1,8 @@
+using CommunityToolkit.Maui.Alerts;
+using TesteRec.API.Communic;
+using TesteRec.Db;
+using TesteRec.Helpers;
+
 namespace Cofauto.Layouts.crud;
 
 public partial class TrocaSenha : ContentPage
@@ -34,9 +39,77 @@ public partial class TrocaSenha : ContentPage
             return;
         }
 
-        // Se todas as validações passarem
-        await DisplayAlert("Sucesso", "Senha alterada com sucesso!", "OK");
+        Criptografia crip = new Criptografia();
+        string SenhaAtual = crip.Criptografar(senhaAtual);
 
-        // Aqui você pode adicionar o código para salvar a nova senha
+        if (Global._UsuarioSelecionado.senha != SenhaAtual)
+        {
+            await DisplayAlert("Atenção", "Senha atual incorreta", "OK");
+            return;
+        }
+
+        HabilitarDesabilitarLoading();
+
+        UsuarioCommunic usuarioCommunic = new UsuarioCommunic();
+        var retorno = await usuarioCommunic.AlterarSenhaUsuario(crip.Criptografar(senhaNova));
+
+        HabilitarDesabilitarLoading();
+
+        if(retorno.Sucesso)
+        {
+            await Toast.Make($"Senha alterada com sucesso").Show();
+            await Navigation.PopAsync();
+        }
+        else
+        {
+            await Toast.Make(retorno.Mensagem).Show();
+        }
+    }
+    private void HabilitarDesabilitarLoading()
+    {
+        Frame_LoadingLogin.IsVisible = !Frame_LoadingLogin.IsVisible;
+        Button_Salvar.IsVisible = !Button_Salvar.IsVisible;
+    }
+
+    private void Button_OlharSenha_Clicked(object sender, EventArgs e)
+    {
+        if (!Entry_SenhaAtual.IsPassword)
+        {
+            Entry_SenhaAtual.IsPassword = true;
+            Button_OlharSenha.Source = "invisible";
+        }
+        else
+        {
+            Entry_SenhaAtual.IsPassword = false;
+            Button_OlharSenha.Source = "visible";
+        }
+    }
+
+    private void Button_OlharSenhaNova_Clicked(object sender, EventArgs e)
+    {
+        if (!Entry_SenhaNova.IsPassword)
+        {
+            Entry_SenhaNova.IsPassword = true;
+            Button_OlharSenhaNova.Source = "invisible";
+        }
+        else
+        {
+            Entry_SenhaNova.IsPassword = false;
+            Button_OlharSenhaNova.Source = "visible";
+        }
+    }
+
+    private void Button_OlharSenhaRepitida_Clicked(object sender, EventArgs e)
+    {
+        if (!Entry_SenhaNovaRep.IsPassword)
+        {
+            Entry_SenhaNovaRep.IsPassword = true;
+            Button_OlharSenhaRepitida.Source = "invisible";
+        }
+        else
+        {
+            Entry_SenhaNovaRep.IsPassword = false;
+            Button_OlharSenhaRepitida.Source = "visible";
+        }
     }
 }
