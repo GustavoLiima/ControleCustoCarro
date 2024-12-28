@@ -207,37 +207,38 @@
     <Grid>
         <ScrollView VerticalOptions="Fill">
             <StackLayout>
-                
-            <toolkit:Expander ExpandedChanged="Expander_ExpandedChanged">
-                <toolkit:Expander.Header>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="Image_TipoVeiculo" Grid.Column="0" Grid.Row="0" WidthRequest="40" HeightRequest="40" VerticalOptions="Center"/>
-                        <StackLayout Grid.Column="1" Grid.Row="0" Padding="10" Orientation="Horizontal">
-                            <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
-                                <Label x:Name="Label_VeiculoSelecionado" FontSize="Medium" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Black" LineBreakMode="TailTruncation"/>
-                                <Label x:Name="Label_VeiculoSelecionadoMarca" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Gray" LineBreakMode="TailTruncation"/>
-                            </StackLayout>
-                            <Label Text="Ver detalhes" TextColor="Gray" HorizontalOptions="End" VerticalOptions="Center"/>
-                        </StackLayout>
 
-                    </Grid>
-                </toolkit:Expander.Header>
-                <StackLayout Padding="10,0">
-                    <Label x:Name="Label_QuilometragemAtual"/>
-                    <Label x:Name="Label_TipoCombustivel"/>
-                    <Button Text="Selecionar outro veículo" Clicked="Button_Clicked_1" BackgroundColor="#7114E7" TextColor="White"/>
-                </StackLayout>
-            </toolkit:Expander>
-            <Grid Padding="10,0,10,10" VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <CollectionView x:Name="CollectionView_Servicos" Grid.Row="0" EmptyView="Sem histórico de serviços" VerticalOptions="FillAndExpand" ItemTemplate="{StaticResource MeuTemplateSelector}" />
-            </Grid>
+                <toolkit:Expander ExpandedChanged="Expander_ExpandedChanged">
+                    <toolkit:Expander.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="Image_TipoVeiculo" Grid.Column="0" Grid.Row="0" WidthRequest="40" HeightRequest="40" VerticalOptions="Center"/>
+                            <StackLayout Grid.Column="1" Grid.Row="0" Padding="10" Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                    <Label x:Name="Label_VeiculoSelecionado" FontSize="Medium" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Black" LineBreakMode="TailTruncation"/>
+                                    <Label x:Name="Label_VeiculoSelecionadoMarca" VerticalOptions="Center" Margin="10,0" HorizontalOptions="StartAndExpand" TextColor="Gray" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <Label Text="Ver detalhes" TextColor="Gray" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                        </Grid>
+                    </toolkit:Expander.Header>
+                    <StackLayout Padding="10,0" Spacing="5">
+                        <Label x:Name="Label_QuilometragemAtual"/>
+                        <Label x:Name="Label_TipoCombustivel"/>
+                        <Label x:Name="Label_PlanoUsuario"/>
+                        <Button Text="Selecionar outro veículo" Clicked="Button_Clicked_1" BackgroundColor="#7114E7" TextColor="White"/>
+                    </StackLayout>
+                </toolkit:Expander>
+                <Grid Padding="10,0,10,10" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <CollectionView x:Name="CollectionView_Servicos" Grid.Row="0" EmptyView="Sem histórico de serviços" VerticalOptions="FillAndExpand" ItemTemplate="{StaticResource MeuTemplateSelector}" />
+                </Grid>
             </StackLayout>
         </ScrollView>
         <Button Text="+" 

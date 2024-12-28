@@ -8,20 +8,31 @@
     <Grid>
 
         <ScrollView>
-            <ListView x:Name="CollectionView_Veiculos" SelectionMode="Single" HasUnevenRows="True" ItemTapped="CollectionView_Veiculos_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid VerticalOptions="FillAndExpand" Padding="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!-- Imagem do serviço (placeholder, substitua com suas imagens) -->
-                                <Image
+            <StackLayout>
+                <Frame BorderColor="Red" Margin="20,5,20,0" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="escrevendo" WidthRequest="30"/>
+                        <Label Grid.Column="1" Text="Você está no plano Gratuito, você terá o limite de 3 carros na sua conta" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+                <ListView x:Name="CollectionView_Veiculos" SelectionMode="Single" HasUnevenRows="True" ItemTapped="CollectionView_Veiculos_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid VerticalOptions="FillAndExpand" Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- Imagem do serviço (placeholder, substitua com suas imagens) -->
+                                    <Image
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Source="{Binding Imagem}" 
@@ -30,13 +41,14 @@
                                    HorizontalOptions="CenterAndExpand"
                                     VerticalOptions="CenterAndExpand"
                                    Margin="0,0,10,0"/>
-                                <!-- Nome do serviço -->
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeVeiculo}" FontSize="Medium" VerticalOptions="Center"  Margin="5,0,0,0"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    <!-- Nome do serviço -->
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding NomeVeiculo}" FontSize="Medium" VerticalOptions="Center"  Margin="5,0,0,0"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </ScrollView>
         <Button Text="+" 
                 WidthRequest="60" HeightRequest="60" 

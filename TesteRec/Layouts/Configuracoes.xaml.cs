@@ -1,4 +1,5 @@
 using Cofauto.Layouts.crud;
+using Cofauto.Layouts.listas;
 using TesteRec.Db;
 using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
@@ -10,7 +11,12 @@ public partial class Configuracoes : ContentPage
 {
 	List<Menu> _listaMenus = new List<Menu> 
 	{
-		new Menu()
+        new Menu()
+        {
+            Imagem = "upgrade.png",
+            Descricao = "Planos"
+        },
+        new Menu()
 		{
 			Imagem = "carro.png",
 			Descricao = "Veículos"
@@ -81,6 +87,9 @@ public partial class Configuracoes : ContentPage
     {
         switch (pTela)
         {
+            case "Planos":
+                await Navigation.PushAsync(new Planos());
+                break;
             case "Veículos":
                 await Navigation.PushAsync(new listaVeiculos());
                 break;

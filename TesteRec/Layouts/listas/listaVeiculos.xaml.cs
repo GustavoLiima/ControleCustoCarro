@@ -1,3 +1,4 @@
+using Cofauto.Layouts.listas;
 using CommunityToolkit.Maui.Alerts;
 using Newtonsoft.Json;
 using TesteRec.API.Models;
@@ -10,6 +11,7 @@ namespace TesteRec.Layouts.listas;
 
 public partial class listaVeiculos : ContentPage
 {
+    public List<VeiculoModel> Veiculos = null;
     public listaVeiculos()
     {
         InitializeComponent();
@@ -24,11 +26,21 @@ public partial class listaVeiculos : ContentPage
     private async void CarregarDados()
     {
         CollectionView_Veiculos.ItemsSource = null;
-        CollectionView_Veiculos.ItemsSource = await new VeiculoDB().GetVeiculosAsync();
+        Veiculos = await new VeiculoDB().GetVeiculosAsync();
+        CollectionView_Veiculos.ItemsSource = Veiculos;
     }
-    private void OnAddVeiculoClicked(object sender, EventArgs e)
+    private async void OnAddVeiculoClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CadastroVeiculo(false));
+        if(Global._UsuarioSelecionado.Plano == 0 && Veiculos.Count >= 3)
+        {
+            if(await DisplayAlert("Você já atingiu o limite de carros", "Para adicionar mais carros, contrate outro plano! \n A partir de R$5,90!", "Melhorar plano", "Cancelar"))
+            {
+                await Navigation.PushAsync(new Planos());
+            }
+            return;
+        }
+
+        await Navigation.PushAsync(new CadastroVeiculo(false));
     }
 
     private async void CollectionView_Veiculos_ItemTapped(object sender, ItemTappedEventArgs e)

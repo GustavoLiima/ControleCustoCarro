@@ -1,4 +1,5 @@
 using Cofauto.Layouts.Templates;
+using Cofauto.Model.Enum;
 using CommunityToolkit.Maui.Views;
 using Newtonsoft.Json;
 using TesteRec.API.Models;
@@ -60,35 +61,18 @@ public partial class Home : ContentPage
     {
         if(Global.carroSelecionado != null)
         {
+            Label_PlanoUsuario.Text = "Plano: " + ((EPlanos)Global._UsuarioSelecionado.Plano).ToString();
             Label_VeiculoSelecionado.Text = Global.carroSelecionado.Placa + " - " + Global.carroSelecionado.NomeVeiculo;
             Label_VeiculoSelecionadoMarca.Text = Global.carroSelecionado.Marca;
+            if(Global.carroSelecionado.TipoCombustivel != null)
+            {
+                Label_TipoCombustivel.Text = "Combustível: " + ((ECombustiveis)Global.carroSelecionado.TipoCombustivel).ToString();
+            }
+            else
+            {
+                Label_TipoCombustivel.Text = "Combustível: Não selecionado";
+            }
             Image_TipoVeiculo.Source = Global.carroSelecionado.Imagem;
-            //switch (Global.carroSelecionado.TipoVeiculo)
-            //{
-            //    case 0:
-            //        Image_TipoVeiculo.Source = "carro.png";
-            //        break;
-            //    case 1:
-            //        Image_TipoVeiculo.Source = "moto.png";
-            //        break;
-            //    case 2:
-            //        Image_TipoVeiculo.Source = "onibus.png";
-            //        break;
-            //    case 3:
-            //        Image_TipoVeiculo.Source = "caminhao.png";
-            //        break;
-            //    case 4:
-            //        Image_TipoVeiculo.Source = "van.png";
-            //        break;
-            //    case 5:
-            //        Image_TipoVeiculo.Source = "bicicleta.png";
-            //        break;
-            //    case 6:
-            //        Image_TipoVeiculo.Source = "caminhonete.png";
-            //        break;
-            //    default:
-            //        break;
-            //}
             Label_QuilometragemAtual.Text = $"Última KM registrada: {Global.carroSelecionado.Kilometragem}";
         }
         if(Global.carroSelecionado != null)

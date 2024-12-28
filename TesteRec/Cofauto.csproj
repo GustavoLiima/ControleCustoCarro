@@ -77,6 +77,7 @@
 		<None Remove="Resources\Images\cartao.png" />
 		<None Remove="Resources\Images\checklist.png" />
 		<None Remove="Resources\Images\cilindrogas.png" />
+		<None Remove="Resources\Images\cloudserver.png" />
 		<None Remove="Resources\Images\custos.png" />
 		<None Remove="Resources\Images\despesa.png" />
 		<None Remove="Resources\Images\diesel.png" />
@@ -106,6 +107,7 @@
 		<None Remove="Resources\Images\sino.png" />
 		<None Remove="Resources\Images\ticket.png" />
 		<None Remove="Resources\Images\tomada.png" />
+		<None Remove="Resources\Images\upgrade.png" />
 		<None Remove="Resources\Images\van.png" />
 		<None Remove="Resources\Images\visible.png" />
 	</ItemGroup>
@@ -166,6 +168,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Layouts\listas\listaVeiculos.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Layouts\listas\Planos.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Layouts\listas\TipoReceita.xaml">
 			<Generator>MSBuild:Compile</Generator>
