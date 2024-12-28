@@ -37,7 +37,14 @@
             <DatePicker x:Name="VencimentoCnhPicker" Format="dd/MM/yyyy"/>
 
             <!-- Botão de Salvar -->
-            <Button Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#7114E7" TextColor="White" CornerRadius="10"/>
+            <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="10" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                    <ActivityIndicator IsRunning="True" Color="White"/>
+                    <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+            <Button x:Name="Button_Salvar" Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#7114E7" TextColor="White" CornerRadius="10"/>
             <Button Text="Trocar senha" Clicked="OnTrocarSenhaClicked" BackgroundColor="White" BorderColor="#7114E7" BorderWidth="1" TextColor="#7114E7" CornerRadius="10"/>
 
         </VerticalStackLayout>
