@@ -3,12 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cofauto.Layouts.listas.Planos"
              Title="Planos"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
              Shell.BackgroundColor="#7114E7"
              Shell.TitleColor="White">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <ScrollView>
+            <StackLayout Padding="10">
+                <CollectionView x:Name="CollectionView_Planos" Margin="0" SelectionMode="Single" SelectionChanged="OnPlanoSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame Padding="5" Margin="5" >
+
+                                    <!-- Expander para cada plano -->
+                                    <toolkit:Expander>
+                                        <!-- Header do Expander -->
+                                        <toolkit:Expander.Header>
+                                            <StackLayout Padding="10">
+
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label Grid.Row="0" Text="{Binding Titulo}" FontAttributes="Bold" FontSize="18" />
+                                                    <Label Grid.Row="1" Text="{Binding Descricao}" FontSize="14" TextColor="Gray" />
+                                                </Grid>
+                                                <Label Text="Plano Atual" TextColor="Green" FontAttributes="Bold" IsVisible="{Binding PlanoAtual}"/>
+                                            </StackLayout>
+                                        </toolkit:Expander.Header>
+
+                                        <!-- Conteúdo do Expander -->
+                                        <toolkit:Expander.Content>
+                                            <StackLayout Padding="10">
+                                                <BoxView HeightRequest="1" Margin="10,0,10,10"/>
+                                                <Label Text="Benefícios:" FontAttributes="Bold" FontSize="16" />
+                                                <Label Text="{Binding Beneficios}" FontSize="14" />
+
+                                                <!-- Preços -->
+                                                <Label Text="Preços:" FontAttributes="Bold" FontSize="16" Margin="0,10,0,0" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="Mensalidade: " FontSize="14"  />
+                                                    <Label Text="{Binding ValorMensal}" FontSize="14"  />
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="Anual: " FontSize="14" />
+                                                    <Label Text="{Binding ValorAnual}" FontSize="14"  />
+                                                </StackLayout>
+
+                                                <BoxView HeightRequest="1" Margin="10,10,10,5"/>
+
+
+                                                <!-- Botões -->
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,10,0,0">
+                                                    <Button Text="Assinar Anual"  
+                                                            Clicked="OnAssinarButtonClicked" 
+                                                            CommandParameter="{Binding .}">
+                                                        <Button.Behaviors>
+                                                            <toolkit:EventToCommandBehavior CommandParameter="Anual" />
+                                                        </Button.Behaviors>
+                                                    </Button>
+                                                    <Button Text="Assinar Mensal" 
+                                                            Clicked="OnAssinarButtonClicked" 
+                                                            CommandParameter="{Binding .}">
+                                                        <Button.Behaviors>
+                                                            <toolkit:EventToCommandBehavior CommandParameter="Mensal" />
+                                                        </Button.Behaviors>
+                                                    </Button>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </toolkit:Expander.Content>
+                                    </toolkit:Expander>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>
