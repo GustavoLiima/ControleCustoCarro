@@ -36,5 +36,7 @@
 	<string>Cofauto</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.gtlabs.cofauto</string>
+	<key>GADApplicationIdentifier</key>
+	<string>seu_admob_app_id</string>
 </dict>
 </plist>

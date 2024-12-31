@@ -2,12 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinaGear.Layouts.Relatorios.RelGeral"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              Title="">
     <Grid>
         <ScrollView>
             
         <VerticalStackLayout Padding="10">
-            <Grid>
+                <controls:MTAdView x:Name="myAds"
+                   AdsId="ca-app-pub-5351963586410426/6553890974"
+                   AdSize="Banner">
+                    <controls:MTAdView.HeightRequest>
+                        <x:OnIdiom>
+                            <x:OnIdiom.Phone>50</x:OnIdiom.Phone>
+                            <x:OnIdiom.Tablet>90</x:OnIdiom.Tablet>
+                            <x:OnIdiom.Desktop>90</x:OnIdiom.Desktop>
+                        </x:OnIdiom>
+                    </controls:MTAdView.HeightRequest>
+                </controls:MTAdView>
+                <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -347,8 +359,8 @@
                 </ListView>
             </StackLayout>
 
-
-        </VerticalStackLayout>
+                
+            </VerticalStackLayout>
         </ScrollView>
 
 
