@@ -100,9 +100,6 @@ public partial class CadastroUsuario : ContentPage
             sobrenome = Entry_Sobrenome.Text,
             email = Entry_Email.Text,
             senha = crip.Criptografar(Entry_Senha.Text),
-            categoriaCnh = "B",
-            numeroCnh = "1234",
-            vencimentoCnh = DateTime.MinValue
         };
 
         ApiResponse<UsuarioVM> vRet = await chamada.CadastrarUsuario(obj);
