@@ -6,15 +6,8 @@
              Title="">
     <VerticalStackLayout>
         <StackLayout Margin="10">
-            <controls:MTAdView AdsId="ca-app-pub-5351963586410426/6553890974" AdSize="Banner">
-                <controls:MTAdView.HeightRequest>
-                    <x:OnIdiom>
-                        <x:OnIdiom.Phone>50</x:OnIdiom.Phone>
-                        <x:OnIdiom.Tablet>90</x:OnIdiom.Tablet>
-                        <x:OnIdiom.Desktop>90</x:OnIdiom.Desktop>
-                    </x:OnIdiom>
-                </controls:MTAdView.HeightRequest>
-            </controls:MTAdView>
+            <controls:MTAdView AdsId="ca-app-pub-5351963586410426/8847219694" AdSize="Banner"/>
+
             <ListView x:Name="ListView_Interacoes" ItemTapped="ListView_Interacoes_ItemTapped" RowHeight="60">
                 <ListView.ItemTemplate>
                     <DataTemplate>

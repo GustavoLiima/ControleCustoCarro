@@ -44,7 +44,7 @@
 
             <!-- Botão para continuar -->
             <Button Text="Continuar"
-                    BackgroundColor="#7114E7"
+                    BackgroundColor="#351c97"
                     TextColor="White"
                     FontAttributes="Bold"
                     CornerRadius="25"

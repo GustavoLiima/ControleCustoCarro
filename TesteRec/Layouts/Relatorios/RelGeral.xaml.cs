@@ -13,6 +13,7 @@ public partial class RelGeral : ContentPage
     private ServicoDB servicoService = new ServicoDB();
     private VeiculoModel _VeiculoSelecionado = null;
     private Menu _RelatorioSelecionado;
+    private bool _CarregouPrimeiraVez = false;
 
     public RelGeral()
     {
@@ -75,6 +76,7 @@ public partial class RelGeral : ContentPage
             ActivityIndicator_Loading.IsVisible = false;
             Stack_Ganho.IsVisible = true;
         }
+        _CarregouPrimeiraVez = true;
     }
 
     private void OcultarTodosRelatorios()
@@ -443,5 +445,13 @@ public partial class RelGeral : ContentPage
     private void ListView_RelServico_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         ((ListView)sender).SelectedItem = null;
+    }
+
+    private async void DatePicker_De_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        if(_CarregouPrimeiraVez)
+        {
+            await CarregarRelatorio();
+        }
     }
 }

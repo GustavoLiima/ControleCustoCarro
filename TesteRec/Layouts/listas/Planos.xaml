@@ -5,7 +5,7 @@
              Title="Planos"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
              Shell.TitleColor="White">
     <VerticalStackLayout>
         <ScrollView>

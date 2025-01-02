@@ -25,14 +25,25 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
+		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+		<DebugSymbols>True</DebugSymbols>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	  <DebugSymbols>False</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images\branco1.png" Color="#7114E7" />
+		<MauiSplashScreen Include="Resources\Images\branco1.png" Color="#351c97" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

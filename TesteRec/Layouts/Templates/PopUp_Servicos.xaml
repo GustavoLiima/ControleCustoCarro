@@ -4,7 +4,7 @@
              x:Class="Cofauto.Layouts.Templates.PopUp_Servicos"
              Title="Servicos"
              xmlns:local="clr-namespace:Cofauto.Helpers.Componentes"
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
              Shell.TitleColor="White">
     <StackLayout Padding="10">
         <!-- Entry para filtro -->
@@ -34,23 +34,22 @@
 
                             <!-- Nome do veículo -->
                             <Label Grid.Column="1" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" FontSize="16" />
-                            <Entry Grid.Column="2" Grid.Row="0" Text="{Binding Valor}" 
+                            <Entry Grid.Column="2" Grid.Row="0" 
+                                   Text="{Binding Valor}" 
                                    IsVisible="{Binding IsSelected}" 
                                    Keyboard="Numeric" 
                                    HorizontalTextAlignment="Center"
+                                   MaxLength="15"
                                    Placeholder="Valor"
-                                   HorizontalOptions="FillAndExpand" >
-                                <Entry.Behaviors>
-                                    <local:MascaraValor />
-                                </Entry.Behaviors>
-                            </Entry>
+                                   HorizontalOptions="FillAndExpand" />
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#7114E7" TextColor="White"/>
+        <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#351c97" TextColor="White"/>
 
     </StackLayout>
 </ContentPage>

@@ -27,12 +27,12 @@
                 <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
                     <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
                     <Label Text="De " VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <DatePicker x:Name="DatePicker_De" />
+                    <DatePicker x:Name="DatePicker_De" DateSelected="DatePicker_De_DateSelected"/>
                 </StackLayout>
                 <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
                     <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
                     <Label Text="Até " VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <DatePicker x:Name="DatePicker_Ate"/>
+                    <DatePicker x:Name="DatePicker_Ate" DateSelected="DatePicker_De_DateSelected"/>
                 </StackLayout>
             </Grid>
 
@@ -220,8 +220,12 @@
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                    <Label Grid.Column="1" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
                                     <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                                         <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
                                         <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>

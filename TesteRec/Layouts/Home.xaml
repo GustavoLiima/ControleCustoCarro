@@ -210,6 +210,7 @@
         <ScrollView VerticalOptions="Fill">
             <StackLayout>
 
+                <controls:MTAdView AdsId="ca-app-pub-5351963586410426/6553890974" AdSize="Banner"/>
                 <toolkit:Expander ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <Grid>
@@ -232,18 +233,10 @@
                         <Label x:Name="Label_QuilometragemAtual"/>
                         <Label x:Name="Label_TipoCombustivel"/>
                         <Label x:Name="Label_PlanoUsuario"/>
-                        <Button Text="Selecionar outro veículo" Clicked="Button_Clicked_1" BackgroundColor="#7114E7" TextColor="White"/>
+                        <Button Text="Selecionar outro veículo" Clicked="Button_Clicked_1" BackgroundColor="#351c97" TextColor="White"/>
                     </StackLayout>
                 </toolkit:Expander>
-                <controls:MTAdView AdsId="ca-app-pub-5351963586410426/6553890974" AdSize="Banner">
-                    <controls:MTAdView.HeightRequest>
-                        <x:OnIdiom>
-                            <x:OnIdiom.Phone>50</x:OnIdiom.Phone>
-                            <x:OnIdiom.Tablet>90</x:OnIdiom.Tablet>
-                            <x:OnIdiom.Desktop>90</x:OnIdiom.Desktop>
-                        </x:OnIdiom>
-                    </controls:MTAdView.HeightRequest>
-                </controls:MTAdView>
+
                 <Grid Padding="10,0,10,10" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -258,7 +251,7 @@
                 
                 FontAttributes="Bold"
                 CornerRadius="30" 
-                BackgroundColor="#7114E7"
+                BackgroundColor="#351c97"
                 TextColor="White"
                 VerticalOptions="End" 
                 HorizontalOptions="End" 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.Templates.CalculadoraFlex"
              Title="Calculadora Flex"
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
             Shell.TitleColor="White">
         <ScrollView>
             <StackLayout Padding="20" Spacing="20">

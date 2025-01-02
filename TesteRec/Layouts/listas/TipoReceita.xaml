@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TesteRec.Layouts.listas.TipoReceita"
              Title="Receita"
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
              Shell.TitleColor="White">
     <ScrollView>
         <CollectionView x:Name="CollectionView_TipoReceita" SelectionMode="Single" SelectionChanged="OnSelectionChanged" >

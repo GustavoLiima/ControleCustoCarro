@@ -4,7 +4,7 @@
              x:Class="Cofauto.Layouts.Templates.PopUpDespesas"
              Title="Despesas"
              xmlns:local="clr-namespace:Cofauto.Helpers.Componentes"
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
              Shell.TitleColor="White">
     <StackLayout Padding="10">
         <!-- Entry para filtro -->
@@ -51,7 +51,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#7114E7" TextColor="White"/>
+        <Button Text="Confirmar" Clicked="Button_Clicked" BackgroundColor="#351c97" TextColor="White"/>
 
     </StackLayout>
 

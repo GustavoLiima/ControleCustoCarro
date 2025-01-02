@@ -22,7 +22,7 @@
                            Keyboard="Email"
                            FontSize="Medium" />
 
-                    <Frame x:Name="Frame_Loading" HeightRequest="50" CornerRadius="25" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
+                    <Frame x:Name="Frame_Loading" HeightRequest="50" CornerRadius="25" BackgroundColor="#351c97" Padding="5" IsVisible="False">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
                             <ActivityIndicator IsRunning="True" Color="White"/>
@@ -32,7 +32,7 @@
 
                     <Button x:Name="Button_Email" 
                             Text="Enviar"
-                            BackgroundColor="#7114E7"
+                            BackgroundColor="#351c97"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="25"

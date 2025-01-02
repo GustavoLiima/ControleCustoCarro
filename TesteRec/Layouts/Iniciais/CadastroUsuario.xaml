@@ -87,7 +87,7 @@
                     </Grid>
 
                     <!-- Botão para avançar -->
-                    <Frame x:Name="Frame_LoadingCadastro" HeightRequest="50" CornerRadius="25" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
+                    <Frame x:Name="Frame_LoadingCadastro" HeightRequest="50" CornerRadius="25" BackgroundColor="#351c97" Padding="5" IsVisible="False">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                             <ActivityIndicator IsRunning="True" Color="White"/>
                             <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
@@ -96,7 +96,7 @@
                     
                     <Button x:Name="Button_Cadastrar"
                             Text="Avançar"
-                            BackgroundColor="#7114E7"
+                            BackgroundColor="#351c97"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="25"
@@ -105,11 +105,11 @@
                             Clicked="Button_Avancar_Clicked" />
                     <Button x:Name="Button_Voltar" Text="Voltar"
                             BackgroundColor="Transparent"
-                            TextColor="#7114E7"
+                            TextColor="#351c97"
                             FontAttributes="Bold"
                             CornerRadius="25"
                             HeightRequest="50"
-                            BorderColor="#7114E7"
+                            BorderColor="#351c97"
                             BorderWidth="1"
                             HorizontalOptions="FillAndExpand"
                             Clicked="Button_Voltar_Clicked"/>

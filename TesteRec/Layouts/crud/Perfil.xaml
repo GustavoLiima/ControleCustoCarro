@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cofauto.Layouts.crud.Perfil"
              Title="Perfil"
-             Shell.BackgroundColor="#7114E7"
+             Shell.BackgroundColor="#351c97"
              Shell.TitleColor="White">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="5">
@@ -37,15 +37,15 @@
             <DatePicker x:Name="VencimentoCnhPicker" Format="dd/MM/yyyy"/>
 
             <!-- Botão de Salvar -->
-            <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="10" BackgroundColor="#7114E7" Padding="5" IsVisible="False">
+            <Frame x:Name="Frame_LoadingLogin" HeightRequest="50" CornerRadius="10" BackgroundColor="#351c97" Padding="5" IsVisible="False">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
                     <ActivityIndicator IsRunning="True" Color="White"/>
                     <Label Text="Carregando..." VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
                 </StackLayout>
             </Frame>
-            <Button x:Name="Button_Salvar" Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#7114E7" TextColor="White" CornerRadius="10"/>
-            <Button Text="Trocar senha" Clicked="OnTrocarSenhaClicked" BackgroundColor="White" BorderColor="#7114E7" BorderWidth="1" TextColor="#7114E7" CornerRadius="10"/>
+            <Button x:Name="Button_Salvar" Text="Salvar" Clicked="OnSalvarClicked" BackgroundColor="#351c97" TextColor="White" CornerRadius="10"/>
+            <Button Text="Trocar senha" Clicked="OnTrocarSenhaClicked" BackgroundColor="White" BorderColor="#351c97" BorderWidth="1" TextColor="#351c97" CornerRadius="10"/>
 
         </VerticalStackLayout>
     </ScrollView>

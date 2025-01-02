@@ -8,8 +8,8 @@
     xmlns:layoutsRel="clr-namespace:FinaGear.Layouts.Relatorios"
     Shell.FlyoutBehavior="Disabled"
     Title="TesteRec"
-    Shell.TabBarForegroundColor="#7114E7"
-    Shell.TabBarTitleColor="#7114E7">
+    Shell.TabBarForegroundColor="#351c97"
+    Shell.TabBarTitleColor="#351c97">
 
         
 
