@@ -5,8 +5,8 @@
              xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              Title="">
     <VerticalStackLayout>
-        <StackLayout Margin="10">
             <controls:MTAdView AdsId="ca-app-pub-5351963586410426/8847219694" AdSize="Banner"/>
+        <StackLayout Margin="10">
 
             <ListView x:Name="ListView_Interacoes" ItemTapped="ListView_Interacoes_ItemTapped" RowHeight="60">
                 <ListView.ItemTemplate>

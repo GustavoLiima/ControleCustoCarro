@@ -14,5 +14,10 @@ namespace TesteRec.API.Communic
         {
             return await ApiService.SendRequestAsync<VeiculoModel, string>(Endereco + "/atualizar", HttpMethod.Put, pVeiculo, true);
         }
+
+        public async Task<ApiResponse<VeiculoModel>> DesabilitarVeiculo(VeiculoModel pVeiculo)
+        {
+            return await ApiService.SendRequestAsync<VeiculoModel, VeiculoModel>(Endereco + "/Desabilitar", HttpMethod.Delete, pVeiculo, true);
+        }
     }
 }

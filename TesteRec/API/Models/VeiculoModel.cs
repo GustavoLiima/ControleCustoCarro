@@ -37,6 +37,7 @@ namespace TesteRec.API.Models
         public string? Renavam { get; set; }
 
         public string? Anotacoes { get; set; }
+        public bool Ativo { get; set; }
 
         [NotMapped]
         public string Imagem

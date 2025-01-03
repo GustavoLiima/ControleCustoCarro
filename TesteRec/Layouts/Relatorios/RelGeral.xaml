@@ -6,364 +6,357 @@
              Title="">
     <Grid>
         <ScrollView>
-            
-        <VerticalStackLayout Padding="10">
+            <VerticalStackLayout>
                 <controls:MTAdView x:Name="myAds"
                    AdsId="ca-app-pub-5351963586410426/6553890974"
-                   AdSize="Banner">
-                    <controls:MTAdView.HeightRequest>
-                        <x:OnIdiom>
-                            <x:OnIdiom.Phone>50</x:OnIdiom.Phone>
-                            <x:OnIdiom.Tablet>90</x:OnIdiom.Tablet>
-                            <x:OnIdiom.Desktop>90</x:OnIdiom.Desktop>
-                        </x:OnIdiom>
-                    </controls:MTAdView.HeightRequest>
-                </controls:MTAdView>
-                <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
-                    <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
-                    <Label Text="De " VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <DatePicker x:Name="DatePicker_De" DateSelected="DatePicker_De_DateSelected"/>
-                </StackLayout>
-                <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-                    <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
-                    <Label Text="Até " VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <DatePicker x:Name="DatePicker_Ate" DateSelected="DatePicker_De_DateSelected"/>
-                </StackLayout>
-            </Grid>
+                   AdSize="Banner"/>
+                <VerticalStackLayout Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center">
+                            <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
+                            <Label Text="De " VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <DatePicker x:Name="DatePicker_De" DateSelected="DatePicker_De_DateSelected"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                            <Image Source="calendario" WidthRequest="25" Margin="0,0,5,0"/>
+                            <Label Text="Até " VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <DatePicker x:Name="DatePicker_Ate" DateSelected="DatePicker_De_DateSelected"/>
+                        </StackLayout>
+                    </Grid>
 
-            <Label Text="Selecione veículo" TextColor="Gray"/>
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
-                <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                </HorizontalStackLayout.GestureRecognizers>
-                
-                <Image x:Name="Image_CarroSelecionado" WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
-                <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
-            </HorizontalStackLayout>
+                    <Label Text="Selecione veículo" TextColor="Gray"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </HorizontalStackLayout.GestureRecognizers>
 
-            <Label Text="Selecione a categoria" TextColor="Gray"/>
+                        <Image x:Name="Image_CarroSelecionado" WidthRequest="25" VerticalOptions="Center" Margin="0,0,5,0"/>
+                        <Label x:Name="Label_CarroSelecionado" Text="" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                    </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
-                <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
-                </HorizontalStackLayout.GestureRecognizers>
-                <Image x:Name="Image_Categoria" WidthRequest="25" Source="geral" VerticalOptions="Center" Margin="0,0,5,0"/>
-                <Label x:Name="Label_Categoria" Text="Geral" VerticalOptions="Center"/>
-            </HorizontalStackLayout>
+                    <Label Text="Selecione a categoria" TextColor="Gray"/>
 
-            <ActivityIndicator x:Name="ActivityIndicator_Loading" IsRunning="True" IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Image x:Name="Image_Categoria" WidthRequest="25" Source="geral" VerticalOptions="Center" Margin="0,0,5,0"/>
+                        <Label x:Name="Label_Categoria" Text="Geral" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
 
-            <StackLayout x:Name="Stack_Geral" IsVisible="False">
-                <Label Text="Custos do período" TextColor="Red" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
+                    <ActivityIndicator x:Name="ActivityIndicator_Loading" IsRunning="True" IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
 
-                <Label Text="Distância percorrida no período" TextColor="DarkOrange" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Média diária" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_KmMediaDiaria" Text="0 km" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_KmTotal" Text="0 km" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
+                    <StackLayout x:Name="Stack_Geral" IsVisible="False">
+                        <Label Text="Custos do período" TextColor="Red" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
 
-                <Label Text="Ganhos do período" TextColor="Green" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
+                        <Label Text="Distância percorrida no período" TextColor="DarkOrange" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Média diária" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_KmMediaDiaria" Text="0 km" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_KmTotal" Text="0 km" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+
+                        <Label Text="Ganhos do período" TextColor="Green" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
 
 
-                <Label Text="Líquido do período" TextColor="CadetBlue" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_LiquidoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
+                        <Label Text="Líquido do período" TextColor="CadetBlue" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_LiquidoPorKm" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_LiquidoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_LiquidoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
                     </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_LiquidoPorDia" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_LiquidoTotal" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
-            <StackLayout x:Name="Stack_Despesas" IsVisible="False">
-                <Label Text="Custos do período" TextColor="Red" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoPorKmDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoPorDiaDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_CustoTotalDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
-                <Label x:Name="Label_CustoDetalhado" Text="Custos detalhados" TextColor="Red" FontAttributes="Bold" IsVisible="False"/>
+                    <StackLayout x:Name="Stack_Despesas" IsVisible="False">
+                        <Label Text="Custos do período" TextColor="Red" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoPorKmDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoPorDiaDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_CustoTotalDespesa" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <Label x:Name="Label_CustoDetalhado" Text="Custos detalhados" TextColor="Red" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelDespesa" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
-                                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                                        <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
-                                        <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
-                                    </StackLayout>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-
-            <StackLayout x:Name="Stack_Ganho" IsVisible="False">
-                <Label Text="Ganhos do período" TextColor="Green" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoPorKmGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
+                        <ListView x:Name="ListView_RelDespesa" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
+                                                <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoPorDiaGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_GanhoTotalGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
-                <Label x:Name="Label_GanhoDetalhado" Text="Ganhos detalhados" TextColor="Green" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelGanho" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
-                                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                                        <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
-                                        <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
-                                    </StackLayout>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
+                    <StackLayout x:Name="Stack_Ganho" IsVisible="False">
+                        <Label Text="Ganhos do período" TextColor="Green" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoPorKmGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoPorDiaGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_GanhoTotalGanho" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <Label x:Name="Label_GanhoDetalhado" Text="Ganhos detalhados" TextColor="Green" FontAttributes="Bold" IsVisible="False"/>
 
-            <StackLayout x:Name="Stack_Servico" IsVisible="False">
-                <Label Text="Custos do período" TextColor="DarkSlateGray" FontAttributes="Bold"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_ServicoPorKmServico" Text="R$ 0,00" HorizontalOptions="Center"/>
+                        <ListView x:Name="ListView_RelGanho" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
+                                                <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_ServicoPorDiaServico" Text="R$ 0,00" HorizontalOptions="Center"/>
+
+                    <StackLayout x:Name="Stack_Servico" IsVisible="False">
+                        <Label Text="Custos do período" TextColor="DarkSlateGray" FontAttributes="Bold"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_ServicoPorKmServico" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_ServicoPorDiaServico" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_ServicoTotalServico" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <Label x:Name="Label_ServicoDetalhado" Text="Serviços detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
+
+                        <ListView x:Name="ListView_RelServico" IsVisible="False" HasUnevenRows="True" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
+                                                <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_ServicoTotalServico" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
-                <Label x:Name="Label_ServicoDetalhado" Text="Serviços detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelServico" IsVisible="False" HasUnevenRows="True" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
-                                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                                        <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
-                                        <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
-                                    </StackLayout>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
+                    <StackLayout x:Name="Stack_Abastecimento" IsVisible="False">
+                        <Label Text="Abastecimentos realizados" TextColor="DarkSlateGray" FontAttributes="Bold"/>
+                        <Label x:Name="Label_QtdAbastecimentos"/>
+                        <Label x:Name="Label_QtdLitros"/>
 
-            <StackLayout x:Name="Stack_Abastecimento" IsVisible="False">
-                <Label Text="Abastecimentos realizados" TextColor="DarkSlateGray" FontAttributes="Bold"/>
-                <Label x:Name="Label_QtdAbastecimentos"/>
-                <Label x:Name="Label_QtdLitros"/>
-
-                <ListView x:Name="ListView_DetalhesComb" HasUnevenRows="True" Margin="10" ItemSelected="ListView_RelServico_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                    <StackLayout VerticalOptions="FillAndExpand" Padding="10">
-                                        <Label Text="{Binding DescricaoReceita}" TextColor="Black" FontAttributes="Bold"/>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Valor total gasto"/>
-                                            <Label Text="{Binding TotalValor, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
+                        <ListView x:Name="ListView_DetalhesComb" HasUnevenRows="True" Margin="10" ItemSelected="ListView_RelServico_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout VerticalOptions="FillAndExpand" Padding="10">
+                                            <Label Text="{Binding DescricaoReceita}" TextColor="Black" FontAttributes="Bold"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Valor total gasto"/>
+                                                <Label Text="{Binding TotalValor, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Média do valor"/>
+                                                <Label Text="{Binding MediaPreco, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Total de litros"/>
+                                                <Label Text="{Binding TotalLitros, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
+                                            </StackLayout>
                                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Média do valor"/>
-                                            <Label Text="{Binding MediaPreco, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
-                                        </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Total de litros"/>
-                                            <Label Text="{Binding TotalLitros, StringFormat='{}{0:F2}'}" HorizontalOptions="EndAndExpand"/>
-                                        </StackLayout>
-                                    </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
-                <Label Text="Custos do período" TextColor="DarkSlateGray" FontAttributes="Bold" Margin="0,5,0,0"/>
-                <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_AbastecimentoPorKmAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_AbastecimentoPorDiaAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
-                        <Label x:Name="Label_AbastecimentoTotalAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Grid>
-                <Label x:Name="Label_AbastecimentoDetalhado" Text="Abastecimentos detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
+                        <Label Text="Custos do período" TextColor="DarkSlateGray" FontAttributes="Bold" Margin="0,5,0,0"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Por Km" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_AbastecimentoPorKmAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Por Dia" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_AbastecimentoPorDiaAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Total" HorizontalOptions="Center" TextColor="Gray"/>
+                                <Label x:Name="Label_AbastecimentoTotalAbastecimento" Text="R$ 0,00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <Label x:Name="Label_AbastecimentoDetalhado" Text="Abastecimentos detalhados" TextColor="DarkSlateGray" FontAttributes="Bold" IsVisible="False"/>
 
-                <ListView x:Name="ListView_RelAbastecimento" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
-                                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                                        <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
-                                        <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
-                                    </StackLayout>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
+                        <ListView x:Name="ListView_RelAbastecimento" IsVisible="False" Margin="10,0" ItemSelected="ListView_RelServico_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" VerticalOptions="Center" TextColor="Black"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:F2}'}" VerticalOptions="Center" HorizontalOptions="End" TextColor="Black"/>
+                                            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding Data, StringFormat='{0:dd MMMM yyyy}'}" VerticalOptions="Center" TextColor="Gray"/>
+                                                <Label Text="{Binding Hora, StringFormat='{}{0:hh\\:mm}'}" TextColor="Gray" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
 
-                
+                </VerticalStackLayout>
+
             </VerticalStackLayout>
         </ScrollView>
 

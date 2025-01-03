@@ -61,5 +61,25 @@
                 HorizontalOptions="End" 
                 Margin="20"
                 Clicked="OnAddVeiculoClicked"/>
+
+        <!-- Popup de seleção de serviço -->
+        <ContentView x:Name="PopupServiceSelection" 
+                     BackgroundColor="#80000000" 
+                     IsVisible="False">
+            <Frame WidthRequest="300" 
+                   Padding="20"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" 
+                   BackgroundColor="White"
+                   CornerRadius="15">
+                <StackLayout>
+                    <ActivityIndicator IsRunning="True" HorizontalOptions="Center" HeightRequest="70" WidthRequest="70"/>
+                    <Label Text="Carregando..." 
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"  
+                           Margin="0,0,0,20" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+        </ContentView>
     </Grid>
 </ContentPage>

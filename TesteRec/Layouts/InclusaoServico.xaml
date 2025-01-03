@@ -260,11 +260,8 @@
                            Completed="OnValorTotalCompleted"
                            MaxLength="7"
                            FontSize="Medium"
-                           Unfocused="entryValorTotal_Unfocused">
-                        <Entry.Behaviors>
-                            <local:MascaraValor />
-                        </Entry.Behaviors>
-                    </Entry>
+                           Unfocused="entryValorTotal_Unfocused"/>
+
                     <!-- Litros abastecidos -->
                     <Entry Grid.Column="2" x:Name="entryLitros" 
                            Keyboard="Numeric" 
