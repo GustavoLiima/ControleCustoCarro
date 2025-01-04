@@ -1,9 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TesteRec.Db.Models;
 using TesteRec.Db.Services;
 
@@ -21,6 +16,11 @@ namespace Cofauto.Db.Services
         public async Task<int> AddDespesaAsync(Despesa pTipoServico)
         {
             return await _database.InsertOrReplaceAsync(pTipoServico);
+        }
+
+        public async Task<List<Despesa>> GetTipoDespesaPorIDAsync(int pId)
+        {
+            return await _database.Table<Despesa>().Where(x => x.IdServico == pId).ToListAsync();
         }
     }
 }

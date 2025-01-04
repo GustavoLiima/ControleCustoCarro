@@ -319,8 +319,10 @@
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" x:Name="Button_ApenasUmaVez" Text="Apenas uma vez" BackgroundColor="#d35400" TextColor="White" Clicked="Button_ApenasUmaVez_Clicked" Padding="5"/>
                     <Button Grid.Column="1" x:Name="Button_RepetirACada" Text="Repetir a cada" BackgroundColor="White" TextColor="Black" Clicked="Button_RepetirACada_Clicked" Padding="5"/>
-
+                    
                 </Grid>
+
+                <Label x:Name="Label_InformacoesPeriodicidade" Text="Informe a kilometragem que deseja receber o alerta ou escolha uma data para receber o alerta" IsVisible="False"/>
 
                 <Grid x:Name="Grid_InformacoesPeriodicidade" IsVisible="False" Padding="10">
                     <Grid.ColumnDefinitions>

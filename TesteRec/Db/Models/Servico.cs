@@ -145,6 +145,21 @@ namespace TesteRec.Db.Models
         public bool LembrarEmKm { get; set; }
         public bool LembrarEmData { get; set; }
         public double LembreteKilometragem { get; set; }
+        [NotMapped]
+        public string LembreteKilometragemCalculado 
+        { 
+            get
+            {
+                if(Global.carroSelecionado.Kilometragem <= LembreteKilometragem)
+                {
+                    return $"Falta {LembreteKilometragem - Global.carroSelecionado.Kilometragem} kms";
+                }
+                else
+                {
+                    return $"Você já passou {Global.carroSelecionado.Kilometragem - LembreteKilometragem} kms";
+                }
+            }
+        }
         public DateTime DataLembrete { get; set; }
 
         [NotMapped]
@@ -186,11 +201,11 @@ namespace TesteRec.Db.Models
             {
                 if (LembreteFoiServico)
                 {
-                    return TipoServicoModelo.Descricao;
+                    return TipoServicoModelo?.Descricao;
                 }
                 else
                 {
-                    return DespesaModelo.Descricao;
+                    return DespesaModelo?.Descricao;
                 }
             }
         }

@@ -25,23 +25,24 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
 		<AndroidUseAapt2>True</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-		<DebugSymbols>False</DebugSymbols>
-		<RunAOTCompilation>False</RunAOTCompilation>
-		<PublishTrimmed>False</PublishTrimmed>
+		<DebugSymbols>True</DebugSymbols>
+		<RunAOTCompilation>True</RunAOTCompilation>
+		<PublishTrimmed>True</PublishTrimmed>
+		<AndroidLinkTool>r8</AndroidLinkTool>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-	  <DebugSymbols>True</DebugSymbols>
-	  <RunAOTCompilation>True</RunAOTCompilation>
-	  <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
-	  <PublishTrimmed>True</PublishTrimmed>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	  <DebugSymbols>False</DebugSymbols>
+	  <RunAOTCompilation>False</RunAOTCompilation>
+	  <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+	  <PublishTrimmed>False</PublishTrimmed>
 	</PropertyGroup>
 
 	<ItemGroup>

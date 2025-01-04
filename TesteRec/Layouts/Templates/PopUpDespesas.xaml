@@ -40,11 +40,8 @@
                                    Keyboard="Numeric" 
                                    HorizontalTextAlignment="Center"
                                    Placeholder="Valor"
-                                   HorizontalOptions="FillAndExpand" >
-                                <Entry.Behaviors>
-                                    <local:MascaraValor />
-                                </Entry.Behaviors>
-                            </Entry>
+                                   HorizontalOptions="FillAndExpand" />
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
