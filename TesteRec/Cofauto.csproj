@@ -32,6 +32,8 @@
 		<RunAOTCompilation>True</RunAOTCompilation>
 		<PublishTrimmed>True</PublishTrimmed>
 		<AndroidLinkTool>r8</AndroidLinkTool>
+		<AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+		<EnableLLVM>True</EnableLLVM>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
@@ -43,6 +45,8 @@
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 	  <PublishTrimmed>False</PublishTrimmed>
+	  <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+	  <EnableLLVM>True</EnableLLVM>
 	</PropertyGroup>
 
 	<ItemGroup>

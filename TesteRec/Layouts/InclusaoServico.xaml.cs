@@ -261,11 +261,6 @@ public partial class InclusaoServico : ContentPage
                         Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
                     }
                 }
-                else
-                {
-                    Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
-                    Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
-                }
                 break;
             case EMenuSelecionado.Abastecimento:
                 Shell.SetBackgroundColor(this, Color.FromHex("#f39c12"));
@@ -421,10 +416,13 @@ public partial class InclusaoServico : ContentPage
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
                     Motorista = entryMotorista.Text,
-                    FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Label_ValorTotalServicos.Text)
                 };
+                if (_pagamentoSelecionado != null)
+                {
+                    objAddServ.FormaPagamento = _pagamentoSelecionado.Id;
+                }
                 if (_servico != null)
                 {
                     objAddServ.Id = _servico.Id;
@@ -459,12 +457,14 @@ public partial class InclusaoServico : ContentPage
                     Data = dataComHora,
                     Hora = timePickerServico.Time,
                     Odometro = double.Parse(entryOdometro.Text),
-                    TipoDespesa = _despesaSelecionada.Id,
                     Motorista = entryMotorista.Text,
-                    FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text,
                     ValorDespesa = double.Parse(Label_ValorTotalDespesas.Text)
                 };
+                if(_pagamentoSelecionado != null)
+                {
+                    objAddDesp.FormaPagamento = _pagamentoSelecionado.Id;
+                }
                 if (_servico != null)
                 {
                     objAddDesp.Id = _servico.Id;

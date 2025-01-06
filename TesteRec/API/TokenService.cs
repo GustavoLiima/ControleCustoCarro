@@ -62,7 +62,7 @@ namespace TesteRec.API
                     return new ApiResponse<string>()
                     {
                         Sucesso = false,
-                        Mensagem = $"Erro ao obter o token: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}"
+                        Mensagem = await response.Content.ReadAsStringAsync()
                     };
                 }
             }
@@ -72,7 +72,7 @@ namespace TesteRec.API
                 return new ApiResponse<string>()
                 {
                     Sucesso = false,
-                    Mensagem = $"Erro ao obter o token: {ex.Message}"
+                    Mensagem = $"Verifique sua conexão e tente novamente\nCaso o erro persista, aguarde um pouco e tente novamente mais tarde"
                 };
             }
         }

@@ -205,7 +205,7 @@
                     <Image x:Name="Image_TipoServico" Grid.Column="0" WidthRequest="30" HeightRequest="30" Source="oleo.png" HorizontalOptions="Center" VerticalOptions="Center"/>
 
                     <StackLayout Grid.Column="1" Margin="10,0,0,0">
-                        <Label Text="Tipo de Servico" FontSize="Medium" TextColor="Gray">
+                        <Label Text="Tipo de Serviço" FontSize="Medium" TextColor="Gray">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizerTipoServico_Tapped"/>
                             </Label.GestureRecognizers>
