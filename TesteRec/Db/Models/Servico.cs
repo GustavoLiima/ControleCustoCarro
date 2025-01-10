@@ -86,7 +86,7 @@ namespace TesteRec.Db.Models
                 switch ((EMenuSelecionado)AcaoSelecionada)
                 {
                     case EMenuSelecionado.Receita:
-                        return DbTipoReceita._tipoReceitas.Find(x => x.Id == Receita).Descricao;
+                        return DbTipoReceita._tipoReceitas.Find(x => x.Id == Receita)?.Descricao;
                     case EMenuSelecionado.Abastecimento:
                         return new Layouts.listas.TiposCombustivel()._tipoCombustivel.Find(x => x.Id == Combustivel).Descricao;
                     default:

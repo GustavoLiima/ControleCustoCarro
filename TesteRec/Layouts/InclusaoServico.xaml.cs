@@ -180,8 +180,11 @@ public partial class InclusaoServico : ContentPage
                 entryValorTotal.Text = _servico.ValorTotal.ToString();
                 entryLitros.Text = _servico.Litros.ToString();
                 _pagamentoSelecionado = _servico.FormaPagamentoModelo;
-                Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
-                Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                if(_pagamentoSelecionado != null)
+                {
+                    Label_TipoPagamento.Text = _pagamentoSelecionado.Descricao;
+                    Image_FormaPagamento.Source = _pagamentoSelecionado.Imagem;
+                }
                 _combustivelSelecionado = _servico.CombustivelModelo;
                 Label_Combustivel.Text = _combustivelSelecionado.Descricao.ToString();
                 Image_TipoCombustivel.Source = _combustivelSelecionado.Imagem.ToString();
@@ -380,6 +383,11 @@ public partial class InclusaoServico : ContentPage
                 {
                     await DisplayAlert("Atenção", "É necessário colocar o valor recebido", "continuar");
                     entryValor.Focus();
+                    return;
+                }
+                if(_receitaSelecionada.Id == 0)
+                {
+                    await DisplayAlert("Atenção", "É necessário selecionar um tipo de receita", "continuar");
                     return;
                 }
                 Servico objAdd = new Servico
