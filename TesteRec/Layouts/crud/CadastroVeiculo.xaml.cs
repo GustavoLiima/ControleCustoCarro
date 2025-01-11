@@ -243,9 +243,10 @@ public partial class CadastroVeiculo : ContentPage
         int.TryParse(Entry_AnoFabricacao.Text, out int pAnoFabricacao);
         int.TryParse(Entry_AnoModelo.Text, out int pAnoModelo);
         int.TryParse(Entry_LitragemVeiculo.Text, out int pCapacidadeTanque);
+        string valorSemPontuacao = Entry_Quilometragem.Text.Replace(".", "").Replace(",", "");
         VeiculoModel objAdd = new VeiculoModel()
         {
-            Kilometragem = int.Parse(Entry_Quilometragem.Text),
+            Kilometragem = double.Parse(valorSemPontuacao),
             NomeVeiculo = Entry_NomeVeiculo.Text,
             Marca = Entry_MarcaVeiculo.Text,
             Chassi = Entry_Chassi.Text,

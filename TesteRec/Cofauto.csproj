@@ -35,6 +35,7 @@
 		<EnableLLVM>False</EnableLLVM>
 		<AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
 		<AndroidLinkTool>r8</AndroidLinkTool>
+		<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">

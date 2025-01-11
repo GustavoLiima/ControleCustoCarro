@@ -319,6 +319,7 @@ public partial class InclusaoServico : ContentPage
                 entryValor.Focus();
                 return;
             }
+            entryOdometro.Text = entryOdometro.Text.Replace(".", "").Replace(",", "");
         }
         DateTime dataComHora = datePickerServico.Date;
         dataComHora.AddHours(timePickerServico.Time.Hours);

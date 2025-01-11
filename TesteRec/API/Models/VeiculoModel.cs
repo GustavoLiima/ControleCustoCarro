@@ -26,7 +26,7 @@ namespace TesteRec.API.Models
 
         public int? CapacidadeTanque { get; set; }
 
-        public int? Kilometragem { get; set; }
+        public double? Kilometragem { get; set; }
 
         public int? AnoFabricacao { get; set; }
 

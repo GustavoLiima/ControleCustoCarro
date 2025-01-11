@@ -1,6 +1,7 @@
 using Cofauto.Layouts.crud;
 using Cofauto.Layouts.listas;
 using TesteRec.Db;
+using TesteRec.Db.Services;
 using TesteRec.Layouts.Iniciais;
 using TesteRec.Layouts.listas;
 using TesteRec.Layouts.Templates;
@@ -117,7 +118,14 @@ public partial class Configuracoes : ContentPage
             case "Sair":
                 if(await DisplayAlert("Atenção", "Você tem certeza que deseja deslogar?", "confirmar", "cancelar"))
                 {
+                    VeiculoDB db = new VeiculoDB();
+                    foreach (var item in Global._Veiculos)
+                    {
+                        await db.DeleteVeiculoAsync(item);
+                    }
                     Global._login = null;
+                    Global._Veiculos = null;
+                    Global._UsuarioSelecionado = null;
                     SecureStorage.Default.Remove("login");
                     Application.Current.MainPage = new NavigationPage(new PaginaLogin());
                 }

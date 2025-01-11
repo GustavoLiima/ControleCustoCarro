@@ -59,6 +59,7 @@ namespace TesteRec.API
                 }
                 else
                 {
+                    var teste = await response.Content.ReadAsStringAsync();
                     return new ApiResponse<string>()
                     {
                         Sucesso = false,
