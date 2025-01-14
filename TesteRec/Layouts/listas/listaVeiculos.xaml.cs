@@ -43,7 +43,7 @@ public partial class listaVeiculos : ContentPage
     }
     private async void OnAddVeiculoClicked(object sender, EventArgs e)
     {
-        if(Global._UsuarioSelecionado.Plano == 0 && Veiculos.Count >= 3)
+        if(Global._UsuarioSelecionado.Plano == 0 && Veiculos.Count >= 2)
         {
             if(await DisplayAlert("Você já atingiu o limite de carros", "Para adicionar mais carros, contrate outro plano! \n A partir de R$5,90!", "Melhorar plano", "Cancelar"))
             {

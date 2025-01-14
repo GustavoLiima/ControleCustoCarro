@@ -35,7 +35,7 @@
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Odometro: " TextColor="Gray"/>
+                                <Label Text="Odômetro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding MostraDescricao}">
@@ -78,7 +78,7 @@
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Odometro: " TextColor="Gray"/>
+                                <Label Text="Odômetro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding MostraDescricao}">
@@ -132,7 +132,7 @@
                                 <Label Text="{Binding Preco}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Odometro: " TextColor="Gray"/>
+                                <Label Text="Odômetro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding MostraDescricao}">
@@ -176,7 +176,7 @@
                         </toolkit:Expander.Header>
                         <VerticalStackLayout Padding="10" Spacing="5">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Odometro: " TextColor="Gray"/>
+                                <Label Text="Odômetro: " TextColor="Gray"/>
                                 <Label Text="{Binding Odometro}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding MostraDescricao}">

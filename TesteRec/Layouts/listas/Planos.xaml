@@ -56,7 +56,7 @@
 
 
                                                 <!-- Botões -->
-                                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,10,0,0">
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,10,0,0" IsVisible="{Binding MostraBotoes}">
                                                     <Button Text="Assinar Anual"  
                                                             Clicked="OnAssinarButtonClicked" 
                                                             CommandParameter="{Binding .}">

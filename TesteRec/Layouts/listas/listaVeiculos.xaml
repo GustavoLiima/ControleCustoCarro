@@ -16,7 +16,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="escrevendo" WidthRequest="30"/>
-                        <Label Grid.Column="1" Text="Você está no plano Gratuito, você terá o limite de 3 carros na sua conta" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Você está no plano Gratuito, você terá o limite de 2 carros na sua conta" VerticalOptions="Center"/>
                     </Grid>
                 </Frame>
                 <ListView x:Name="CollectionView_Veiculos" SelectionMode="Single" HasUnevenRows="True" ItemTapped="CollectionView_Veiculos_ItemTapped">

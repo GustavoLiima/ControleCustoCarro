@@ -528,9 +528,12 @@ public partial class InclusaoServico : ContentPage
                     ValorTotal = double.Parse(entryValorTotal.Text),
                     Litros = double.Parse(entryLitros.Text),
                     Motorista = entryMotorista.Text,
-                    FormaPagamento = _pagamentoSelecionado.Id,
                     Descricao = Editor_Observacao.Text
                 };
+                if(_pagamentoSelecionado != null)
+                {
+                    objAddAbast.FormaPagamento = _pagamentoSelecionado.Id;
+                }
                 if (_servico != null)
                 {
                     objAddAbast.Id = _servico.Id;

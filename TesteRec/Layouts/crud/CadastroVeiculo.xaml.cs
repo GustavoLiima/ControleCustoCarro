@@ -278,6 +278,7 @@ public partial class CadastroVeiculo : ContentPage
             if (retorno.Sucesso)
             {
                 await instancia.AddVeiculoAsync(retorno.Valor);
+                Global._Veiculos.Add(retorno.Valor);
                 if (_novoCadastro)
                 {
                     Global.carroSelecionado = retorno.Valor;
